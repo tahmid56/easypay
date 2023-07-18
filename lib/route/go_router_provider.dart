@@ -1,8 +1,10 @@
+import 'package:easypay/common/widgets/loader.dart';
 import 'package:easypay/screens/first_registration_screen.dart';
 import 'package:easypay/screens/login_screen.dart';
 import 'package:easypay/screens/home_screen.dart';
 
 import 'package:easypay/route/named_routes.dart';
+import 'package:easypay/screens/second_registration_screen.dart';
 import 'package:easypay/screens/splash_screen.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,9 +25,23 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           ),
         ),
         GoRoute(
+          name: NamedRoutes.loading,
+          path: 'loading',
+          builder: (context, state) => Loader(
+            key: state.pageKey,
+          ),
+        ),
+        GoRoute(
           name: NamedRoutes.registration1,
           path: 'registration1',
           builder: (context, state) => FirstRegistrationScreen(
+            key: state.pageKey,
+          ),
+        ),
+        GoRoute(
+          name: NamedRoutes.registration2,
+          path: 'registration2',
+          builder: (context, state) => SecondRegistrationScreen(
             key: state.pageKey,
           ),
         ),

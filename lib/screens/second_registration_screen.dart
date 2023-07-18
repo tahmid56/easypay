@@ -1,26 +1,25 @@
-import 'package:easypay/Services/auth_services.dart';
-import 'package:easypay/route/named_routes.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../common/widgets/custom_text_field.dart';
-
 import '../common/widgets/reusable_button.dart';
-import '../common/widgets/text_reusable_button.dart';
 
-class FirstRegistrationScreen extends StatefulWidget {
-  const FirstRegistrationScreen({super.key});
+import '../common/widgets/text_reusable_button.dart';
+import '../route/named_routes.dart';
+
+class SecondRegistrationScreen extends StatefulWidget {
+  const SecondRegistrationScreen({super.key});
 
   @override
-  State<FirstRegistrationScreen> createState() =>
-      _FirstRegistrationScreenState();
+  State<SecondRegistrationScreen> createState() =>
+      _SecondRegistrationScreenState();
 }
 
-class _FirstRegistrationScreenState extends State<FirstRegistrationScreen> {
-  final TextEditingController fullNameController = TextEditingController();
-  final TextEditingController mobileController = TextEditingController();
+class _SecondRegistrationScreenState extends State<SecondRegistrationScreen> {
+  final TextEditingController otpController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  AuthServices authServices = AuthServices();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,26 +41,30 @@ class _FirstRegistrationScreenState extends State<FirstRegistrationScreen> {
               Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CustomTextField(
-                      textEditingController: fullNameController,
-                      hintText: 'Full Name')),
-              Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CustomTextField(
-                      textEditingController: mobileController,
-                      hintText: 'Mobile No.')),
+                      textEditingController: otpController,
+                      hintText: 'OTP Sent To Your Phone')),
               const SizedBox(
                 height: 20,
               ),
-              ReusableButton(
-                  buttonText: "Next",
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      authServices.firstRegistration(
-                          context: context,
-                          fullName: fullNameController.text,
-                          mobileNumber: mobileController.text);
-                    }
-                  }),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ReusableButton(
+                      buttonText: "Next",
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          GoRouter.of(context)
+                              .pushNamed(NamedRoutes.registration2);
+                        }
+                      }),
+                  ReusableButton(
+                      buttonText: "Go Back",
+                      colorCode: 0xff00c2e5,
+                      onPressed: () {
+                        GoRouter.of(context).pop();
+                      }),
+                ],
+              ),
               const Spacer(),
               const Text("Not registered as a User?",
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
