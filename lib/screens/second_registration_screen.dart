@@ -52,10 +52,10 @@ class _SecondRegistrationScreenState extends State<SecondRegistrationScreen> {
                   ReusableButton(
                       buttonText: "Next",
                       onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          GoRouter.of(context)
-                              .pushNamed(NamedRoutes.registration2);
-                        }
+                        // if (_formKey.currentState!.validate()) {
+                        GoRouter.of(context)
+                            .pushNamed(NamedRoutes.registration3);
+                        // }
                       }),
                   ReusableButton(
                       buttonText: "Go Back",
