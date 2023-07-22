@@ -17,12 +17,15 @@ void httpErrorHandle({
       onSuccess();
       break;
     case 400:
+      debugPrint(response?.data);
       showSnackBar(context, jsonDecode(response?.data)['message']);
       break;
     case 500:
+      debugPrint(response?.data);
       showSnackBar(context, jsonDecode(response?.data)['error']);
       break;
     case 404:
+      debugPrint(response?.data);
       showSnackBar(context, jsonDecode(response?.data)['message']);
       break;
     default:
