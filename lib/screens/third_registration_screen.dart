@@ -83,15 +83,15 @@ class _ThirdRegistrationScreenState
     if (_formKey.currentState!.validate()) {
       ref.read(authControllerProvider.notifier).thirdStepRegistration(
           context: context,
-          nidFrontFile: nidFrontFilePath?.files.first.bytes,
+          nidFrontFile: nidFrontFilePath!.files.first.path!,
           nidFrontName: nidFrontFilePath?.files.first.name,
-          nidBackFile: nidBackFilePath!.files.first.bytes,
+          nidBackFile: nidBackFilePath!.files.first.path!,
           nidBackName: nidBackFilePath?.files.first.name,
           permanentAddress: permanentAddress,
           residentialAddress: residentAddress,
-          jobOfferFile: offerLetterFilePath!.files.first.bytes,
+          jobOfferFile: offerLetterFilePath!.files.first.path!,
           jobOfferName: offerLetterFilePath?.files.first.name,
-          bankStatement: bankStatementFilePath!.files.first.bytes,
+          bankStatement: bankStatementFilePath!.files.first.path!,
           bankStateName: bankStatementFilePath?.files.first.name);
     }
   }

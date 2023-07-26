@@ -58,15 +58,15 @@ class AuthController extends StateNotifier<bool> {
 
   void thirdStepRegistration(
       {required BuildContext context,
-      required Uint8List? nidFrontFile,
+      required String nidFrontFile,
       required String? nidFrontName,
-      required Uint8List? nidBackFile,
+      required String nidBackFile,
       required String? nidBackName,
       required String permanentAddress,
       required String residentialAddress,
-      required Uint8List? jobOfferFile,
+      required String jobOfferFile,
       required String? jobOfferName,
-      required Uint8List? bankStatement,
+      required String bankStatement,
       required String? bankStateName}) async {
     state = true;
     final Response? res = await _authServices.thirdRegistration(
@@ -88,6 +88,33 @@ class AuthController extends StateNotifier<bool> {
         context: context,
         onSuccess: () {
           GoRouter.of(context).pushNamed(NamedRoutes.registration4);
+        });
+  }
+
+  void fourthStepRegistration(
+      {required BuildContext context,
+      required String selfieFile,
+      required String? selfieName,
+      required String bankAccountFile,
+      required String? bankAccountName,
+      required String pin,
+      required String confirmPin}) async {
+    state = true;
+    final Response? res = await _authServices.fourthRegistration(
+        context: context,
+        selfieFile: selfieFile,
+        selfieName: selfieName,
+        bankAccountFile: bankAccountFile,
+        bankAccountName: bankAccountName,
+        pin: pin,
+        confirmPin: confirmPin);
+    state = false;
+    // ignore: use_build_context_synchronously
+    httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () {
+          GoRouter.of(context).pushReplacementNamed(NamedRoutes.home);
         });
   }
 }
