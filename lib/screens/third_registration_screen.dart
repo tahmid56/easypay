@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:easypay/common/utils/utils.dart';
 import 'package:easypay/common/widgets/custom_text_field.dart';
 import 'package:easypay/common/widgets/custom_upload_button.dart';
@@ -31,19 +33,20 @@ class _ThirdRegistrationScreenState
   final TextEditingController residentialAddressController =
       TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  void _pickNIDFront() async {
+  Future<void> _pickNIDFront() async {
     nidFrontFilePath = await pickFile(fileTypes: ["png"]);
+    
   }
 
-  void _pickNIDBack() async {
+  Future<void> _pickNIDBack() async {
     nidBackFilePath = await pickFile(fileTypes: ["png"]);
   }
 
-  void _pickJobOfferLetter() async {
+  Future<void> _pickJobOfferLetter() async {
     offerLetterFilePath = await pickFile(fileTypes: ["png"]);
   }
 
-  void _pickBankStatement() async {
+  Future<void> _pickBankStatement() async {
     bankStatementFilePath = await pickFile(fileTypes: ["png"]);
   }
 
@@ -119,15 +122,22 @@ class _ThirdRegistrationScreenState
                         ),
                         const Spacer(),
                         CustomUploadButton(
-                          buttonText: "Upload NID Front",
-                          onPressed: _pickNIDFront,
+                          buttonText: nidFrontFilePath?.files.first.name ??
+                              "Upload NID Front",
+                          onPressed: () {
+                            _pickNIDFront().then((_)=> setState((){}));
+                          },
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         CustomUploadButton(
-                          buttonText: "Upload NID Back",
-                          onPressed: _pickNIDBack,
+                          buttonText: nidBackFilePath?.files.first.name ??
+                              "Upload NID Back",
+                          onPressed: () {
+                            _pickNIDBack().then((_) => setState(() {}));
+                            
+                          },
                         ),
                         const SizedBox(
                           height: 20,
@@ -153,15 +163,22 @@ class _ThirdRegistrationScreenState
                           height: 20,
                         ),
                         CustomUploadButton(
-                          buttonText: "Upload Job Offer Letter",
-                          onPressed: _pickJobOfferLetter,
+                          buttonText: offerLetterFilePath?.files.first.name ??
+                              "Upload Job Offer Letter",
+                          onPressed: () {
+                            _pickJobOfferLetter().then((_) => setState(() {}));
+                          },
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         CustomUploadButton(
-                          buttonText: "Upload Bank Statement of Last 3 months",
-                          onPressed: _pickBankStatement,
+                          buttonText: bankStatementFilePath?.files.first.name ??
+                              "Upload Bank Statement of Last 3 months",
+                          onPressed: () {
+                            _pickBankStatement().then((_) => setState(() {}));
+                            
+                          },
                         ),
                         const SizedBox(
                           height: 20,

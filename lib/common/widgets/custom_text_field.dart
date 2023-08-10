@@ -17,18 +17,21 @@ class CustomTextField extends StatelessWidget {
       textAlign: TextAlign.center,
       controller: textEditingController,
       decoration: InputDecoration(
-          hintText: "Enter $hintText",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-            borderSide: const BorderSide(
-              color: Colors.black,
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
-              borderSide: const BorderSide(
-                color: Colors.black,
-              ))),
+        hintText: hintText,
+        hintStyle: const TextStyle(color: Colors.white),
+        fillColor: Color(0xffE7E7E7),
+        filled: true,
+        focusColor: Colors.white,
+        hoverColor: Colors.white,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+          borderSide: BorderSide.none,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+          borderSide: BorderSide.none,
+        ),
+      ),
       validator: (value) {
         if (value == null || value.isEmpty) {
           return "Enter your $hintText";

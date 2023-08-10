@@ -13,7 +13,7 @@ class TextReusableButton extends StatelessWidget {
       child: Text(
         buttonText,
         style: const TextStyle(
-            fontSize: 20,
+            fontSize: 15,
             color: Color(0xff00C2E4),
             fontWeight: FontWeight.bold),
       ),

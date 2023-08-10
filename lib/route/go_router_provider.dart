@@ -1,5 +1,3 @@
-
-
 import 'package:easypay/common/widgets/loader.dart';
 import 'package:easypay/screens/first_registration_screen.dart';
 import 'package:easypay/screens/fourth_registration_screen.dart';
@@ -10,6 +8,7 @@ import 'package:easypay/route/named_routes.dart';
 import 'package:easypay/screens/second_registration_screen.dart';
 import 'package:easypay/screens/splash_screen.dart';
 import 'package:easypay/screens/third_registration_screen.dart';
+import 'package:easypay/screens/verify_otp_screen.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -25,6 +24,13 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           name: NamedRoutes.login,
           path: 'login',
           builder: (context, state) => LoginScreen(
+            key: state.pageKey,
+          ),
+        ),
+        GoRoute(
+          name: NamedRoutes.verifyOtp,
+          path: 'verifyOtp',
+          builder: (context, state) => VerifyOtpScreen(
             key: state.pageKey,
           ),
         ),

@@ -19,6 +19,7 @@ class _MyAppState extends ConsumerState<MyApp> {
   Widget build(BuildContext context) {
     final goRoute = ref.watch(goRouterProvider);
     return MaterialApp.router(
+      
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,

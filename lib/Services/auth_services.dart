@@ -77,14 +77,15 @@ class AuthServices {
     try {
       FormData formData = FormData.fromMap({
         "nid_front":
-           await MultipartFile.fromFile(nidFrontFile, filename: nidFrontName),
-        "nid_back":await MultipartFile.fromFile(nidBackFile, filename: nidBackName),
+            await MultipartFile.fromFile(nidFrontFile, filename: nidFrontName),
+        "nid_back":
+            await MultipartFile.fromFile(nidBackFile, filename: nidBackName),
         "residential_address": residentialAddress,
         "permanent_address": permanentAddress,
         "job_offer_latter":
-           await MultipartFile.fromFile(jobOfferFile, filename: jobOfferName),
-        "bank_statement":
-           await MultipartFile.fromFile(bankStatement, filename: bankStateName),
+            await MultipartFile.fromFile(jobOfferFile, filename: jobOfferName),
+        "bank_statement": await MultipartFile.fromFile(bankStatement,
+            filename: bankStateName),
         "user": FirstStepProvider().getFirstRegistrationData()
       });
       formData.fields.map((e) => debugPrint(e.value));
@@ -142,4 +143,39 @@ class AuthServices {
     }
     return null;
   }
+
+  Future<Response?> login(
+      {required BuildContext context,
+      required String phoneNumber,
+      required String password}) async {
+    final dio = Dio();
+    dio.options.baseUrl = Urls.baseUrl;
+    try {
+      Response res = await dio.post(
+        Urls.loginUrl,
+        data: {"phone_number": phoneNumber, "password": password},
+      );
+      cookie = res.headers['Set-Cookie'];
+      return res;
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+    return null;
+  }
+
+  Future<Response?> verifyToken(
+    {required BuildContext context, required String otp}) async {
+  final dio = Dio();
+  dio.options.baseUrl = Urls.baseUrl;
+  dio.options.headers['Cookie'] = cookie;
+  try {
+    Response res = await dio.post(Urls.verifyLoginOtp, data: {"otp": otp});
+    return res;
+  } catch (error) {
+    showSnackBar(context, error.toString());
+  }
+  return null;
 }
+}
+
+

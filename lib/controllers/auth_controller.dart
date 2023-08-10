@@ -4,10 +4,13 @@ import 'package:dio/dio.dart';
 import 'package:easypay/Services/auth_services.dart';
 import 'package:easypay/common/utils/error_handling.dart';
 import 'package:easypay/models/firstRegistration.dart';
+import 'package:easypay/models/user.dart';
+import 'package:easypay/providers/user_provider.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../providers/auth_provider.dart';
 import '../route/named_routes.dart';
@@ -114,6 +117,51 @@ class AuthController extends StateNotifier<bool> {
         response: res,
         context: context,
         onSuccess: () {
+          GoRouter.of(context).replaceNamed(NamedRoutes.home);
+        });
+  }
+
+  void login(
+      {required BuildContext context,
+      required String phoneNumber,
+      required String password}) async {
+    state = true;
+    final Response? res = await _authServices.login(
+      context: context,
+      phoneNumber: phoneNumber,
+      password: password,
+    );
+    state = false;
+
+    // ignore: use_build_context_synchronously
+    httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () {
+          GoRouter.of(context).pushNamed(NamedRoutes.verifyOtp);
+        });
+  }
+
+  void verifyLoginToken(
+      {required BuildContext context,
+      required String otp,
+      required WidgetRef ref}) async {
+    state = true;
+    final Response? res =
+        await _authServices.verifyToken(context: context, otp: otp);
+    state = false;
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // ignore: use_build_context_synchronously
+    httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () async {
+          var userData = User.fromJson(res?.data);
+          await prefs.setString("access_token", userData.token);
+          ref.watch(userRepositoryProvider.notifier).saveUser(userData);
+          // ignore: use_build_context_synchronously
           GoRouter.of(context).pushReplacementNamed(NamedRoutes.home);
         });
   }

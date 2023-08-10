@@ -3,6 +3,7 @@ class NamedRoutes {
   static const loading = 'loading';
   static const home = 'home';
   static const login = 'login';
+  static const verifyOtp = 'verifyOtp';
   static const registration1 = 'registration1';
   static const registration2 = 'registration2';
   static const registration3 = 'registration3';

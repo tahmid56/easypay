@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class CustomUploadButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String buttonText;
+  final Color color;
   const CustomUploadButton(
-      {super.key, required this.buttonText, required this.onPressed});
+      {super.key, required this.buttonText, this.color = Colors.white,required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class CustomUploadButton extends StatelessWidget {
         width: 300,
         height: 60,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: color,
           border: Border.all(color: Colors.black, width: 1),
           borderRadius: BorderRadius.circular(20),
         ),
