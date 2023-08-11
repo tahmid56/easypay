@@ -1,4 +1,4 @@
-import 'dart:ffi';
+
 
 import 'package:easypay/common/utils/utils.dart';
 import 'package:easypay/common/widgets/custom_text_field.dart';
@@ -118,7 +118,7 @@ class _ThirdRegistrationScreenState
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(20.0),
-                          child: Image.asset("assets/images/gg2.png"),
+                          child: Image.asset("assets/images/logo4.png"),
                         ),
                         const Spacer(),
                         CustomUploadButton(
@@ -127,6 +127,7 @@ class _ThirdRegistrationScreenState
                           onPressed: () {
                             _pickNIDFront().then((_)=> setState((){}));
                           },
+                          
                         ),
                         const SizedBox(
                           height: 20,

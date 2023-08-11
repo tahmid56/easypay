@@ -18,18 +18,17 @@ class CustomTextField extends StatelessWidget {
       controller: textEditingController,
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: const TextStyle(color: Colors.white),
-        fillColor: Color(0xffE7E7E7),
+        hintStyle: const TextStyle(
+            color: Color(0xffcccccc), fontFamily: 'Italian Plate 2'),
+        fillColor: Colors.white,
         filled: true,
         focusColor: Colors.white,
         hoverColor: Colors.white,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
-          borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
-          borderSide: BorderSide.none,
         ),
       ),
       validator: (value) {

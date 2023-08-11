@@ -30,24 +30,16 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      decoration: BoxDecoration(color: Colors.grey[900]),
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 50,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: Image.asset(
-              "assets/images/gg2.png",
-              height: 200,
-              width: 300,
-            ),
-          ),
-        ],
+      child: Center(
+        child: Image.asset(
+          "assets/images/logo4.png",
+          height: 200,
+          width: 300,
+        ),
       ),
     );
   }

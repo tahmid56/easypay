@@ -53,12 +53,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           child: Text(
                             "welcome",
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 30),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 30,
+                                fontFamily: 'Italian Plate 2'),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(20.0),
-                          child: Image.asset("assets/images/gg2.png"),
+                          child: Image.asset("assets/images/logo4.png"),
                         ),
                         const SizedBox(
                           height: 20,
@@ -86,7 +88,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         const SizedBox(
                           height: 20,
                         ),
-                        const Text("Forgot your password?"),
+                        const Text(
+                          "Forgot your password?",
+                          style: TextStyle(fontFamily: 'Italian Plate 2'),
+                        ),
                         const SizedBox(
                           height: 5,
                         ),
@@ -96,8 +101,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             const Text(
                               "Do not have account?",
                               style: TextStyle(
-                                fontSize: 15,
-                              ),
+                                  fontSize: 15, fontFamily: "Italian Plate 2"),
                             ),
                             const SizedBox(
                               width: 3,
@@ -119,7 +123,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               "Terms & Conditions",
                               style: TextStyle(
                                   color: Color(0xff53d5ec),
-                                  fontWeight: FontWeight.bold),
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: "Italian Plate 2"),
                             ),
                             SizedBox(
                               width: 5,
@@ -128,7 +133,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               "Privacy Policy",
                               style: TextStyle(
                                   color: Color(0xffeaf1ba),
-                                  fontWeight: FontWeight.bold),
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: "Italian Plate 2"),
                             ),
                           ],
                         )

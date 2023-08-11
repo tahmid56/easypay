@@ -47,7 +47,7 @@ class _SecondRegistrationScreenState
                     ),
                     Padding(
                       padding: const EdgeInsets.all(20.0),
-                      child: Image.asset("assets/images/gg2.png"),
+                      child: Image.asset("assets/images/logo4.png"),
                     ),
                     const Spacer(),
                     Padding(

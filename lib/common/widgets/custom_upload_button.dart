@@ -5,7 +5,10 @@ class CustomUploadButton extends StatelessWidget {
   final String buttonText;
   final Color color;
   const CustomUploadButton(
-      {super.key, required this.buttonText, this.color = Colors.white,required this.onPressed});
+      {super.key,
+      required this.buttonText,
+      this.color = Colors.white,
+      required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,10 @@ class CustomUploadButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Center(
-          child: Text(buttonText),
+          child: Text(
+            buttonText,
+            style: TextStyle(color: Color(0xffcccccc)),
+          ),
         ),
       ),
     );

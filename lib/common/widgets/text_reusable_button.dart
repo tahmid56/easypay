@@ -15,7 +15,8 @@ class TextReusableButton extends StatelessWidget {
         style: const TextStyle(
             fontSize: 15,
             color: Color(0xff00C2E4),
-            fontWeight: FontWeight.bold),
+            fontWeight: FontWeight.bold,
+            fontFamily: "Italian Plate 2"),
       ),
     );
   }

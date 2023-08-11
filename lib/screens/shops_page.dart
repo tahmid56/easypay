@@ -8,13 +8,13 @@ class ShopsPage extends StatefulWidget {
 }
 
 class _ShopsPageState extends State<ShopsPage> {
-  List<String> categories = [
-    "all",
-    "men's",
-    "women's",
-    "beauty",
-    "apparel",
-    "accessories"
+  List<String> imgUrl = [
+    "https://easypayltd.com/slider1.jpg",
+    "https://easypayltd.com/slider3.jpg",
+    "https://easypayltd.com/slider4.jpg",
+    "https://easypayltd.com/slider8.jpg",
+    "https://easypayltd.com/slider6.jpg",
+    "https://easypayltd.com/slider5.jpg"
   ];
   @override
   Widget build(BuildContext context) {
@@ -25,11 +25,17 @@ class _ShopsPageState extends State<ShopsPage> {
           children: [
             const Text(
               "Shop",
-              style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Italian Plate 2"),
             ),
             const Text(
               "with easypay",
-              style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Italian Plate 2"),
             ),
             const SizedBox(
               height: 20,
@@ -44,7 +50,7 @@ class _ShopsPageState extends State<ShopsPage> {
                     decoration: BoxDecoration(
                       image: const DecorationImage(
                         image: NetworkImage(
-                          'https://images.unsplash.com/photo-1613151848917-80e67f421fff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
+                          'https://easypayltd.com/slider2.jpg',
                         ),
                         fit: BoxFit.cover,
                       ),
@@ -60,7 +66,7 @@ class _ShopsPageState extends State<ShopsPage> {
                     decoration: BoxDecoration(
                       image: const DecorationImage(
                         image: NetworkImage(
-                          'https://images.unsplash.com/photo-1600091166971-7f9faad6c1e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
+                          'https://easypayltd.com/slider7.jpg',
                         ),
                         fit: BoxFit.cover,
                       ),
@@ -75,7 +81,7 @@ class _ShopsPageState extends State<ShopsPage> {
                     decoration: BoxDecoration(
                       image: const DecorationImage(
                         image: NetworkImage(
-                          'https://images.unsplash.com/photo-1613151848917-80e67f421fff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
+                          'https://easypayltd.com/slider3.jpg',
                         ),
                         fit: BoxFit.cover,
                       ),
@@ -91,129 +97,128 @@ class _ShopsPageState extends State<ShopsPage> {
               ),
             ),
             const SizedBox(
-              height: 40,
+              height: 20,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 65),
-              child: SizedBox(
+            SizedBox(
                 width: double.infinity,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                height: 40,
+                child: ListView(
+                  itemExtent: 100,
+                  scrollDirection: Axis.horizontal,
                   children: [
                     Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 8),
+                      height: 30,
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(),
+                        borderRadius: BorderRadius.circular(50),
                       ),
-                      height: 40,
                       child: const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Center(
-                          child: Text("all"),
+                          child: Text(
+                            "all",
+                            style: TextStyle(fontFamily: "Italian Plate 2"),
+                          ),
                         ),
                       ),
                     ),
                     Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 8),
+                      height: 30,
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(),
+                        borderRadius: BorderRadius.circular(50),
                       ),
-                      height: 40,
                       child: const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Center(
-                          child: Text("men's"),
+                          child: Text(
+                            "men's",
+                            style: TextStyle(fontFamily: "Italian Plate 2"),
+                          ),
                         ),
                       ),
                     ),
                     Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 8),
+                      height: 30,
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(10),
+                        color: Color(0xfff13a5c),
+                        border: Border.all(color: Colors.red),
+                        borderRadius: BorderRadius.circular(50),
                       ),
-                      height: 40,
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Text("women's"),
+                      child: const Center(
+                        child: Text(
+                          "women's",
+                          style: TextStyle(
+                              fontFamily: "Italian Plate 2",
+                              color: Colors.white),
                         ),
                       ),
                     ),
                     Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 8),
+                      height: 30,
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(),
+                        borderRadius: BorderRadius.circular(50),
                       ),
-                      height: 40,
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Text("beauty"),
+                      child: const Center(
+                        child: Text(
+                          "beauty",
+                          style: TextStyle(fontFamily: "Italian Plate 2"),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 8),
+                      height: 30,
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          "apparel",
+                          style: TextStyle(fontFamily: "Italian Plate 2"),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 8),
+                      height: 30,
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          "accessories",
+                          style: TextStyle(fontFamily: "Italian Plate 2"),
                         ),
                       ),
                     ),
                   ],
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 85),
-              child: SizedBox(
-                width: double.infinity,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      height: 40,
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Text("apparel"),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      height: 40,
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Text("accessories"),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+                )),
             const SizedBox(
               height: 20,
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.30,
+              height: MediaQuery.of(context).size.height * 0.40,
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2, // Number of columns in the grid
                   mainAxisSpacing: 10.0, // Spacing between rows
                   crossAxisSpacing: 10.0, // Spacing between columns
                 ),
-                itemCount: 10, // Number of items in the grid
+                itemCount: 6, // Number of items in the grid
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
                     decoration: BoxDecoration(
-                      image: const DecorationImage(
+                      image: DecorationImage(
                         image: NetworkImage(
-                          'https://images.unsplash.com/photo-1613151848917-80e67f421fff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
+                          imgUrl[index],
                         ),
                         fit: BoxFit.cover,
                       ),
