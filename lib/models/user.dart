@@ -30,24 +30,24 @@ class User {
 
 class Data {
     int id;
-    String nidFrontFile;
-    String nidBackFile;
-    String jobOfferFile;
-    String bankStatementFile;
-    String selfieFile;
-    String bankAccountFile;
+    String? nidFrontFile;
+    String? nidBackFile;
+    String? jobOfferFile;
+    String? bankStatementFile;
+    String? selfieFile;
+    String? bankAccountFile;
     String password;
     dynamic lastLogin;
-    bool isSuperuser;
-    bool isStaff;
-    bool isActive;
+    bool? isSuperuser;
+    bool? isStaff;
+    bool? isActive;
     DateTime dateJoined;
-    String fullName;
-    String phoneNumber;
-    String permanentAddress;
-    String residentialAddress;
-    String userRoll;
-    String userIp;
+    String? fullName;
+    String? phoneNumber;
+    String? permanentAddress;
+    String? residentialAddress;
+    String? userRoll;
+    String? userIp;
 
     Data({
         required this.id,

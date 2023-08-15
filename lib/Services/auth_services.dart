@@ -1,6 +1,3 @@
-import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:dio/dio.dart';
 import 'package:easypay/common/utils/utils.dart';
 import 'package:easypay/constants/url.dart';
@@ -8,7 +5,6 @@ import 'package:easypay/providers/auth_provider.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:http_parser/http_parser.dart';
 
 final authServicesProvider = Provider((ref) => AuthServices());
 
@@ -151,31 +147,32 @@ class AuthServices {
     final dio = Dio();
     dio.options.baseUrl = Urls.baseUrl;
     try {
-      Response res = await dio.post(
-        Urls.loginUrl,
-        data: {"phone_number": phoneNumber, "password": password},
-      );
+      debugPrint(phoneNumber);
+      Response res = await dio.post(Urls.loginUrl,
+          data: FormData.fromMap(
+              {"phone_number": phoneNumber, "password": password}));
+
       cookie = res.headers['Set-Cookie'];
       return res;
     } catch (e) {
+      // debugPrint(e.toString());
       showSnackBar(context, e.toString());
     }
     return null;
   }
 
   Future<Response?> verifyToken(
-    {required BuildContext context, required String otp}) async {
-  final dio = Dio();
-  dio.options.baseUrl = Urls.baseUrl;
-  dio.options.headers['Cookie'] = cookie;
-  try {
-    Response res = await dio.post(Urls.verifyLoginOtp, data: {"otp": otp});
-    return res;
-  } catch (error) {
-    showSnackBar(context, error.toString());
+      {required BuildContext context, required String otp}) async {
+    final dio = Dio();
+    dio.options.baseUrl = Urls.baseUrl;
+    dio.options.headers['Cookie'] = cookie;
+    try {
+      Response res = await dio.post(Urls.verifyLoginOtp,
+          data: FormData.fromMap({"otp": otp}));
+      return res;
+    } catch (error) {
+      showSnackBar(context, error.toString());
+    }
+    return null;
   }
-  return null;
 }
-}
-
-

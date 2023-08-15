@@ -34,7 +34,9 @@ class HomePage extends ConsumerWidget {
                     borderRadius: BorderRadius.all(Radius.circular(5))),
               ),
               Text(
-                "Hello, ${user?.data.fullName}",
+                user?.data.fullName != null
+                    ? "Hello, ${user?.data.fullName}"
+                    : "Hello, Guest",
                 style: const TextStyle(
                     fontSize: 20, fontFamily: "Italian Plate 2"),
               ),
@@ -164,7 +166,7 @@ class HomePage extends ConsumerWidget {
                         ),
                         subtitle: Text(
                           "Wed, 25 August",
-                          style:const TextStyle(
+                          style: const TextStyle(
                               fontSize: 13, fontFamily: "Italian Plate 2"),
                         ),
                         trailing: InkWell(
