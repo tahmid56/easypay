@@ -1,5 +1,5 @@
 import 'package:easypay/Services/order_services.dart';
-import 'package:easypay/common/utils/error_handling.dart';
+
 import 'package:easypay/common/utils/utils.dart';
 import 'package:easypay/models/order.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,13 +22,13 @@ final ordersProvider = FutureProvider.family((ref, BuildContext context) async {
         await ref.watch(ordersServicesProvider).getAllOrders(context: context);
     if (res?.statusCode == 200) {
       var orders = Order.fromJson(res?.data);
-      debugPrint(orders.data.toString());
-      return orders.data;
+      return orders;
     } else {
       showSnackBar(context, "Something Went wrong");
-      return [];
     }
   } catch (e) {
     showSnackBar(context, e.toString());
   }
 });
+
+

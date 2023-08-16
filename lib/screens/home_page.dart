@@ -173,7 +173,7 @@ class HomePage extends ConsumerWidget {
                           onTap: () {
                             Navigator.of(context)
                                 .push(MaterialPageRoute(builder: (_) {
-                              return const SingleOrder();
+                              return const SingleOrder(id: "1",);
                             }));
                           },
                           child: Container(

@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../constants/url.dart';
 
-
 final ordersServicesProvider = Provider((ref) => OrderServices());
 
 class OrderServices {
@@ -16,11 +15,24 @@ class OrderServices {
       Response res = await dio.get(
         Urls.ordersUrl,
       );
-      
+
       return res;
     } catch (error) {
       showSnackBar(context, error.toString());
     }
     return null;
+  }
+
+  Future<Response?> getOrderDetails({required int id}) async {
+    final dio = Dio();
+    dio.options.baseUrl = Urls.baseUrl;
+    try {
+      Response res = await dio.get(
+        "${Urls.orderDetailsUrl}$id",
+      );
+      return res;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 }

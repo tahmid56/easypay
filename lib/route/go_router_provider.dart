@@ -1,4 +1,5 @@
 import 'package:easypay/common/widgets/loader.dart';
+import 'package:easypay/route/go_router_notifier.dart';
 import 'package:easypay/screens/first_registration_screen.dart';
 import 'package:easypay/screens/fourth_registration_screen.dart';
 import 'package:easypay/screens/login_screen.dart';
@@ -6,12 +7,14 @@ import 'package:easypay/screens/home_screen.dart';
 
 import 'package:easypay/route/named_routes.dart';
 import 'package:easypay/screens/second_registration_screen.dart';
+import 'package:easypay/screens/single_order_screen.dart';
 import 'package:easypay/screens/splash_screen.dart';
 import 'package:easypay/screens/third_registration_screen.dart';
 import 'package:easypay/screens/verify_otp_screen.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final goRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(initialLocation: '/', routes: [
@@ -21,12 +24,20 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       builder: (context, state) => const SplashScreen(),
       routes: [
         GoRoute(
-          name: NamedRoutes.login,
-          path: 'login',
-          builder: (context, state) => LoginScreen(
-            key: state.pageKey,
-          ),
-        ),
+            name: NamedRoutes.login,
+            path: 'login',
+            builder: (context, state) => LoginScreen(
+                  key: state.pageKey,
+                ),
+            redirect: (context, state) async {
+              final SharedPreferences prefs =
+                  await SharedPreferences.getInstance();
+
+              if (prefs.getString("access_token") != null) {
+                return '/home';
+              }
+              return '/login';
+            }),
         GoRoute(
           name: NamedRoutes.verifyOtp,
           path: 'verifyOtp',

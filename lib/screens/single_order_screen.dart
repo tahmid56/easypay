@@ -1,19 +1,18 @@
+import 'package:easypay/providers/order_details_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
-class SingleOrder extends StatefulWidget {
-  const SingleOrder({Key? key}) : super(key: key);
+class SingleOrder extends StatelessWidget {
+  final String id;
+  const SingleOrder({super.key, required this.id});
 
-  @override
-  State<SingleOrder> createState() => _SingleOrderState();
-}
-
-class _SingleOrderState extends State<SingleOrder> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.grey, // <-- SEE HERE
         ),
         backgroundColor: Colors.white,
@@ -22,292 +21,240 @@ class _SingleOrderState extends State<SingleOrder> {
       body: Scaffold(
         backgroundColor: Colors.white,
         body: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(25.0),
-                    child: Column(
-                      children: [
-                        Text("10 Oct, 2023",
-                            style: TextStyle(
-                                fontSize: 12, fontFamily: 'Italian Plate 2')),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "Lacoste",
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Italian Plate 2'),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text("BDT 10,000",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Italian Plate 2')),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 30.0, right: 30),
-                          child: Divider(
-                            height: 25,
-                            thickness: 1.5,
-                          ),
-                        ),
-                        Text(
-                          "BDT 5,000",
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Italian Plate 2'),
-                        ),
-                        Text(
-                          "Remaining",
-                          style: TextStyle(
-                              fontSize: 15, fontFamily: 'Italian Plate 2'),
-                        ),
-                      ],
-                    ),
-                  ),
-                  height: 200,
-                  width: 200,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      border: Border.all(
-                        width: 3,
-                        color: Colors.grey,
-                      )),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: Divider(
-                    thickness: 1,
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                        width: 80, child: Image.asset("assets/images/gg.png")),
-                    Text(
-                      "....4538",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Italian Plate 2'),
-                    ),
-                    Text(
-                      "Change",
-                      style: TextStyle(
-                          color: Color(0xff00C2E4),
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Italian Plate 2'),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: Divider(
-                    thickness: 1,
-                  ),
-                ),
-                Container(
-                  height: 400,
-                  child: ListView(
-                    children: [
-                      ListTile(
-                        leading: Container(
-                          child: Center(
-                            child: Text(
-                              "1",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                  fontFamily: 'Italian Plate 2'),
-                            ),
-                          ),
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              border: Border.all(
-                                width: 5,
-                                color: Color(0xff00C2E4),
-                              )),
-                        ),
-                        title: Text(
-                          "First payment",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Italian Plate 2',
-                          ),
-                        ),
-                        subtitle: const Text("Sun, 6 August",
-                            style: TextStyle(
-                                fontSize: 13, fontFamily: 'Italian Plate 2')),
-                        trailing: const Padding(
-                          padding: EdgeInsets.only(top: 20.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text("BDT 2500",
-                                  style: TextStyle(
-                                      fontSize: 10,
-                                      fontFamily: 'Italian Plate 2')),
-                              Text(
-                                "PAID",
-                                style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'Italian Plate 2'),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      ListTile(
-                        leading: Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            border: Border.all(
-                              width: 5,
-                              color: const Color(0xff00C2E4),
-                            ),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              "2",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                  fontFamily: 'Italian Plate 2'),
-                            ),
-                          ),
-                        ),
-                        title: const Text(
-                          "Second payment",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Italian Plate 2'),
-                        ),
-                        subtitle: const Text("Sun, 20 August",
-                            style: TextStyle(
-                                fontSize: 13, fontFamily: 'Italian Plate 2')),
-                        trailing: Padding(
-                          padding: const EdgeInsets.only(top: 20.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text("BDT 2500",
-                                  style: TextStyle(
-                                      fontSize: 10,
-                                      fontFamily: 'Italian Plate 2')),
-                              Text(
-                                "PAID",
-                                style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'Italian Plate 2'),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      ListTile(
-                        leading: Container(
-                          child: Center(
-                            child: Text(
-                              "3",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                  fontFamily: 'Italian Plate 2'),
-                            ),
-                          ),
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              border: Border.all(
-                                width: 5,
-                                color: Colors.pinkAccent,
-                              )),
-                        ),
-                        title: Text("Third payment",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        subtitle: Text(
-                          "Sun, 10 October",
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontFamily: 'Italian Plate 2',
-                          ),
-                        ),
-                        trailing: Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(7.0),
-                            child: Text(
-                              "Pay BDT 2500",
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.white,
-                                  fontFamily: 'Italian Plate 2'),
-                            ),
-                          ),
-                          decoration: BoxDecoration(
-                              color: Color(0xff333333),
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
-                      ),
-                      ListTile(
-                        leading: Container(
-                          child: Center(
-                            child: Text(
-                              "4",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                  fontFamily: 'Italian Plate 2'),
-                            ),
-                          ),
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              border: Border.all(
-                                width: 5,
-                                color: Colors.grey,
-                              )),
-                        ),
-                        title: const Text(
-                          "Final payment",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Italian Plate 2'),
-                        ),
-                        subtitle: Text("Sun, 1 November",
-                            style: TextStyle(
-                                fontSize: 13, fontFamily: 'Italian Plate 2')),
-                        trailing: Padding(
-                          padding: const EdgeInsets.all(7.0),
-                          child: Text("BDT 2500",
-                              style: TextStyle(
-                                  fontSize: 10,
+          child: SingleChildScrollView(child: Consumer(
+            builder: (context, ref, child) {
+              final orderDetail = ref.watch(orderDetailsProvider(id));
+              return orderDetail.when(
+                  data: (data) {
+                    final firstDue =
+                        data!.dues.firstWhere((due) => due.isPaid == false);
+
+                    return RefreshIndicator(
+                      onRefresh: () async {
+                        ref.refresh(orderDetailsProvider(id));
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 200,
+                            width: 200,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                border: Border.all(
+                                  width: 3,
                                   color: Colors.grey,
-                                  fontFamily: 'Italian Plate 2')),
-                        ),
+                                )),
+                            child: Padding(
+                              padding: const EdgeInsets.all(25.0),
+                              child: Column(
+                                children: [
+                                  Text(
+                                      DateFormat('dd, MMM, yyyy')
+                                          .format(firstDue.dueDate),
+                                      style: const TextStyle(
+                                          fontSize: 12,
+                                          fontFamily: 'Italian Plate 2')),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    data.order.merchant.storeName,
+                                    style: const TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Italian Plate 2'),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text("BDT ${data.order.totalAmount}",
+                                      style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Italian Plate 2')),
+                                  const Padding(
+                                    padding:
+                                        EdgeInsets.only(left: 30.0, right: 30),
+                                    child: Divider(
+                                      height: 25,
+                                      thickness: 1.5,
+                                    ),
+                                  ),
+                                  Text(
+                                    "BDT ${data.order.remainingDueAmount}",
+                                    style: const TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Italian Plate 2'),
+                                  ),
+                                  const Text(
+                                    "Remaining",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontFamily: 'Italian Plate 2'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.only(top: 20.0),
+                            child: Divider(
+                              thickness: 1,
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              SizedBox(
+                                  width: 80,
+                                  child: Image.asset("assets/images/gg.png")),
+                              const Text(
+                                "....4538",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Italian Plate 2'),
+                              ),
+                              const Text(
+                                "Change",
+                                style: TextStyle(
+                                    color: Color(0xff00C2E4),
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Italian Plate 2'),
+                              ),
+                            ],
+                          ),
+                          const Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: Divider(
+                              thickness: 1,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 400,
+                            child: ListView.builder(
+                              itemCount: data.dues.length,
+                              itemBuilder: (context, index) => ListTile(
+                                leading: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    Container(
+                                      height: 45,
+                                      width: 45,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                        border: Border.all(
+                                          width: 1,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                          border: Border.all(
+                                            width: 1,
+                                            color: firstDue.id ==
+                                                    data.dues[index].id
+                                                ? Colors.pinkAccent
+                                                : data.dues[index].isPaid
+                                                    ? const Color(0xff00C2E4)
+                                                    : Colors.white,
+                                          )),
+                                      child: Center(
+                                        child: Text(
+                                          "${index + 1}",
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15,
+                                              fontFamily: 'Italian Plate 2'),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                title: Text(
+                                  "${data.dues[index].installment} payment",
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Italian Plate 2',
+                                  ),
+                                ),
+                                subtitle: const Text("Sun, 6 August",
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontFamily: 'Italian Plate 2')),
+                                trailing: firstDue.id == data.dues[index].id
+                                    ? Container(
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xff333333),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(7.0),
+                                          child: Text(
+                                            "Pay BDT ${data.dues[index].dueAmount}",
+                                            style: const TextStyle(
+                                                fontSize: 11,
+                                                color: Colors.white,
+                                                fontFamily: 'Italian Plate 2'),
+                                          ),
+                                        ),
+                                      )
+                                    : data.dues[index].isPaid
+                                        ? Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 20.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              children: [
+                                                Text(
+                                                    "BDT ${data.dues[index].dueAmount}",
+                                                    style: const TextStyle(
+                                                        fontSize: 11,
+                                                        fontFamily:
+                                                            'Italian Plate 2')),
+                                                const Text(
+                                                  "PAID",
+                                                  style: TextStyle(
+                                                      fontSize: 10,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontFamily:
+                                                          'Italian Plate 2'),
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        : Padding(
+                                            padding: EdgeInsets.all(7.0),
+                                            child: Text(
+                                                "BDT ${data.dues[index].dueAmount}",
+                                                style: const TextStyle(
+                                                    fontSize: 10,
+                                                    color: Colors.grey,
+                                                    fontFamily:
+                                                        'Italian Plate 2')),
+                                          ),
+                              ),
+                            ),
+                          )
+                        ],
                       ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
+                    );
+                  },
+                  error: (error, stackTrace) =>
+                      Center(child: Text('Error: $error')),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()));
+            },
+          )),
         ),
       ),
     );

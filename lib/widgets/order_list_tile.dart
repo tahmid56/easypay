@@ -1,34 +1,45 @@
+import 'package:easypay/constants/url.dart';
+import 'package:easypay/route/named_routes.dart';
+import 'package:easypay/screens/single_order_screen.dart';
 import 'package:flutter/material.dart';
-
-import '../screens/single_order_screen.dart';
+import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 class OrderListTile extends StatelessWidget {
-  final String date;
+  final DateTime date;
   final String imgUrl;
   final String titleText;
-  final String price;
+  final double? price;
+  final String id;
   const OrderListTile(
       {super.key,
       required this.date,
       required this.imgUrl,
       required this.titleText,
-      required this.price});
+      required this.price,
+      required this.id});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-          return const SingleOrder();
+          return SingleOrder(id: id);
         }));
       },
       child: ListTile(
-        leading: Image.asset(imgUrl),
+        leading: imgUrl == ""
+            ? Image.asset(
+                'assets/images/logo4.png',
+                height: 20,
+                width: 50,
+              )
+            : Image.network("${Urls.baseUrl}$imgUrl"),
         title: Text(titleText,
             style: const TextStyle(
                 fontWeight: FontWeight.bold, fontFamily: "Italian Plate 2")),
         subtitle: Text(
-          date,
+          DateFormat('dd/MM/yyyy').format(date),
           style: const TextStyle(fontFamily: "Italian Plate 2"),
         ),
         trailing: Container(
@@ -43,10 +54,10 @@ class OrderListTile extends StatelessWidget {
               children: [
                 Text(
                   "BDT $price",
-                  style: TextStyle(color: Colors.white, fontSize: 12),
+                  style: const TextStyle(color: Colors.white, fontSize: 12),
                 ),
                 const SizedBox(width: 10),
-                Icon(Icons.arrow_forward, color: Color(0xffD2E063))
+                const Icon(Icons.arrow_forward, color: Color(0xffD2E063))
               ],
             ),
           ),

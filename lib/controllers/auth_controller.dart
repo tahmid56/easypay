@@ -1,11 +1,10 @@
-
-
 import 'package:dio/dio.dart';
 import 'package:easypay/Services/auth_services.dart';
 import 'package:easypay/common/utils/error_handling.dart';
 import 'package:easypay/models/firstRegistration.dart';
 import 'package:easypay/models/user.dart';
 import 'package:easypay/providers/user_provider.dart';
+import 'package:easypay/route/go_router_notifier.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -138,7 +137,7 @@ class AuthController extends StateNotifier<bool> {
         response: res,
         context: context,
         onSuccess: () {
-          GoRouter.of(context).pushNamed(NamedRoutes.verifyOtp);
+          GoRouter.of(context).pushReplacementNamed(NamedRoutes.verifyOtp);
         });
   }
 
@@ -161,6 +160,7 @@ class AuthController extends StateNotifier<bool> {
           var userData = User.fromJson(res?.data);
           await prefs.setString("access_token", userData.token);
           ref.watch(userRepositoryProvider.notifier).saveUser(userData);
+          ref.watch(loggedInProvider).isLoggedIn(true);
           // ignore: use_build_context_synchronously
           GoRouter.of(context).pushReplacementNamed(NamedRoutes.home);
         });
