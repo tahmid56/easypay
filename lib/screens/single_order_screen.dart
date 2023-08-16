@@ -1,3 +1,4 @@
+import 'package:easypay/constants/theme.dart';
 import 'package:easypay/providers/order_details_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,16 +12,9 @@ class SingleOrder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: Colors.grey, // <-- SEE HERE
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0.0,
-      ),
-      body: Scaffold(
-        backgroundColor: Colors.white,
-        body: Center(
+      backgroundColor: CustomTheme.primaryColor,
+      body: SafeArea(
+        child: Center(
           child: SingleChildScrollView(child: Consumer(
             builder: (context, ref, child) {
               final orderDetail = ref.watch(orderDetailsProvider(id));
@@ -49,11 +43,13 @@ class SingleOrder extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Text(
-                                      DateFormat('dd, MMM, yyyy')
-                                          .format(firstDue.dueDate),
-                                      style: const TextStyle(
-                                          fontSize: 12,
-                                          fontFamily: 'Italian Plate 2')),
+                                    DateFormat('dd, MMM, yyyy')
+                                        .format(firstDue.dueDate),
+                                    style: const TextStyle(
+                                        fontSize: 12,
+                                        fontFamily: CustomTheme.fontFamily,
+                                        color: CustomTheme.secondaryColor),
+                                  ),
                                   const SizedBox(
                                     height: 10,
                                   ),
@@ -62,16 +58,20 @@ class SingleOrder extends StatelessWidget {
                                     style: const TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold,
-                                        fontFamily: 'Italian Plate 2'),
+                                        fontFamily: CustomTheme.fontFamily,
+                                        color: CustomTheme.secondaryColor),
                                   ),
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  Text("BDT ${data.order.totalAmount}",
-                                      style: const TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: 'Italian Plate 2')),
+                                  Text(
+                                    "BDT ${data.order.totalAmount}",
+                                    style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: CustomTheme.fontFamily,
+                                        color: CustomTheme.secondaryColor),
+                                  ),
                                   const Padding(
                                     padding:
                                         EdgeInsets.only(left: 30.0, right: 30),
@@ -85,13 +85,15 @@ class SingleOrder extends StatelessWidget {
                                     style: const TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold,
-                                        fontFamily: 'Italian Plate 2'),
+                                        fontFamily: CustomTheme.fontFamily,
+                                        color: CustomTheme.secondaryColor),
                                   ),
                                   const Text(
                                     "Remaining",
                                     style: TextStyle(
                                         fontSize: 15,
-                                        fontFamily: 'Italian Plate 2'),
+                                        fontFamily: CustomTheme.fontFamily,
+                                        color: CustomTheme.secondaryColor),
                                   ),
                                 ],
                               ),
@@ -112,9 +114,9 @@ class SingleOrder extends StatelessWidget {
                               const Text(
                                 "....4538",
                                 style: TextStyle(
-                                    color: Colors.black,
                                     fontWeight: FontWeight.bold,
-                                    fontFamily: 'Italian Plate 2'),
+                                    fontFamily: CustomTheme.fontFamily,
+                                    color: Colors.white),
                               ),
                               const Text(
                                 "Change",
@@ -171,7 +173,9 @@ class SingleOrder extends StatelessWidget {
                                           style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 15,
-                                              fontFamily: 'Italian Plate 2'),
+                                              fontFamily:
+                                                  CustomTheme.fontFamily,
+                                              color: Colors.white),
                                         ),
                                       ),
                                     ),
@@ -180,18 +184,22 @@ class SingleOrder extends StatelessWidget {
                                 title: Text(
                                   "${data.dues[index].installment} payment",
                                   style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'Italian Plate 2',
-                                  ),
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: CustomTheme.fontFamily,
+                                      color: CustomTheme.secondaryColor),
                                 ),
-                                subtitle: const Text("Sun, 6 August",
-                                    style: TextStyle(
-                                        fontSize: 13,
-                                        fontFamily: 'Italian Plate 2')),
+                                subtitle: Text(
+                                  DateFormat('dd, MMM, yyyy')
+                                      .format(data.dues[index].dueDate),
+                                  style: const TextStyle(
+                                      fontSize: 13,
+                                      fontFamily: CustomTheme.fontFamily,
+                                      color: Colors.white),
+                                ),
                                 trailing: firstDue.id == data.dues[index].id
                                     ? Container(
                                         decoration: BoxDecoration(
-                                          color: const Color(0xff333333),
+                                          color: const Color(0xffffffff),
                                           borderRadius:
                                               BorderRadius.circular(10),
                                         ),
@@ -201,8 +209,10 @@ class SingleOrder extends StatelessWidget {
                                             "Pay BDT ${data.dues[index].dueAmount}",
                                             style: const TextStyle(
                                                 fontSize: 11,
-                                                color: Colors.white,
-                                                fontFamily: 'Italian Plate 2'),
+                                                fontFamily:
+                                                    CustomTheme.fontFamily,
+                                                color:
+                                                    CustomTheme.secondaryColor),
                                           ),
                                         ),
                                       )
@@ -215,19 +225,24 @@ class SingleOrder extends StatelessWidget {
                                                   CrossAxisAlignment.end,
                                               children: [
                                                 Text(
-                                                    "BDT ${data.dues[index].dueAmount}",
-                                                    style: const TextStyle(
-                                                        fontSize: 11,
-                                                        fontFamily:
-                                                            'Italian Plate 2')),
+                                                  "BDT ${data.dues[index].dueAmount}",
+                                                  style: const TextStyle(
+                                                      fontSize: 11,
+                                                      fontFamily: CustomTheme
+                                                          .fontFamily,
+                                                      color: CustomTheme
+                                                          .secondaryColor),
+                                                ),
                                                 const Text(
                                                   "PAID",
                                                   style: TextStyle(
                                                       fontSize: 10,
                                                       fontWeight:
                                                           FontWeight.bold,
-                                                      fontFamily:
-                                                          'Italian Plate 2'),
+                                                      fontFamily: CustomTheme
+                                                          .fontFamily,
+                                                      color: CustomTheme
+                                                          .secondaryColor),
                                                 ),
                                               ],
                                             ),

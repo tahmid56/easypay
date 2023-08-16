@@ -20,7 +20,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   Future navigator() async {
     final isLoggedIn = ref.read(loggedInProvider);
-    await Future.delayed(const Duration(milliseconds: 2000));
+    await Future.delayed(const Duration(milliseconds: 3000));
     if (isLoggedIn.getLoggedInStatus()) {
       return GoRouter.of(context).pushReplacementNamed(NamedRoutes.home);
     } else {
@@ -31,12 +31,24 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Colors.grey[900]),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          stops: [0.1, 0.4, 0.6, 0.9],
+          colors: [
+            Color(0xfffff7ad),
+            Color(0xffffa9f9),
+            Color(0xff62ffe3),
+            Color(0xff63dbc5)
+          ],
+        ),
+      ),
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Center(
         child: Image.asset(
-          "assets/images/logo4.png",
+          "assets/images/logo2.png",
           height: 200,
           width: 300,
         ),

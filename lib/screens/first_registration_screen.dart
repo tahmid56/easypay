@@ -1,5 +1,6 @@
 import 'package:easypay/Services/auth_services.dart';
 import 'package:easypay/common/widgets/loader.dart';
+import 'package:easypay/constants/theme.dart';
 import 'package:easypay/controllers/auth_controller.dart';
 import 'package:easypay/route/named_routes.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class _FirstRegistrationScreenState
   Widget build(BuildContext context) {
     final isLoading = ref.watch(authControllerProvider);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: CustomTheme.primaryColor,
       body: isLoading
           ? const Loader()
           : Padding(
@@ -59,21 +60,51 @@ class _FirstRegistrationScreenState
                       child: Image.asset("assets/images/logo4.png"),
                     ),
                     const Spacer(),
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          "FullName",
+                          style: TextStyle(
+                              fontFamily: CustomTheme.fontFamily,
+                              fontSize: 15,
+                              color: Colors.white),
+                        ),
+                      ),
+                    ),
                     Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CustomTextField(
-                            textEditingController: fullNameController,
-                            hintText: 'Full Name')),
+                      padding: const EdgeInsets.all(8.0),
+                      child: CustomTextField(
+                          textEditingController: fullNameController,
+                          hintText: 'Full Name'),
+                    ),
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          "Mobile No",
+                          style: TextStyle(
+                              fontFamily: CustomTheme.fontFamily,
+                              fontSize: 15,
+                              color: Colors.white),
+                        ),
+                      ),
+                    ),
                     Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CustomTextField(
-                            textEditingController: mobileController,
-                            hintText: 'Mobile No.')),
+                      padding: const EdgeInsets.all(8.0),
+                      child: CustomTextField(
+                          textEditingController: mobileController,
+                          hintText: 'Mobile No.'),
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
                     ReusableButton(
                         buttonText: "Next",
+                        colorCode: 0xff000000,
+                        customWidth: MediaQuery.of(context).size.width * 0.2,
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             firstRegistrationClick(
@@ -87,11 +118,14 @@ class _FirstRegistrationScreenState
                     const Spacer(),
                     const Text("Not registered as a User?",
                         style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold)),
+                            fontSize: 15,
+                            color: CustomTheme.secondaryColor,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: CustomTheme.fontFamily)),
                     TextReusableButton(
                         buttonText: "Login",
                         onPressed: () {
-                          GoRouter.of(context).pushNamed(NamedRoutes.login);
+                          GoRouter.of(context).pushReplacementNamed(NamedRoutes.login);
                         }),
                     const SizedBox(height: 20),
                   ],

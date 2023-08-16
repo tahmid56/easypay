@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+import '../constants/theme.dart';
+
 class OrderListTile extends StatelessWidget {
   final DateTime date;
   final String imgUrl;
@@ -37,10 +39,14 @@ class OrderListTile extends StatelessWidget {
             : Image.network("${Urls.baseUrl}$imgUrl"),
         title: Text(titleText,
             style: const TextStyle(
-                fontWeight: FontWeight.bold, fontFamily: "Italian Plate 2")),
+                fontWeight: FontWeight.bold,
+                fontFamily: CustomTheme.fontFamily,
+                color: CustomTheme.secondaryColor)),
         subtitle: Text(
           DateFormat('dd/MM/yyyy').format(date),
-          style: const TextStyle(fontFamily: "Italian Plate 2"),
+          style: const TextStyle(
+              fontFamily: CustomTheme.fontFamily,
+              color: CustomTheme.secondaryColor),
         ),
         trailing: Container(
           decoration: BoxDecoration(

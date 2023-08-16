@@ -1,9 +1,8 @@
-
-
 import 'package:easypay/common/utils/utils.dart';
 import 'package:easypay/common/widgets/custom_text_field.dart';
 import 'package:easypay/common/widgets/custom_upload_button.dart';
 import 'package:easypay/common/widgets/loader.dart';
+import 'package:easypay/constants/theme.dart';
 import 'package:easypay/controllers/auth_controller.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +34,6 @@ class _ThirdRegistrationScreenState
   final _formKey = GlobalKey<FormState>();
   Future<void> _pickNIDFront() async {
     nidFrontFilePath = await pickFile(fileTypes: ["png"]);
-    
   }
 
   Future<void> _pickNIDBack() async {
@@ -103,7 +101,7 @@ class _ThirdRegistrationScreenState
   Widget build(BuildContext context) {
     final isLoading = ref.watch(authControllerProvider);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: CustomTheme.primaryColor,
       body: isLoading
           ? const Loader()
           : Padding(
@@ -125,9 +123,8 @@ class _ThirdRegistrationScreenState
                           buttonText: nidFrontFilePath?.files.first.name ??
                               "Upload NID Front",
                           onPressed: () {
-                            _pickNIDFront().then((_)=> setState((){}));
+                            _pickNIDFront().then((_) => setState(() {}));
                           },
-                          
                         ),
                         const SizedBox(
                           height: 20,
@@ -137,7 +134,6 @@ class _ThirdRegistrationScreenState
                               "Upload NID Back",
                           onPressed: () {
                             _pickNIDBack().then((_) => setState(() {}));
-                            
                           },
                         ),
                         const SizedBox(
@@ -178,7 +174,6 @@ class _ThirdRegistrationScreenState
                               "Upload Bank Statement of Last 3 months",
                           onPressed: () {
                             _pickBankStatement().then((_) => setState(() {}));
-                            
                           },
                         ),
                         const SizedBox(
@@ -189,6 +184,8 @@ class _ThirdRegistrationScreenState
                           children: [
                             ReusableButton(
                                 buttonText: "Next",
+                                customWidth:
+                                    MediaQuery.of(context).size.width * 0.2,
                                 onPressed: () {
                                   onNextClick(
                                       ref,
@@ -202,9 +199,11 @@ class _ThirdRegistrationScreenState
                                 }),
                             ReusableButton(
                                 buttonText: "Go Back",
+                                customWidth:
+                                    MediaQuery.of(context).size.width * 0.2,
                                 colorCode: 0xff00c2e5,
                                 onPressed: () {
-                                  GoRouter.of(context).pop();
+                                  GoRouter.of(context).pushReplacementNamed(NamedRoutes.registration2);
                                 }),
                           ],
                         ),

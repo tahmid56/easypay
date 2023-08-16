@@ -1,3 +1,4 @@
+import 'package:easypay/constants/theme.dart';
 import 'package:easypay/screens/home_page.dart';
 import 'package:easypay/screens/more_page.dart';
 import 'package:easypay/screens/orders_page.dart';
@@ -27,7 +28,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          backgroundColor: Color(0xffffffff),
+          backgroundColor: CustomTheme.primaryColor,
           body: navigationOptions[ref.watch(pageIndexProvider)],
           bottomNavigationBar: Container(
             height: 90,

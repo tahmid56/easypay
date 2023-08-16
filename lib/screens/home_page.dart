@@ -1,3 +1,4 @@
+import 'package:easypay/constants/theme.dart';
 import 'package:easypay/providers/user_provider.dart';
 import 'package:easypay/screens/single_order_screen.dart';
 import 'package:flutter/material.dart';
@@ -38,21 +39,29 @@ class HomePage extends ConsumerWidget {
                     ? "Hello, ${user?.data.fullName}"
                     : "Hello, Guest",
                 style: const TextStyle(
-                    fontSize: 20, fontFamily: "Italian Plate 2"),
+                    fontSize: 20,
+                    fontFamily: CustomTheme.fontFamily,
+                    color: CustomTheme.secondaryColor),
               ),
               const SizedBox(height: 15),
               const Text("BDT 12600.89",
                   style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
-                      fontFamily: "Italian Plate 2")),
+                      fontFamily: CustomTheme.fontFamily,
+                      color: CustomTheme.secondaryColor)),
               const Text("Total you owe",
-                  style:
-                      TextStyle(fontSize: 20, fontFamily: "Italian Plate 2")),
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontFamily: CustomTheme.fontFamily,
+                      color: CustomTheme.secondaryColor)),
               const SizedBox(height: 30),
               const Text(
                 "Credit Available: BDT 56820.12",
-                style: TextStyle(fontSize: 15, fontFamily: "Italian Plate 2"),
+                style: TextStyle(
+                    fontSize: 15,
+                    fontFamily: CustomTheme.fontFamily,
+                    color: CustomTheme.secondaryColor),
               ),
               const Divider(
                 height: 80,
@@ -68,11 +77,16 @@ class HomePage extends ConsumerWidget {
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 35,
-                            fontFamily: "Italian Plate 2"),
+                            fontFamily: CustomTheme.fontFamily,
+                            color: CustomTheme.secondaryColor),
                       ),
-                      Text("Due in 15 days",
-                          style: TextStyle(
-                              fontSize: 13, fontFamily: "Italian Plate 2"))
+                      Text(
+                        "Due in 15 days",
+                        style: TextStyle(
+                            fontSize: 13,
+                            fontFamily: CustomTheme.fontFamily,
+                            color: CustomTheme.secondaryColor),
+                      ),
                     ],
                   ),
                   SizedBox(
@@ -80,14 +94,21 @@ class HomePage extends ConsumerWidget {
                   ),
                   Column(
                     children: [
-                      Text("22123",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 35,
-                              fontFamily: "Italian Plate 2")),
-                      Text("Due in 15 days",
-                          style: TextStyle(
-                              fontSize: 13, fontFamily: "Italian Plate 2"))
+                      Text(
+                        "47241",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 35,
+                            fontFamily: CustomTheme.fontFamily,
+                            color: CustomTheme.secondaryColor),
+                      ),
+                      Text(
+                        "Due in 30 days",
+                        style: TextStyle(
+                            fontSize: 13,
+                            fontFamily: CustomTheme.fontFamily,
+                            color: CustomTheme.secondaryColor),
+                      ),
                     ],
                   )
                 ],
@@ -104,22 +125,27 @@ class HomePage extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            color: const Color(0xffD2E063),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
                               "Upcoming payments",
-                              style: TextStyle(fontFamily: "Italian Plate 2"),
+                              style: TextStyle(
+                                  fontFamily: CustomTheme.fontFamily,
+                                  color: Colors.white),
                             ),
                           ),
-                          decoration: BoxDecoration(
-                              color: Color(0xffD2E063),
-                              borderRadius: BorderRadius.circular(10)),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
                           child: Text(
                             "All Orders",
-                            style: TextStyle(fontFamily: "Italian Plate 2"),
+                            style: TextStyle(
+                                fontFamily: CustomTheme.fontFamily,
+                                color: CustomTheme.secondaryColor),
                           ),
                         )
                       ],
@@ -134,6 +160,9 @@ class HomePage extends ConsumerWidget {
                 height: 30,
               ),
               Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    border: Border.all(color: Colors.grey)),
                 child: Column(
                   children: [
                     Padding(
@@ -146,7 +175,8 @@ class HomePage extends ConsumerWidget {
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15,
-                                  fontFamily: "Italian Plate 2"),
+                                  fontFamily: CustomTheme.fontFamily,
+                                  color: Colors.white),
                             ),
                           ),
                           height: 40,
@@ -162,18 +192,23 @@ class HomePage extends ConsumerWidget {
                           "Yellow Shopping",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontFamily: "Italian Plate 2"),
+                              fontFamily: CustomTheme.fontFamily,
+                              color: Colors.white),
                         ),
                         subtitle: Text(
                           "Wed, 25 August",
                           style: const TextStyle(
-                              fontSize: 13, fontFamily: "Italian Plate 2"),
+                              fontSize: 13,
+                              fontFamily: CustomTheme.fontFamily,
+                              color: Colors.white),
                         ),
                         trailing: InkWell(
                           onTap: () {
                             Navigator.of(context)
                                 .push(MaterialPageRoute(builder: (_) {
-                              return const SingleOrder(id: "1",);
+                              return const SingleOrder(
+                                id: "1",
+                              );
                             }));
                           },
                           child: Container(
@@ -186,7 +221,8 @@ class HomePage extends ConsumerWidget {
                                 "Pay BDT 2212",
                                 style: TextStyle(
                                     fontSize: 10,
-                                    fontFamily: "Italian Plate 2"),
+                                    fontFamily: CustomTheme.fontFamily,
+                                    color: Colors.white),
                               ),
                             ),
                           ),
@@ -206,7 +242,8 @@ class HomePage extends ConsumerWidget {
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15,
-                                  fontFamily: "Italian Plate 2"),
+                                  fontFamily: CustomTheme.fontFamily,
+                                  color: Colors.white),
                             ),
                           ),
                           height: 40,
@@ -222,31 +259,31 @@ class HomePage extends ConsumerWidget {
                           "Yellow Shopping",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontFamily: "Italian Plate 2"),
+                              fontFamily: CustomTheme.fontFamily,
+                              color: Colors.white),
                         ),
                         subtitle: Text(
                           "Wed, 25 August",
                           style: TextStyle(
-                              fontSize: 13, fontFamily: "Italian Plate 2"),
+                              fontSize: 13,
+                              fontFamily: CustomTheme.fontFamily,
+                              color: Colors.white),
                         ),
                         trailing: Padding(
                           padding: const EdgeInsets.all(7.0),
                           child: Text(
                             "BDT 2212",
                             style: TextStyle(
-                              fontSize: 10,
-                              fontFamily: "Italian Plate 2",
-                            ),
+                                fontSize: 10,
+                                fontFamily: CustomTheme.fontFamily,
+                                color: Colors.white),
                           ),
                         ),
                       ),
                     ),
                   ],
                 ),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    border: Border.all(color: Colors.grey)),
-              )
+              ),
             ],
           ),
         ),

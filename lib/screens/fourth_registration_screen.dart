@@ -1,4 +1,5 @@
 import 'package:easypay/common/widgets/loader.dart';
+import 'package:easypay/constants/theme.dart';
 import 'package:easypay/controllers/auth_controller.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +55,7 @@ class _FourthRegistrationScreenState
     }
     if (pin == confirmPin) {
       ref.read(authControllerProvider.notifier).fourthStepRegistration(
+          ref: ref,
           context: context,
           selfieFile: selfieFile.files.first.path!,
           selfieName: selfieFile.files.first.name,
@@ -70,90 +72,99 @@ class _FourthRegistrationScreenState
   Widget build(BuildContext context) {
     final isLoading = ref.watch(authControllerProvider);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: CustomTheme.primaryColor,
       body: isLoading
           ? const Loader()
-          : Padding(
-              padding: const EdgeInsets.all(30),
-              child: SingleChildScrollView(
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.85,
-                  width: MediaQuery.of(context).size.width,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Image.asset("assets/images/logo4.png"),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      CustomUploadButton(
-                        buttonText: "Upload Selfie",
-                        onPressed: _pickSelfieImage,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      CustomUploadButton(
-                        buttonText: "Upload Bank Account",
-                        onPressed: _pickBankAccount,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: CustomTextField(
-                          textEditingController: pinController,
-                          hintText: "Account Pin",
+          : SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(30),
+                child: SingleChildScrollView(
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.85,
+                    width: MediaQuery.of(context).size.width,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Image.asset("assets/images/logo4.png"),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: CustomTextField(
-                          textEditingController: confirmPinController,
-                          hintText: "Account Pin Again",
+                        const SizedBox(
+                          height: 20,
                         ),
-                      ),
-                      const SizedBox(
-                        height: 40,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          ReusableButton(
-                              buttonText: "Complete",
-                              onPressed: () {
-                                handleCompletePress(
-                                    ref,
-                                    context,
-                                    selfieFile,
-                                    bankAccount,
-                                    pinController.text,
-                                    confirmPinController.text);
-                              }),
-                          ReusableButton(
-                              buttonText: "Go Back",
-                              colorCode: 0xff00c2e5,
-                              onPressed: () {
-                                GoRouter.of(context).pop();
-                              }),
-                        ],
-                      ),
-                      const Spacer(),
-                      const Text("Not registered as a User?",
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold)),
-                      TextReusableButton(
-                          buttonText: "Login",
-                          onPressed: () {
-                            GoRouter.of(context).pushNamed(NamedRoutes.login);
-                          }),
-                    ],
+                        CustomUploadButton(
+                          buttonText: "Upload Selfie",
+                          onPressed: _pickSelfieImage,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        CustomUploadButton(
+                          buttonText: "Upload Bank Account",
+                          onPressed: _pickBankAccount,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: CustomTextField(
+                            textEditingController: pinController,
+                            hintText: "Account Pin",
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: CustomTextField(
+                            textEditingController: confirmPinController,
+                            hintText: "Account Pin Again",
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            ReusableButton(
+                                buttonText: "Complete",
+                                customWidth:
+                                    MediaQuery.of(context).size.width * 0.2,
+                                onPressed: () {
+                                  handleCompletePress(
+                                      ref,
+                                      context,
+                                      selfieFile,
+                                      bankAccount,
+                                      pinController.text,
+                                      confirmPinController.text);
+                                }),
+                            ReusableButton(
+                                buttonText: "Go Back",
+                                customWidth:
+                                    MediaQuery.of(context).size.width * 0.2,
+                                colorCode: 0xff00c2e5,
+                                onPressed: () {
+                                  GoRouter.of(context).pushReplacementNamed(
+                                      NamedRoutes.registration3);
+                                }),
+                          ],
+                        ),
+                        const Spacer(),
+                        const Text("Not registered as a User?",
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: CustomTheme.secondaryColor,
+                                fontFamily: CustomTheme.fontFamily)),
+                        TextReusableButton(
+                            buttonText: "Login",
+                            onPressed: () {
+                              GoRouter.of(context).pushNamed(NamedRoutes.login);
+                            }),
+                      ],
+                    ),
                   ),
                 ),
               ),

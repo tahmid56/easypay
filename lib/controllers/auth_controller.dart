@@ -95,6 +95,7 @@ class AuthController extends StateNotifier<bool> {
 
   void fourthStepRegistration(
       {required BuildContext context,
+      required WidgetRef ref,
       required String selfieFile,
       required String? selfieName,
       required String bankAccountFile,
@@ -111,12 +112,16 @@ class AuthController extends StateNotifier<bool> {
         pin: pin,
         confirmPin: confirmPin);
     state = false;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     // ignore: use_build_context_synchronously
     httpErrorHandle(
         response: res,
         context: context,
-        onSuccess: () {
-          GoRouter.of(context).replaceNamed(NamedRoutes.home);
+        onSuccess: () async{
+          var userData = User.fromJson(res?.data);
+          await prefs.setString("access_token", userData.token);
+          ref.watch(userRepositoryProvider.notifier).saveUser(userData);
+          GoRouter.of(context).pushReplacementNamed(NamedRoutes.home);
         });
   }
 

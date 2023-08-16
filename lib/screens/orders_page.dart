@@ -1,3 +1,4 @@
+import 'package:easypay/constants/theme.dart';
 import 'package:easypay/providers/order_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,12 +30,15 @@ class OrdersPage extends StatelessWidget {
                               style: const TextStyle(
                                   fontSize: 30,
                                   fontWeight: FontWeight.bold,
-                                  fontFamily: "Italian Plate 2"),
+                                  fontFamily: CustomTheme.fontFamily,
+                                  color: CustomTheme.secondaryColor),
                             ),
                             const Text(
                               "Total you owe",
                               style: TextStyle(
-                                  fontSize: 20, fontFamily: "Italian Plate 2"),
+                                  fontSize: 20,
+                                  fontFamily: CustomTheme.fontFamily,
+                                  color: CustomTheme.secondaryColor),
                             ),
                             const SizedBox(
                               height: 20,

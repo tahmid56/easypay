@@ -2,6 +2,7 @@ import 'package:easypay/common/widgets/custom_text_field.dart';
 import 'package:easypay/common/widgets/loader.dart';
 import 'package:easypay/common/widgets/reusable_button.dart';
 import 'package:easypay/common/widgets/text_reusable_button.dart';
+import 'package:easypay/constants/theme.dart';
 import 'package:easypay/route/named_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,7 +32,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   Widget build(BuildContext context) {
     final isLoading = ref.watch(authControllerProvider);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: CustomTheme.primaryColor,
       body: isLoading
           ? const Loader()
           : Padding(
@@ -53,9 +54,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           child: Text(
                             "welcome",
                             style: TextStyle(
+                                color: CustomTheme.secondaryColor,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 30,
-                                fontFamily: 'Italian Plate 2'),
+                                fontFamily: CustomTheme.fontFamily),
                           ),
                         ),
                         Padding(
@@ -63,45 +65,94 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           child: Image.asset("assets/images/logo4.png"),
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 10,
+                        ),
+                        const Text(
+                          "Login",
+                          style: TextStyle(
+                              color: CustomTheme.secondaryColor,
+                              fontFamily: CustomTheme.fontFamily,
+                              fontSize: 30),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Mobile",
+                              style: TextStyle(
+                                  color: CustomTheme.secondaryColor,
+                                  fontFamily: CustomTheme.fontFamily,
+                                  fontSize: 15),
+                            ),
+                          ),
                         ),
                         Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: CustomTextField(
                                 textEditingController: mobileNumberController,
                                 hintText: 'mobile number')),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Password",
+                              style: TextStyle(
+                                  color: CustomTheme.secondaryColor,
+                                  fontFamily: CustomTheme.fontFamily,
+                                  fontSize: 15),
+                            ),
+                          ),
+                        ),
                         Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: CustomTextField(
-                                textEditingController: pinController,
-                                hintText: 'password')),
+                          padding: const EdgeInsets.all(8.0),
+                          child: CustomTextField(
+                              textEditingController: pinController,
+                              hintText: 'password'),
+                        ),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: InkWell(
+                            onTap: () {},
+                            child:const Padding(
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: 10.0),
+                              child: Text(
+                                "Forgot your password?",
+                                style: TextStyle(
+                                    color: CustomTheme.secondaryColor),
+                              ),
+                            ),
+                          ),
+                        ),
                         const SizedBox(
                           height: 20,
                         ),
                         ReusableButton(
                           buttonText: "Login",
+                          colorCode: 0xff000000,
+                          customWidth: MediaQuery.of(context).size.width* 0.8,
                           onPressed: () {
                             handleLoginClick(ref, mobileNumberController.text,
                                 pinController.text);
                           },
                         ),
                         const SizedBox(
-                          height: 20,
-                        ),
-                        const Text(
-                          "Forgot your password?",
-                          style: TextStyle(fontFamily: 'Italian Plate 2'),
-                        ),
-                        const SizedBox(
-                          height: 5,
+                          height: 80,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const Text(
-                              "Do not have account?",
+                              "Not a user?",
                               style: TextStyle(
-                                  fontSize: 15, fontFamily: "Italian Plate 2"),
+                                  color: CustomTheme.secondaryColor,
+                                  fontSize: 15,
+                                  fontFamily: CustomTheme.fontFamily),
                             ),
                             const SizedBox(
                               width: 3,
