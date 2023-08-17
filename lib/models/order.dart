@@ -10,21 +10,21 @@ String orderToJson(Order data) => json.encode(data.toJson());
 
 class Order {
     List<Datum> data;
-    double totalDueAmount;
+    double? dueTotalAmount;
 
     Order({
         required this.data,
-        required this.totalDueAmount,
+        required this.dueTotalAmount,
     });
 
     factory Order.fromJson(Map<String, dynamic> json) => Order(
         data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
-        totalDueAmount: json["total_due_amount"],
+        dueTotalAmount: json["due_total_amount"],
     );
 
     Map<String, dynamic> toJson() => {
         "data": List<dynamic>.from(data.map((x) => x.toJson())),
-        "total_due_amount": totalDueAmount,
+        "due_total_amount": dueTotalAmount,
     };
 }
 
@@ -32,46 +32,30 @@ class Datum {
     int orderId;
     String storeName;
     String storeImgLink;
-    List<InstallmentDetail> installmentDetails;
+    DateTime purchasedDate;
+    double amount;
 
     Datum({
         required this.orderId,
         required this.storeName,
         required this.storeImgLink,
-        required this.installmentDetails,
+        required this.purchasedDate,
+        required this.amount,
     });
 
     factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         orderId: json["order_id"],
         storeName: json["store_name"],
         storeImgLink: json["store_img_link"],
-        installmentDetails: List<InstallmentDetail>.from(json["installment_details"].map((x) => InstallmentDetail.fromJson(x))),
+        purchasedDate: DateTime.parse(json["purchased_date"]),
+        amount: json["amount"],
     );
 
     Map<String, dynamic> toJson() => {
         "order_id": orderId,
         "store_name": storeName,
         "store_img_link": storeImgLink,
-        "installment_details": List<dynamic>.from(installmentDetails.map((x) => x.toJson())),
-    };
-}
-
-class InstallmentDetail {
-    double dueAmount;
-    DateTime dueDate;
-
-    InstallmentDetail({
-        required this.dueAmount,
-        required this.dueDate,
-    });
-
-    factory InstallmentDetail.fromJson(Map<String, dynamic> json) => InstallmentDetail(
-        dueAmount: json["due_amount"],
-        dueDate: DateTime.parse(json["due_date"]),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "due_amount": dueAmount,
-        "due_date": "${dueDate.year.toString().padLeft(4, '0')}-${dueDate.month.toString().padLeft(2, '0')}-${dueDate.day.toString().padLeft(2, '0')}",
+        "purchased_date": purchasedDate.toIso8601String(),
+        "amount": amount,
     };
 }

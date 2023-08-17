@@ -41,12 +41,11 @@ class OrderListTile extends StatelessWidget {
             style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontFamily: CustomTheme.fontFamily,
-                color: CustomTheme.secondaryColor)),
+                color: Colors.black)),
         subtitle: Text(
-          DateFormat('dd/MM/yyyy').format(date),
+          DateFormat('MMM, dd, yyyy').format(date),
           style: const TextStyle(
-              fontFamily: CustomTheme.fontFamily,
-              color: CustomTheme.secondaryColor),
+              fontFamily: CustomTheme.fontFamily, color: Colors.black),
         ),
         trailing: Container(
           decoration: BoxDecoration(

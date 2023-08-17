@@ -23,6 +23,9 @@ class _ShopsPageState extends State<ShopsPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            const SizedBox(
+              height: 10,
+            ),
             const Text(
               "Shop",
               style: TextStyle(
@@ -186,7 +189,7 @@ class _ShopsPageState extends State<ShopsPage> {
                       ),
                     ),
                     Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 8),
+                      margin: const EdgeInsets.symmetric(horizontal: 4),
                       height: 30,
                       decoration: BoxDecoration(
                         border: Border.all(),

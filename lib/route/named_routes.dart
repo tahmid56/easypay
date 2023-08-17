@@ -8,5 +8,6 @@ class NamedRoutes {
   static const registration2 = 'registration2';
   static const registration3 = 'registration3';
   static const registration4 = 'registration4';
+  static const allOrders = "allOrders";
   static const singleOrder = "order";
 }

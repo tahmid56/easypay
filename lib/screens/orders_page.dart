@@ -9,72 +9,91 @@ class OrdersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 18.0, left: 4, right: 4),
-          child: Consumer(
-            builder: (context, ref, child) {
-              final orders = ref.watch(ordersProvider(context));
-              return orders.when(
-                  data: (data) {
-                    return RefreshIndicator(
-                        onRefresh: () async {
-                          ref.refresh(ordersProvider(context));
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "BDT ${data?.totalDueAmount}",
-                              style: const TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: CustomTheme.fontFamily,
-                                  color: CustomTheme.secondaryColor),
-                            ),
-                            const Text(
-                              "Total you owe",
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontFamily: CustomTheme.fontFamily,
-                                  color: CustomTheme.secondaryColor),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            const Divider(
-                              thickness: 2,
-                            ),
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.7,
-                                child: ListView.builder(
-                                    itemCount: data?.data.length ?? 0,
-                                    itemBuilder: (context, index) {
-                                      return Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 10),
-                                        child: OrderListTile(
-                                          date: data!.data[index]
-                                              .installmentDetails[0].dueDate,
-                                          imgUrl: data.data[index].storeImgLink,
-                                          titleText: data.data[index].storeName,
-                                          price: data.data[index]
-                                              .installmentDetails[0].dueAmount,
-                                          id: data.data[index].orderId
-                                              .toString(),
-                                        ),
-                                      );
-                                    }))
-                          ],
-                        ));
-                  },
-                  error: (error, stackTrace) =>
-                      Center(child: Text('Error: $error')),
-                  loading: () =>
-                      const Center(child: CircularProgressIndicator()));
-            },
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          stops: [0.1, 0.4, 0.6, 0.9],
+          colors: [
+            Color(0xfffff7ad),
+            Color(0xffffa9f9),
+            Color(0xff62ffe3),
+            Color(0xff63dbc5)
+          ],
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 18.0, left: 4, right: 4),
+              child: Consumer(
+                builder: (context, ref, child) {
+                  final orders = ref.watch(ordersProvider(context));
+                  return orders.when(
+                      data: (data) {
+                        return RefreshIndicator(
+                            onRefresh: () async {
+                              ref.refresh(ordersProvider(context));
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "BDT ${data?.dueTotalAmount}",
+                                  style: const TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: CustomTheme.fontFamily,
+                                      color: Colors.black),
+                                ),
+                                const Text(
+                                  "Total you owe",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontFamily: CustomTheme.fontFamily,
+                                      color: Colors.black),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                const Divider(
+                                  thickness: 2,
+                                ),
+                                SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.7,
+                                    child: ListView.builder(
+                                        itemCount: data?.data.length ?? 0,
+                                        itemBuilder: (context, index) {
+                                          return Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 10),
+                                            child: OrderListTile(
+                                              date: data!
+                                                  .data[index].purchasedDate,
+                                              imgUrl:
+                                                  data.data[index].storeImgLink,
+                                              titleText:
+                                                  data.data[index].storeName,
+                                              price: data.data[index].amount,
+                                              id: data.data[index].orderId
+                                                  .toString(),
+                                            ),
+                                          );
+                                        }))
+                              ],
+                            ));
+                      },
+                      error: (error, stackTrace) =>
+                          Center(child: Text('Error: $error')),
+                      loading: () =>
+                          const Center(child: CircularProgressIndicator()));
+                },
+              ),
+            ),
           ),
         ),
       ),

@@ -1,8 +1,10 @@
 import 'package:easypay/constants/theme.dart';
 import 'package:easypay/providers/user_provider.dart';
+import 'package:easypay/route/named_routes.dart';
 import 'package:easypay/screens/single_order_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -12,279 +14,315 @@ class HomePage extends ConsumerWidget {
     final user = ref.watch(userRepositoryProvider);
     debugPrint(user?.data.fullName.toString());
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 40,
-                width: 200,
-                child: Image.asset("assets/images/logo4.png"),
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Divider(
-                  color: Colors.black,
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.9,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  decoration: const BoxDecoration(
+                      color: Color(0xffE7E7E7),
+                      borderRadius: BorderRadius.all(Radius.circular(5))),
                 ),
-              ),
-              Container(
-                decoration: const BoxDecoration(
-                    color: Color(0xffE7E7E7),
-                    borderRadius: BorderRadius.all(Radius.circular(5))),
-              ),
-              Text(
-                user?.data.fullName != null
-                    ? "Hello, ${user?.data.fullName}"
-                    : "Hello, Guest",
-                style: const TextStyle(
-                    fontSize: 20,
-                    fontFamily: CustomTheme.fontFamily,
-                    color: CustomTheme.secondaryColor),
-              ),
-              const SizedBox(height: 15),
-              const Text("BDT 12600.89",
+                const Text(
+                  "Orders",
                   style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 40,
                       fontFamily: CustomTheme.fontFamily,
-                      color: CustomTheme.secondaryColor)),
-              const Text("Total you owe",
+                      color: Colors.black),
+                ),
+                const SizedBox(height: 20),
+                const Text("BDT 2000.0",
+                    style: TextStyle(
+                        fontSize: 50,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: CustomTheme.fontFamily,
+                        color: Colors.black)),
+                const Text("Total you owe",
+                    style: TextStyle(
+                        fontSize: 40,
+                        fontFamily: CustomTheme.fontFamily,
+                        color: Colors.black)),
+                const SizedBox(height: 30),
+                const Text(
+                  "Pre approved to spend: BDT 56820.12",
                   style: TextStyle(
                       fontSize: 20,
                       fontFamily: CustomTheme.fontFamily,
-                      color: CustomTheme.secondaryColor)),
-              const SizedBox(height: 30),
-              const Text(
-                "Credit Available: BDT 56820.12",
-                style: TextStyle(
-                    fontSize: 15,
-                    fontFamily: CustomTheme.fontFamily,
-                    color: CustomTheme.secondaryColor),
-              ),
-              const Divider(
-                height: 80,
-                thickness: 2,
-              ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(
-                    children: [
-                      Text(
-                        "22123",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 35,
-                            fontFamily: CustomTheme.fontFamily,
-                            color: CustomTheme.secondaryColor),
-                      ),
-                      Text(
-                        "Due in 15 days",
-                        style: TextStyle(
-                            fontSize: 13,
-                            fontFamily: CustomTheme.fontFamily,
-                            color: CustomTheme.secondaryColor),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: 50,
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        "47241",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 35,
-                            fontFamily: CustomTheme.fontFamily,
-                            color: CustomTheme.secondaryColor),
-                      ),
-                      Text(
-                        "Due in 30 days",
-                        style: TextStyle(
-                            fontSize: 13,
-                            fontFamily: CustomTheme.fontFamily,
-                            color: CustomTheme.secondaryColor),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                      color: Colors.black),
+                ),
+                const Divider(
+                  height: 80,
+                  thickness: 2,
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      children: [
+                        Text(
+                          "2000",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25,
+                              fontFamily: CustomTheme.fontFamily,
+                              color: Colors.black),
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Text(
+                          "Due in 15 days",
+                          style: TextStyle(
+                              fontSize: 13,
+                              fontFamily: CustomTheme.fontFamily,
+                              color: Colors.black),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 50,
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          "2000",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25,
+                              fontFamily: CustomTheme.fontFamily,
+                              color: Colors.black),
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Text(
+                          "Due in 30 days",
+                          style: TextStyle(
+                              fontSize: 13,
+                              fontFamily: CustomTheme.fontFamily,
+                              color: Colors.black),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 50,
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          "47241",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25,
+                              fontFamily: CustomTheme.fontFamily,
+                              color: Colors.black),
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Text(
+                          "Due in 30 days",
+                          style: TextStyle(
+                              fontSize: 13,
+                              fontFamily: CustomTheme.fontFamily,
+                              color: Colors.black),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      border: Border.all(color: Colors.grey)),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
+                          height: 50,
+                          width: MediaQuery.of(context).size.width * 0.4,
                           decoration: BoxDecoration(
-                            color: const Color(0xffD2E063),
+                            border: Border.all(color: Colors.cyan),
+                            color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: const Padding(
-                            padding: EdgeInsets.all(8.0),
+                          child: const Center(
                             child: Text(
                               "Upcoming payments",
                               style: TextStyle(
                                   fontFamily: CustomTheme.fontFamily,
-                                  color: Colors.white),
+                                  color: Colors.cyan),
                             ),
                           ),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            "All Orders",
-                            style: TextStyle(
-                                fontFamily: CustomTheme.fontFamily,
-                                color: CustomTheme.secondaryColor),
+                        InkWell(
+                          onTap: () {
+                            GoRouter.of(context)
+                                .pushNamed(NamedRoutes.allOrders);
+                          },
+                          child: Container(
+                            height: 50,
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                "All Orders",
+                                style: TextStyle(
+                                    fontFamily: CustomTheme.fontFamily,
+                                    color: Colors.black),
+                              ),
+                            ),
                           ),
                         )
                       ],
                     ),
                   ),
                 ),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    border: Border.all(color: Colors.grey)),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    border: Border.all(color: Colors.grey)),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ListTile(
-                        leading: Container(
-                          child: Center(
-                            child: const Text(
-                              "3",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                  fontFamily: CustomTheme.fontFamily,
-                                  color: Colors.white),
-                            ),
-                          ),
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              border: Border.all(
-                                width: 5,
-                                color: Color(0xff00C2E4),
-                              )),
-                        ),
-                        title: Text(
-                          "Yellow Shopping",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontFamily: CustomTheme.fontFamily,
-                              color: Colors.white),
-                        ),
-                        subtitle: Text(
-                          "Wed, 25 August",
-                          style: const TextStyle(
-                              fontSize: 13,
-                              fontFamily: CustomTheme.fontFamily,
-                              color: Colors.white),
-                        ),
-                        trailing: InkWell(
-                          onTap: () {
-                            Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (_) {
-                              return const SingleOrder(
-                                id: "1",
-                              );
-                            }));
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Color(0xffD2E063),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(7.0),
-                              child: Text(
-                                "Pay BDT 2212",
+                const SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      border: Border.all(color: Colors.grey)),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListTile(
+                          leading: Container(
+                            child: Center(
+                              child: const Text(
+                                "3",
                                 style: TextStyle(
-                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
                                     fontFamily: CustomTheme.fontFamily,
-                                    color: Colors.white),
+                                    color: Colors.black),
+                              ),
+                            ),
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                border: Border.all(
+                                  width: 5,
+                                  color: Color(0xff00C2E4),
+                                )),
+                          ),
+                          title: const Text(
+                            "Yellow Shopping",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontFamily: CustomTheme.fontFamily,
+                                color: Colors.black),
+                          ),
+                          subtitle: const Text(
+                            "Wed, 25 August",
+                            style: TextStyle(
+                                fontSize: 13,
+                                fontFamily: CustomTheme.fontFamily,
+                                color: Colors.black),
+                          ),
+                          trailing: InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) {
+                                    return const SingleOrder(
+                                      id: "1",
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: const Color(0xffD2E063),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: const Padding(
+                                padding: EdgeInsets.all(7.0),
+                                child: Text(
+                                  "Pay BDT 2212",
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      fontFamily: CustomTheme.fontFamily,
+                                      color: Colors.black),
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    const Divider(
-                      thickness: 2,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ListTile(
-                        leading: Container(
-                          child: Center(
-                            child: Text(
-                              "3",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                  fontFamily: CustomTheme.fontFamily,
-                                  color: Colors.white),
+                      const Divider(
+                        thickness: 2,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListTile(
+                          leading: Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                border: Border.all(
+                                  width: 5,
+                                  color: const Color(0xff00C2E4),
+                                )),
+                            child: const Center(
+                              child: Text(
+                                "3",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                    fontFamily: CustomTheme.fontFamily,
+                                    color: Colors.black),
+                              ),
                             ),
                           ),
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              border: Border.all(
-                                width: 5,
-                                color: Color(0xff00C2E4),
-                              )),
-                        ),
-                        title: Text(
-                          "Yellow Shopping",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontFamily: CustomTheme.fontFamily,
-                              color: Colors.white),
-                        ),
-                        subtitle: Text(
-                          "Wed, 25 August",
-                          style: TextStyle(
-                              fontSize: 13,
-                              fontFamily: CustomTheme.fontFamily,
-                              color: Colors.white),
-                        ),
-                        trailing: Padding(
-                          padding: const EdgeInsets.all(7.0),
-                          child: Text(
-                            "BDT 2212",
+                          title: const Text(
+                            "Yellow Shopping",
                             style: TextStyle(
-                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
                                 fontFamily: CustomTheme.fontFamily,
-                                color: Colors.white),
+                                color: Colors.black),
+                          ),
+                          subtitle: const Text(
+                            "Wed, 25 August",
+                            style: TextStyle(
+                                fontSize: 13,
+                                fontFamily: CustomTheme.fontFamily,
+                                color: Colors.black),
+                          ),
+                          trailing: const Padding(
+                            padding: EdgeInsets.all(7.0),
+                            child: Text(
+                              "BDT 2212",
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  fontFamily: CustomTheme.fontFamily,
+                                  color: Colors.black),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

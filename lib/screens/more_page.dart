@@ -18,16 +18,6 @@ class MorePage extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 13),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "More",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
           InkWell(
             onTap: () async {
               const url = 'https://easypayltd.com/howitworks/';
@@ -39,8 +29,7 @@ class MorePage extends ConsumerWidget {
               height: MediaQuery.of(context).size.height * 0.293,
               width: MediaQuery.of(context).size.width * 0.9,
               decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: Colors.black),
+                color: Colors.transparent,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Image.asset(
