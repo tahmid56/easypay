@@ -34,13 +34,26 @@ class HomePage extends ConsumerWidget {
                       fontFamily: CustomTheme.fontFamily,
                       color: Colors.black),
                 ),
-                const SizedBox(height: 20),
-                const Text("BDT 2000.0",
-                    style: TextStyle(
-                        fontSize: 50,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: CustomTheme.fontFamily,
-                        color: Colors.black)),
+                const Row(
+                  children: [
+                    SizedBox(
+                      height: 55,
+                      child: FittedBox(
+                        fit: BoxFit.cover,
+                        child: ImageIcon(
+                          AssetImage("assets/icons/takaIcon.png"),
+                        ),
+                      ),
+                    ),
+                    Text(
+                      "6000",
+                      style: TextStyle(
+                          fontFamily: CustomTheme.fontFamily,
+                          fontSize: 48,
+                          fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
                 const Text("Total you owe",
                     style: TextStyle(
                         fontSize: 40,
@@ -48,7 +61,7 @@ class HomePage extends ConsumerWidget {
                         color: Colors.black)),
                 const SizedBox(height: 30),
                 const Text(
-                  "Pre approved to spend: BDT 56820.12",
+                  "Pre approved to spend: BDT 25000.0",
                   style: TextStyle(
                       fontSize: 20,
                       fontFamily: CustomTheme.fontFamily,
@@ -63,16 +76,28 @@ class HomePage extends ConsumerWidget {
                   children: [
                     Column(
                       children: [
-                        Text(
-                          "2000",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 25,
-                              fontFamily: CustomTheme.fontFamily,
-                              color: Colors.black),
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 35,
+                              child: FittedBox(
+                                fit: BoxFit.cover,
+                                child: ImageIcon(
+                                  AssetImage("assets/icons/takaIcon.png"),
+                                ),
+                              ),
+                            ),
+                            Text(
+                              "6000",
+                              style: TextStyle(
+                                  fontFamily: CustomTheme.fontFamily,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ],
                         ),
                         SizedBox(
-                          height: 30,
+                          height: 5,
                         ),
                         Text(
                           "Due in 15 days",
@@ -84,23 +109,35 @@ class HomePage extends ConsumerWidget {
                       ],
                     ),
                     SizedBox(
-                      width: 50,
+                      width: 30,
                     ),
                     Column(
                       children: [
-                        Text(
-                          "2000",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 25,
-                              fontFamily: CustomTheme.fontFamily,
-                              color: Colors.black),
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 35,
+                              child: FittedBox(
+                                fit: BoxFit.cover,
+                                child: ImageIcon(
+                                  AssetImage("assets/icons/takaIcon.png"),
+                                ),
+                              ),
+                            ),
+                            Text(
+                              "12000",
+                              style: TextStyle(
+                                  fontFamily: CustomTheme.fontFamily,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ],
                         ),
                         SizedBox(
-                          height: 30,
+                          height: 5,
                         ),
                         Text(
-                          "Due in 30 days",
+                          "Due in 40 days",
                           style: TextStyle(
                               fontSize: 13,
                               fontFamily: CustomTheme.fontFamily,
@@ -109,30 +146,42 @@ class HomePage extends ConsumerWidget {
                       ],
                     ),
                     SizedBox(
-                      width: 50,
+                      width: 30,
                     ),
                     Column(
                       children: [
-                        Text(
-                          "47241",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 25,
-                              fontFamily: CustomTheme.fontFamily,
-                              color: Colors.black),
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 35,
+                              child: FittedBox(
+                                fit: BoxFit.cover,
+                                child: ImageIcon(
+                                  AssetImage("assets/icons/takaIcon.png"),
+                                ),
+                              ),
+                            ),
+                            Text(
+                              "18000",
+                              style: TextStyle(
+                                  fontFamily: CustomTheme.fontFamily,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ],
                         ),
                         SizedBox(
-                          height: 30,
+                          height: 5,
                         ),
                         Text(
-                          "Due in 30 days",
+                          "Due in 45 days",
                           style: TextStyle(
                               fontSize: 13,
                               fontFamily: CustomTheme.fontFamily,
                               color: Colors.black),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
                 const SizedBox(
