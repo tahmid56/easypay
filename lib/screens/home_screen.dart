@@ -136,7 +136,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
                 BottomNavigationBarItem(
                   icon: const ImageIcon(
-                      AssetImage("assets/icons/profileIcon.png")),
+                    AssetImage("assets/icons/easypayLogo.png"),
+                    size: 36,
+                  ),
                   label: "My Easypay",
                   // activeIcon: Column(
                   //   children: [
