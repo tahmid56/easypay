@@ -17,182 +17,243 @@ class HomePage extends ConsumerWidget {
       child: SizedBox(
         height: MediaQuery.of(context).size.height * 0.9,
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  decoration: const BoxDecoration(
-                      color: Color(0xffE7E7E7),
-                      borderRadius: BorderRadius.all(Radius.circular(5))),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height * 0.4,
+                decoration: const BoxDecoration(
+                  color: Color(0xffb3edf7),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(30),
+                      bottomRight: Radius.circular(30)),
                 ),
-                const Text(
-                  "Orders",
-                  style: TextStyle(
-                      fontSize: 40,
-                      fontFamily: CustomTheme.fontFamily,
-                      color: Colors.black),
-                ),
-                const Row(
-                  children: [
-                    SizedBox(
-                      height: 55,
-                      child: FittedBox(
-                        fit: BoxFit.cover,
-                        child: ImageIcon(
-                          AssetImage("assets/icons/takaIcon.png"),
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 12.0, vertical: 12),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Orders",
+                              style: TextStyle(
+                                fontSize: 40,
+                                fontFamily: CustomTheme.fontFamily,
+                                color: Colors.black,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 50,
+                              width: 50,
+                              child: ImageIcon(
+                                  AssetImage("assets/icons/easypayLogo.png")),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                    Text(
-                      "6000",
-                      style: TextStyle(
-                          fontFamily: CustomTheme.fontFamily,
-                          fontSize: 48,
-                          fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
-                const Text("Total you owe",
-                    style: TextStyle(
-                        fontSize: 40,
-                        fontFamily: CustomTheme.fontFamily,
-                        color: Colors.black)),
-                const SizedBox(height: 30),
-                const Text(
-                  "Pre approved to spend: BDT 25000.0",
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontFamily: CustomTheme.fontFamily,
-                      color: Colors.black),
-                ),
-                const Divider(
-                  height: 80,
-                  thickness: 2,
-                ),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            SizedBox(
-                              height: 35,
-                              child: FittedBox(
-                                fit: BoxFit.cover,
-                                child: ImageIcon(
-                                  AssetImage("assets/icons/takaIcon.png"),
-                                ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16.0,
+                        ),
+                        child: Text(
+                          "Hi,",
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
+                        child: Text(
+                          "User",
+                          style: TextStyle(
+                            fontSize: 24,
+                          ),
+                        ),
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          SizedBox(
+                            height: 70,
+                            child: FittedBox(
+                              fit: BoxFit.cover,
+                              child: ImageIcon(
+                                AssetImage("assets/icons/takaIcon.png"),
                               ),
                             ),
-                            Text(
-                              "6000",
-                              style: TextStyle(
-                                  fontFamily: CustomTheme.fontFamily,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          "Due in 15 days",
-                          style: TextStyle(
-                              fontSize: 13,
+                          ),
+                          Text(
+                            "6000",
+                            style: TextStyle(
                               fontFamily: CustomTheme.fontFamily,
-                              color: Colors.black),
+                              fontSize: 64,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text(
+                          "Total you owe",
+                          style: TextStyle(
+                            fontSize: 40,
+                            fontFamily: CustomTheme.fontFamily,
+                            color: Colors.black,
+                          ),
                         ),
-                      ],
-                    ),
-                    SizedBox(
-                      width: 30,
-                    ),
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            SizedBox(
-                              height: 35,
-                              child: FittedBox(
-                                fit: BoxFit.cover,
-                                child: ImageIcon(
-                                  AssetImage("assets/icons/takaIcon.png"),
-                                ),
+                      ),
+                      SizedBox(height: 5),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text(
+                          "Pre approved to spend: 25000",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: CustomTheme.fontFamily,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 30,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          SizedBox(
+                            height: 35,
+                            child: FittedBox(
+                              fit: BoxFit.cover,
+                              child: ImageIcon(
+                                AssetImage("assets/icons/takaIcon.png"),
                               ),
                             ),
-                            Text(
-                              "12000",
-                              style: TextStyle(
-                                  fontFamily: CustomTheme.fontFamily,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          "Due in 40 days",
-                          style: TextStyle(
-                              fontSize: 13,
-                              fontFamily: CustomTheme.fontFamily,
-                              color: Colors.black),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      width: 30,
-                    ),
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            SizedBox(
-                              height: 35,
-                              child: FittedBox(
-                                fit: BoxFit.cover,
-                                child: ImageIcon(
-                                  AssetImage("assets/icons/takaIcon.png"),
-                                ),
+                          ),
+                          Text(
+                            "6000",
+                            style: TextStyle(
+                                fontFamily: CustomTheme.fontFamily,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        "Due in 15 days",
+                        style: TextStyle(
+                            fontSize: 13,
+                            fontFamily: CustomTheme.fontFamily,
+                            color: Colors.black),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          SizedBox(
+                            height: 35,
+                            child: FittedBox(
+                              fit: BoxFit.cover,
+                              child: ImageIcon(
+                                AssetImage("assets/icons/takaIcon.png"),
                               ),
                             ),
-                            Text(
-                              "18000",
-                              style: TextStyle(
-                                  fontFamily: CustomTheme.fontFamily,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          "Due in 45 days",
-                          style: TextStyle(
-                              fontSize: 13,
-                              fontFamily: CustomTheme.fontFamily,
-                              color: Colors.black),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Container(
+                          ),
+                          Text(
+                            "12000",
+                            style: TextStyle(
+                                fontFamily: CustomTheme.fontFamily,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        "Due in 30 days",
+                        style: TextStyle(
+                            fontSize: 13,
+                            fontFamily: CustomTheme.fontFamily,
+                            color: Colors.black),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          SizedBox(
+                            height: 35,
+                            child: FittedBox(
+                              fit: BoxFit.cover,
+                              child: ImageIcon(
+                                AssetImage("assets/icons/takaIcon.png"),
+                              ),
+                            ),
+                          ),
+                          Text(
+                            "18000",
+                            style: TextStyle(
+                                fontFamily: CustomTheme.fontFamily,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        "Due in 45 days",
+                        style: TextStyle(
+                            fontSize: 13,
+                            fontFamily: CustomTheme.fontFamily,
+                            color: Colors.black),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
+                      color: const Color(0xff212529),
+                      borderRadius: BorderRadius.circular(15),
                       border: Border.all(color: Colors.grey)),
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -201,15 +262,16 @@ class HomePage extends ConsumerWidget {
                           width: MediaQuery.of(context).size.width * 0.4,
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.cyan),
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.cyan,
+                            borderRadius: BorderRadius.circular(5),
                           ),
                           child: const Center(
                             child: Text(
                               "Upcoming payments",
                               style: TextStyle(
                                   fontFamily: CustomTheme.fontFamily,
-                                  color: Colors.cyan),
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
@@ -229,8 +291,10 @@ class HomePage extends ConsumerWidget {
                               child: Text(
                                 "All Orders",
                                 style: TextStyle(
-                                    fontFamily: CustomTheme.fontFamily,
-                                    color: Colors.black),
+                                  fontFamily: CustomTheme.fontFamily,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                           ),
@@ -239,29 +303,22 @@ class HomePage extends ConsumerWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Container(
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
-                      border: Border.all(color: Colors.grey)),
+                      border: Border.all(color: Colors.grey, width: 3)),
                   child: Column(
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ListTile(
                           leading: Container(
-                            child: Center(
-                              child: const Text(
-                                "3",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                    fontFamily: CustomTheme.fontFamily,
-                                    color: Colors.black),
-                              ),
-                            ),
                             height: 40,
                             width: 40,
                             decoration: BoxDecoration(
@@ -270,6 +327,16 @@ class HomePage extends ConsumerWidget {
                                   width: 5,
                                   color: Color(0xff00C2E4),
                                 )),
+                            child: const Center(
+                              child: Text(
+                                "3",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                    fontFamily: CustomTheme.fontFamily,
+                                    color: Colors.black),
+                              ),
+                            ),
                           ),
                           title: const Text(
                             "Yellow Shopping",
@@ -300,7 +367,7 @@ class HomePage extends ConsumerWidget {
                             child: Container(
                               decoration: BoxDecoration(
                                   color: const Color(0xffD2E063),
-                                  borderRadius: BorderRadius.circular(10)),
+                                  borderRadius: BorderRadius.circular(6)),
                               child: const Padding(
                                 padding: EdgeInsets.all(7.0),
                                 child: Text(
@@ -370,8 +437,8 @@ class HomePage extends ConsumerWidget {
                     ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

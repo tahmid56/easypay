@@ -18,91 +18,91 @@ class _ShopsPageState extends State<ShopsPage> {
   ];
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(
-              height: 10,
-            ),
-            const Text(
-              "Shop",
-              style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: "Italian Plate 2"),
-            ),
-            const Text(
-              "with easypay",
-              style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: "Italian Plate 2"),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              width: double.infinity,
-              height: 160,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      image: const DecorationImage(
-                        image: NetworkImage(
-                          'https://easypayltd.com/slider2.jpg',
-                        ),
-                        fit: BoxFit.cover,
-                      ),
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.amber,
-                    ),
-                    margin: const EdgeInsets.all(5),
-                    width: 150,
-                    height: 200,
-                    alignment: Alignment.center,
+    return SafeArea(
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.9,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            stops: [0.1, 0.4, 0.6, 0.9],
+            colors: [
+              Color(0xfffff7ad),
+              Color(0xffffa9f9),
+              Color(0xff62ffe3),
+              Color(0xff63dbc5)
+            ],
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.14,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: const Color(0xffB3EDF7),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      image: const DecorationImage(
-                        image: NetworkImage(
-                          'https://easypayltd.com/slider7.jpg',
-                        ),
-                        fit: BoxFit.cover,
+                  child: Column(
+                    children: [
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Divider(),
+                          Padding(
+                            padding: EdgeInsets.only(top: 10),
+                            child: Image(
+                              image: AssetImage("assets/images/logo4.png"),
+                              height: 25,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 10),
+                            child: Icon(
+                              Icons.favorite,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ],
                       ),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    margin: const EdgeInsets.all(5),
-                    width: 150,
-                    height: 200,
-                    alignment: Alignment.center,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      image: const DecorationImage(
-                        image: NetworkImage(
-                          'https://easypayltd.com/slider3.jpg',
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 4),
+                        child: TextField(
+                          textAlign: TextAlign.center,
+                          decoration: InputDecoration(
+                            prefixIcon: const Icon(
+                              Icons.search,
+                              size: 36,
+                              color: Colors.black,
+                            ),
+                            hintText: "Search brands, stores, products",
+                            hintStyle: const TextStyle(color: Colors.black45),
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
                         ),
-                        fit: BoxFit.cover,
-                      ),
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.amber,
-                    ),
-                    margin: const EdgeInsets.all(5),
-                    width: 150,
-                    height: 200,
-                    alignment: Alignment.center,
+                      )
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            SizedBox(
+              const SizedBox(
+                height: 10,
+              ),
+              SizedBox(
                 width: double.infinity,
                 height: 40,
                 child: ListView(
@@ -113,14 +113,14 @@ class _ShopsPageState extends State<ShopsPage> {
                       margin: const EdgeInsets.symmetric(horizontal: 8),
                       height: 30,
                       decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all(color: Color(0xff00C2E4)),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Center(
                           child: Text(
-                            "all",
+                            "All",
                             style: TextStyle(fontFamily: "Italian Plate 2"),
                           ),
                         ),
@@ -130,14 +130,14 @@ class _ShopsPageState extends State<ShopsPage> {
                       margin: const EdgeInsets.symmetric(horizontal: 8),
                       height: 30,
                       decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all(color: const Color(0xff00C2E4)),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Center(
                           child: Text(
-                            "men's",
+                            "Newest",
                             style: TextStyle(fontFamily: "Italian Plate 2"),
                           ),
                         ),
@@ -147,16 +147,15 @@ class _ShopsPageState extends State<ShopsPage> {
                       margin: const EdgeInsets.symmetric(horizontal: 8),
                       height: 30,
                       decoration: BoxDecoration(
-                        color: Color(0xfff13a5c),
-                        border: Border.all(color: Colors.red),
-                        borderRadius: BorderRadius.circular(50),
+                        color: const Color(0xff00C2E4),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Center(
                         child: Text(
-                          "women's",
+                          "Popular",
                           style: TextStyle(
                               fontFamily: "Italian Plate 2",
-                              color: Colors.white),
+                              color: Colors.black),
                         ),
                       ),
                     ),
@@ -164,79 +163,103 @@ class _ShopsPageState extends State<ShopsPage> {
                       margin: const EdgeInsets.symmetric(horizontal: 8),
                       height: 30,
                       decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all(color: const Color(0xff00C2E4)),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Center(
                         child: Text(
-                          "beauty",
-                          style: TextStyle(fontFamily: "Italian Plate 2"),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 8),
-                      height: 30,
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          "apparel",
-                          style: TextStyle(fontFamily: "Italian Plate 2"),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 4),
-                      height: 30,
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          "accessories",
+                          "Trending",
                           style: TextStyle(fontFamily: "Italian Plate 2"),
                         ),
                       ),
                     ),
                   ],
-                )),
-            const SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.40,
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // Number of columns in the grid
-                  mainAxisSpacing: 10.0, // Spacing between rows
-                  crossAxisSpacing: 10.0, // Spacing between columns
                 ),
-                itemCount: 6, // Number of items in the grid
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(
-                          imgUrl[index],
-                        ),
-                        fit: BoxFit.cover,
-                      ),
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.amber,
-                    ),
-                    margin: const EdgeInsets.all(5),
-                    width: 100,
-                    height: 100,
-                    alignment: Alignment.center,
-                  );
-                },
               ),
-            ),
-          ],
+              const SizedBox(
+                height: 20,
+              ),
+              const Padding(
+                padding: EdgeInsets.all(4.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  child: Image(
+                    image: AssetImage("assets/images/banner.png"),
+                  ),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Featured Stores",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                    ),
+                    Icon(Icons.play_circle),
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: double.infinity,
+                height: 200,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        image: const DecorationImage(
+                          image: NetworkImage(
+                            'https://easypayltd.com/slider2.jpg',
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.amber,
+                      ),
+                      margin: const EdgeInsets.all(5),
+                      width: 200,
+                      height: 200,
+                      alignment: Alignment.center,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        image: const DecorationImage(
+                          image: NetworkImage(
+                            'https://easypayltd.com/slider7.jpg',
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      margin: const EdgeInsets.all(5),
+                      width: 200,
+                      height: 200,
+                      alignment: Alignment.center,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        image: const DecorationImage(
+                          image: NetworkImage(
+                            'https://easypayltd.com/slider3.jpg',
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.amber,
+                      ),
+                      margin: const EdgeInsets.all(5),
+                      width: 200,
+                      height: 200,
+                      alignment: Alignment.center,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
