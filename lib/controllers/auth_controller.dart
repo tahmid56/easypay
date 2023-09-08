@@ -119,7 +119,7 @@ class AuthController extends StateNotifier<bool> {
         context: context,
         onSuccess: () async{
           var userData = User.fromJson(res?.data);
-          await prefs.setString("access_token", userData.token);
+          await prefs.setString("access_token", userData.accessToken);
           ref.watch(userRepositoryProvider.notifier).saveUser(userData);
           GoRouter.of(context).pushReplacementNamed(NamedRoutes.home);
         });
@@ -163,7 +163,7 @@ class AuthController extends StateNotifier<bool> {
         context: context,
         onSuccess: () async {
           var userData = User.fromJson(res?.data);
-          await prefs.setString("access_token", userData.token);
+          await prefs.setString("access_token", userData.accessToken);
           ref.watch(userRepositoryProvider.notifier).saveUser(userData);
           ref.watch(loggedInProvider).isLoggedIn(true);
           // ignore: use_build_context_synchronously

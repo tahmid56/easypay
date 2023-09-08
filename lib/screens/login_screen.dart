@@ -75,7 +75,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               fontSize: 30),
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 30,
                         ),
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 15),
@@ -118,9 +118,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           alignment: Alignment.centerRight,
                           child: InkWell(
                             onTap: () {},
-                            child:const Padding(
-                              padding:
-                                  EdgeInsets.symmetric(horizontal: 10.0),
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10.0),
                               child: Text(
                                 "Forgot your password?",
                                 style: TextStyle(
@@ -134,8 +133,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         ),
                         ReusableButton(
                           buttonText: "Login",
-                          colorCode: 0xff000000,
-                          customWidth: MediaQuery.of(context).size.width* 0.8,
+                          colorCode: 0xffB3EDF7,
+                          customWidth: MediaQuery.of(context).size.width * 0.8,
                           onPressed: () {
                             handleLoginClick(ref, mobileNumberController.text,
                                 pinController.text);

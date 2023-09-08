@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final user = userFromJson(jsonString);
-
 import 'dart:convert';
 
 User userFromJson(String str) => User.fromJson(json.decode(str));
@@ -9,45 +5,48 @@ User userFromJson(String str) => User.fromJson(json.decode(str));
 String userToJson(User data) => json.encode(data.toJson());
 
 class User {
-    String token;
+    String accessToken;
+    String refreshToken;
     Data data;
 
     User({
-        required this.token,
+        required this.accessToken,
+        required this.refreshToken,
         required this.data,
     });
 
     factory User.fromJson(Map<String, dynamic> json) => User(
-        token: json["token"],
+        accessToken: json["access_token"],
+        refreshToken: json["refresh_token"],
         data: Data.fromJson(json["data"]),
     );
 
     Map<String, dynamic> toJson() => {
-        "token": token,
+        "access_token": accessToken,
+        "refresh_token": refreshToken,
         "data": data.toJson(),
     };
 }
 
 class Data {
     int id;
-    String? nidFrontFile;
-    String? nidBackFile;
-    String? jobOfferFile;
-    String? bankStatementFile;
-    String? selfieFile;
-    String? bankAccountFile;
-    String password;
-    dynamic lastLogin;
-    bool? isSuperuser;
-    bool? isStaff;
-    bool? isActive;
+    dynamic nidFrontFile;
+    dynamic nidBackFile;
+    dynamic jobOfferFile;
+    dynamic bankStatementFile;
+    dynamic selfieFile;
+    dynamic bankAccountFile;
+    DateTime lastLogin;
+    bool isSuperuser;
+    bool isStaff;
+    bool isActive;
     DateTime dateJoined;
-    String? fullName;
-    String? phoneNumber;
-    String? permanentAddress;
-    String? residentialAddress;
-    String? userRoll;
-    String? userIp;
+    String fullName;
+    String phoneNumber;
+    dynamic permanentAddress;
+    dynamic residentialAddress;
+    String userRoll;
+    dynamic userIp;
 
     Data({
         required this.id,
@@ -57,8 +56,7 @@ class Data {
         required this.bankStatementFile,
         required this.selfieFile,
         required this.bankAccountFile,
-        required this.password,
-        this.lastLogin,
+        required this.lastLogin,
         required this.isSuperuser,
         required this.isStaff,
         required this.isActive,
@@ -79,8 +77,7 @@ class Data {
         bankStatementFile: json["bank_statement_file"],
         selfieFile: json["selfie_file"],
         bankAccountFile: json["bank_account_file"],
-        password: json["password"],
-        lastLogin: json["last_login"],
+        lastLogin: DateTime.parse(json["last_login"]),
         isSuperuser: json["is_superuser"],
         isStaff: json["is_staff"],
         isActive: json["is_active"],
@@ -101,8 +98,7 @@ class Data {
         "bank_statement_file": bankStatementFile,
         "selfie_file": selfieFile,
         "bank_account_file": bankAccountFile,
-        "password": password,
-        "last_login": lastLogin,
+        "last_login": lastLogin.toIso8601String(),
         "is_superuser": isSuperuser,
         "is_staff": isStaff,
         "is_active": isActive,

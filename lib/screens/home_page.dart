@@ -12,7 +12,7 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userRepositoryProvider);
-    debugPrint(user?.data.fullName.toString());
+    debugPrint(user.toString());
     return SafeArea(
       child: SizedBox(
         height: MediaQuery.of(context).size.height * 0.9,
@@ -28,7 +28,7 @@ class HomePage extends ConsumerWidget {
                       bottomLeft: Radius.circular(30),
                       bottomRight: Radius.circular(30)),
                 ),
-                child: const Padding(
+                child: Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,7 +73,7 @@ class HomePage extends ConsumerWidget {
                           vertical: 8,
                         ),
                         child: Text(
-                          "User",
+                          user?.data.fullName?? "User",
                           style: TextStyle(
                             fontSize: 24,
                           ),
