@@ -30,13 +30,20 @@ class OrderListTile extends StatelessWidget {
         }));
       },
       child: ListTile(
+        contentPadding: const EdgeInsets.only(left: 0, right: 5),
         leading: imgUrl == ""
-            ? Image.asset(
-                'assets/images/logo4.png',
-                height: 20,
-                width: 50,
+            ? ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: Image.asset(
+                  'assets/images/logo4.png',
+                  height: 20,
+                  width: 50,
+                ),
               )
-            : Image.network("${Urls.baseUrl}$imgUrl"),
+            : CircleAvatar(
+                radius: 50,
+                backgroundImage: NetworkImage("${Urls.baseUrl}$imgUrl"),
+              ),
         title: Text(titleText,
             style: const TextStyle(
                 fontWeight: FontWeight.bold,

@@ -22,6 +22,7 @@ final ordersProvider = FutureProvider.family((ref, BuildContext context) async {
         await ref.watch(ordersServicesProvider).getAllOrders(context: context);
     if (res?.statusCode == 200) {
       var orders = Order.fromJson(res?.data);
+      
       return orders;
     } else {
       showSnackBar(context, "Something Went wrong");
@@ -30,5 +31,3 @@ final ordersProvider = FutureProvider.family((ref, BuildContext context) async {
     showSnackBar(context, e.toString());
   }
 });
-
-

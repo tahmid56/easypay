@@ -20,6 +20,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   List<Widget> navigationOptions = [
     const ShopsPage(),
     const HomePage(),
+    const MorePage(),
     const SettingsPage(),
   ];
   @override
@@ -29,7 +30,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         body: navigationOptions[ref.watch(pageIndexProvider)],
         bottomNavigationBar: Container(
           decoration: const BoxDecoration(
-            color: Color(0xffB3EDF7),
+            color: Color(0xffe7e7e7),
             borderRadius: BorderRadius.all(
               Radius.circular(50),
             ),
@@ -41,7 +42,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
             child: BottomNavigationBar(
               type: BottomNavigationBarType.fixed, // Fixed
-              backgroundColor: const Color(0xffB3EDF7),
+              backgroundColor: const Color(0xffe7e7e7),
               elevation: 0.0,
               selectedItemColor: Colors.black,
               unselectedItemColor: Colors.black,
@@ -126,6 +127,45 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   //       ),
                   //       child: const Text(
                   //         "Orders",
+                  //         style: TextStyle(
+                  //             fontFamily: CustomTheme.fontFamily,
+                  //             fontWeight: FontWeight.bold),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                ),
+                BottomNavigationBarItem(
+                  icon: const ImageIcon(
+                    AssetImage("assets/icons/badgeIcon.png"),
+                    size: 36,
+                  ),
+                  label: "Rewards",
+                  // activeIcon: Column(
+                  //   children: [
+                  //     const SizedBox(
+                  //       height: 30,
+                  //       width: 30,
+                  //       child: FittedBox(
+                  //         child: ImageIcon(
+                  //           AssetImage(
+                  //             "assets/icons/profileIcon.png",
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     const SizedBox(
+                  //       height: 4,
+                  //     ),
+                  //     Container(
+                  //       decoration: const BoxDecoration(
+                  //         color: Colors.blue,
+                  //         borderRadius: BorderRadius.all(
+                  //           Radius.circular(40),
+                  //         ),
+                  //       ),
+                  //       child: const Text(
+                  //         "My Easypay",
                   //         style: TextStyle(
                   //             fontFamily: CustomTheme.fontFamily,
                   //             fontWeight: FontWeight.bold),

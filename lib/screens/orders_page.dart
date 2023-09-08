@@ -9,90 +9,145 @@ class OrdersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          stops: [0.1, 0.4, 0.6, 0.9],
-          colors: [
-            Color(0xfffff7ad),
-            Color(0xffffa9f9),
-            Color(0xff62ffe3),
-            Color(0xff63dbc5)
-          ],
-        ),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: SingleChildScrollView(
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 18.0, left: 4, right: 4),
-              child: Consumer(
-                builder: (context, ref, child) {
-                  final orders = ref.watch(ordersProvider(context));
-                  return orders.when(
-                      data: (data) {
-                        return RefreshIndicator(
-                            onRefresh: () async {
-                              ref.refresh(ordersProvider(context));
-                            },
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "BDT ${data?.dueTotalAmount}",
-                                  style: const TextStyle(
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: CustomTheme.fontFamily,
-                                      color: Colors.black),
-                                ),
-                                const Text(
-                                  "Total you owe",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontFamily: CustomTheme.fontFamily,
-                                      color: Colors.black),
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                const Divider(
-                                  thickness: 2,
-                                ),
-                                SizedBox(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.7,
-                                    child: ListView.builder(
-                                        itemCount: data?.data.length ?? 0,
-                                        itemBuilder: (context, index) {
-                                          return Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 10),
-                                            child: OrderListTile(
-                                              date: data!
-                                                  .data[index].purchasedDate,
-                                              imgUrl:
-                                                  data.data[index].storeImgLink,
-                                              titleText:
-                                                  data.data[index].storeName,
-                                              price: data.data[index].amount,
-                                              id: data.data[index].orderId
-                                                  .toString(),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 18.0, left: 4, right: 4),
+            child: Consumer(
+              builder: (context, ref, child) {
+                final orders = ref.watch(ordersProvider(context));
+                return orders.when(
+                    data: (data) {
+                      return RefreshIndicator(
+                          onRefresh: () async {
+                            ref.refresh(ordersProvider(context));
+                          },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                decoration: const BoxDecoration(
+                                    color: Color(0xffe7e7e7),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15))),
+                                height:
+                                    MediaQuery.of(context).size.height * 0.3,
+                                width: MediaQuery.of(context).size.width * 0.95,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 15),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "All Orders",
+                                              style: TextStyle(
+                                                fontSize: 40,
+                                                fontFamily:
+                                                    CustomTheme.fontFamily,
+                                                color: Colors.black,
+                                              ),
                                             ),
-                                          );
-                                        }))
-                              ],
-                            ));
-                      },
-                      error: (error, stackTrace) =>
-                          Center(child: Text('Error: $error')),
-                      loading: () =>
-                          const Center(child: CircularProgressIndicator()));
-                },
-              ),
+                                            SizedBox(
+                                              height: 50,
+                                              width: 50,
+                                              child: ImageIcon(AssetImage(
+                                                  "assets/icons/easypayLogo.png")),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          const SizedBox(
+                                            height: 80,
+                                            width: 80,
+                                            child: ImageIcon(
+                                              AssetImage(
+                                                "assets/icons/takaIcon.png",
+                                              ),
+                                            ),
+                                          ),
+                                          Text(
+                                            "${data?.dueTotalAmount}",
+                                            style: const TextStyle(
+                                                fontSize: 70,
+                                                fontWeight: FontWeight.w600,
+                                                fontFamily:
+                                                    CustomTheme.fontFamily,
+                                                color: Colors.black),
+                                          ),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 15),
+                                        child: const Text(
+                                          "Total you owe",
+                                          style: TextStyle(
+                                              fontSize: 30,
+                                              fontFamily:
+                                                  CustomTheme.fontFamily,
+                                              color: Colors.black),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              const Divider(
+                                thickness: 2,
+                              ),
+                              Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                        width: 1,
+                                        color: Colors.grey,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.7,
+                                  child: ListView.builder(
+                                      itemCount: data?.data.length ?? 0,
+                                      itemBuilder: (context, index) {
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 10),
+                                          child: OrderListTile(
+                                            date:
+                                                data!.data[index].purchasedDate,
+                                            imgUrl:
+                                                data.data[index].storeImgLink,
+                                            titleText:
+                                                data.data[index].storeName,
+                                            price: data.data[index].amount,
+                                            id: data.data[index].orderId
+                                                .toString(),
+                                          ),
+                                        );
+                                      }))
+                            ],
+                          ));
+                    },
+                    error: (error, stackTrace) =>
+                        Center(child: Text('Error: $error')),
+                    loading: () =>
+                        const Center(child: CircularProgressIndicator()));
+              },
             ),
           ),
         ),
