@@ -90,10 +90,10 @@ class OrdersPage extends StatelessWidget {
                                           ),
                                         ],
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
+                                      const Padding(
+                                        padding: EdgeInsets.symmetric(
                                             horizontal: 15),
-                                        child: const Text(
+                                        child: Text(
                                           "Total you owe",
                                           style: TextStyle(
                                               fontSize: 30,
@@ -109,34 +109,38 @@ class OrdersPage extends StatelessWidget {
                               const SizedBox(
                                 height: 20,
                               ),
-                              const Divider(
-                                thickness: 2,
-                              ),
                               Container(
                                   decoration: BoxDecoration(
                                       border: Border.all(
                                         width: 1,
-                                        color: Colors.grey,
+                                        color: Colors.black26,
                                       ),
                                       borderRadius: BorderRadius.circular(12)),
                                   height:
-                                      MediaQuery.of(context).size.height * 0.7,
+                                      MediaQuery.of(context).size.height * 0.6,
                                   child: ListView.builder(
                                       itemCount: data?.data.length ?? 0,
                                       itemBuilder: (context, index) {
                                         return Padding(
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 10),
-                                          child: OrderListTile(
-                                            date:
-                                                data!.data[index].purchasedDate,
-                                            imgUrl:
-                                                data.data[index].storeImgLink,
-                                            titleText:
-                                                data.data[index].storeName,
-                                            price: data.data[index].amount,
-                                            id: data.data[index].orderId
-                                                .toString(),
+                                          child: Container(
+                                            decoration: const BoxDecoration(
+                                                border: Border(
+                                                    bottom: BorderSide(
+                                                        color: Colors.black26,
+                                                        width: 0.5))),
+                                            child: OrderListTile(
+                                              date: data!
+                                                  .data[index].purchasedDate,
+                                              imgUrl:
+                                                  data.data[index].storeImgLink,
+                                              titleText:
+                                                  data.data[index].storeName,
+                                              price: data.data[index].amount,
+                                              id: data.data[index].orderId
+                                                  .toString(),
+                                            ),
                                           ),
                                         );
                                       }))
