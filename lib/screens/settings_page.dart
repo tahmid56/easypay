@@ -285,8 +285,99 @@ class SettingsPage extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        Container(
-          
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Row(
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height * 0.10,
+                width: MediaQuery.of(context).size.width * 0.46,
+                decoration: BoxDecoration(
+                  color: const Color(0xffe7e7e7),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Your information"),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Icon(
+                            Icons.phone,
+                            color: Colors.red,
+                          ),
+                          Text("01600000000")
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Icon(
+                            Icons.contact_emergency,
+                            color: Colors.red,
+                          ),
+                          Text("123456789")
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.10,
+                width: MediaQuery.of(context).size.width * 0.46,
+                decoration: BoxDecoration(
+                  color: const Color(0xffe7e7e7),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Can't make a payment?",
+                        style: TextStyle(
+                            fontFamily: CustomTheme.fontFamily,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 10),
+                      ),
+                      Text(
+                        "We can help",
+                        style: TextStyle(
+                            fontFamily: CustomTheme.fontFamily,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 10),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Contact",
+                        style: TextStyle(
+                            fontSize: 10,
+                            fontFamily: CustomTheme.fontFamily,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        "Customer support",
+                        style: TextStyle(
+                            fontFamily: CustomTheme.fontFamily,
+                            decoration: TextDecoration.underline,
+                            fontSize: 14),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         )
       ],
     );
