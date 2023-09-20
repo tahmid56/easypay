@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
+import '../constants/url.dart';
+
 class SingleOrder extends StatelessWidget {
   final String id;
-  const SingleOrder({super.key, required this.id});
+  final String imgUrl;
+  const SingleOrder({super.key, required this.id, required this.imgUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -22,113 +25,215 @@ class SingleOrder extends StatelessWidget {
                   data: (data) {
                     final firstDue =
                         data!.dues.firstWhere((due) => due.isPaid == false);
-
                     return RefreshIndicator(
                       onRefresh: () async {
                         ref.refresh(orderDetailsProvider(id));
                       },
                       child: Column(
                         children: [
-                          Container(
-                            height: 200,
-                            width: 200,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                border: Border.all(
-                                  width: 3,
-                                  color: Colors.grey,
-                                )),
-                            child: Padding(
-                              padding: const EdgeInsets.all(25.0),
-                              child: Column(
-                                children: [
-                                  Text(
-                                    DateFormat('dd, MMM, yyyy')
-                                        .format(firstDue.dueDate),
-                                    style: const TextStyle(
-                                        fontSize: 12,
-                                        fontFamily: CustomTheme.fontFamily,
-                                        color: CustomTheme.primaryTextColor),
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    data.order.merchant.storeName,
-                                    style: const TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: CustomTheme.fontFamily,
-                                        color: CustomTheme.primaryTextColor),
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    "BDT ${data.order.totalAmount}",
-                                    style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: CustomTheme.fontFamily,
-                                        color: CustomTheme.primaryTextColor),
-                                  ),
-                                  const Padding(
-                                    padding:
-                                        EdgeInsets.only(left: 30.0, right: 30),
-                                    child: Divider(
-                                      height: 25,
-                                      thickness: 1.5,
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 15, right: 10, left: 10),
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                color: Color(0xffe7e7e7),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(15),
+                                ),
+                              ),
+                              height: MediaQuery.of(context).size.height * 0.35,
+                              width: MediaQuery.of(context).size.width * 0.95,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 15),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            "This Order",
+                                            style: TextStyle(
+                                              fontSize: 34,
+                                              fontFamily:
+                                                  CustomTheme.fontFamily,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 50,
+                                            width: 50,
+                                            child: ImageIcon(AssetImage(
+                                                "assets/icons/easypayLogo.png")),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    "BDT ${data.order.remainingDueAmount}",
-                                    style: const TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: CustomTheme.fontFamily,
-                                        color: CustomTheme.primaryTextColor),
-                                  ),
-                                  const Text(
-                                    "Remaining",
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontFamily: CustomTheme.fontFamily,
-                                        color: CustomTheme.primaryTextColor),
-                                  ),
-                                ],
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                          height: 60,
+                                          width: 90,
+                                          child: Image.network(
+                                              "${Urls.baseUrl}$imgUrl"),
+                                        ),
+                                        SizedBox(
+                                          width: 15,
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              data.order.merchant.storeName,
+                                              style: const TextStyle(
+                                                  fontSize: 24,
+                                                  fontFamily:
+                                                      CustomTheme.fontFamily),
+                                            ),
+                                            Text(
+                                              "BDT ${data.order.totalAmount}",
+                                              style: const TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w800,
+                                                  fontFamily:
+                                                      CustomTheme.fontFamily),
+                                            ),
+                                            Text(
+                                              DateFormat('dd, MMM, yyyy')
+                                                  .format(firstDue.dueDate),
+                                              style: const TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily:
+                                                      CustomTheme.fontFamily),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "BDT ${data.order.remainingDueAmount}",
+                                          style: const TextStyle(
+                                              fontSize: 60,
+                                              fontWeight: FontWeight.w600,
+                                              fontFamily:
+                                                  CustomTheme.fontFamily,
+                                              color: Colors.black),
+                                        ),
+                                        const Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 5),
+                                          child: Text(
+                                            "remaining",
+                                            style: TextStyle(
+                                                fontSize: 30,
+                                                fontFamily:
+                                                    CustomTheme.fontFamily,
+                                                color: Colors.black),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                          const Padding(
-                            padding: EdgeInsets.only(top: 20.0),
-                            child: Divider(
-                              thickness: 1,
-                            ),
+                          const SizedBox(
+                            height: 20,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              SizedBox(
-                                  width: 80,
-                                  child: Image.asset("assets/images/gg.png")),
-                              const Text(
-                                "....4538",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: CustomTheme.fontFamily,
-                                    color: Colors.white),
-                              ),
-                              const Text(
-                                "Change",
-                                style: TextStyle(
-                                    color: Color(0xff00C2E4),
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'Italian Plate 2'),
-                              ),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Container(
+                                height: 70,
+                                width: MediaQuery.of(context).size.width * 0.95,
+                                decoration: const BoxDecoration(
+                                  color: Color(0xffe7e7e7),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(15),
+                                  ),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20, vertical: 5),
+                                      child: Row(
+                                        children: [
+                                          const Icon(Icons.wallet),
+                                          const SizedBox(
+                                            width: 30,
+                                          ),
+                                          const Text("Payment Method"),
+                                          const Spacer(),
+                                          Container(
+                                            width: 70,
+                                            decoration: BoxDecoration(
+                                                color: const Color(0xff00c2e4),
+                                                borderRadius:
+                                                    BorderRadius.circular(50)),
+                                            child: const Padding(
+                                              padding: EdgeInsets.all(7.0),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    "change",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 12),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 20),
+                                      child: Row(
+                                        children: [
+                                          SizedBox(
+                                            height: 30,
+                                            width: 30,
+                                            child: ImageIcon(AssetImage(
+                                                "assets/icons/visaIcon.png")),
+                                          ),
+                                          SizedBox(width: 25),
+                                          Text(
+                                            "5442 **** 1231",
+                                            style: TextStyle(fontSize: 18),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                )),
+                          ),
+                          const SizedBox(
+                            height: 10,
                           ),
                           const Padding(
-                            padding: const EdgeInsets.only(bottom: 8.0),
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text("Payment breakdown")),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.only(bottom: 8.0),
                             child: Divider(
                               thickness: 1,
                             ),
@@ -175,7 +280,7 @@ class SingleOrder extends StatelessWidget {
                                               fontSize: 15,
                                               fontFamily:
                                                   CustomTheme.fontFamily,
-                                              color: Colors.white),
+                                              color: Colors.black),
                                         ),
                                       ),
                                     ),
@@ -250,12 +355,13 @@ class SingleOrder extends StatelessWidget {
                                         : Padding(
                                             padding: const EdgeInsets.all(7.0),
                                             child: Text(
-                                                "BDT ${data.dues[index].dueAmount}",
-                                                style: const TextStyle(
-                                                    fontSize: 10,
-                                                    color: Colors.grey,
-                                                    fontFamily:
-                                                        'Italian Plate 2')),
+                                              "BDT ${data.dues[index].dueAmount}",
+                                              style: const TextStyle(
+                                                fontSize: 10,
+                                                color: Colors.grey,
+                                                fontFamily: 'Italian Plate 2',
+                                              ),
+                                            ),
                                           ),
                               ),
                             ),

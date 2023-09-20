@@ -73,7 +73,7 @@ class HomePage extends ConsumerWidget {
                           vertical: 8,
                         ),
                         child: Text(
-                          user?.data.fullName?? "User",
+                          user?.data.fullName ?? "User",
                           style: TextStyle(
                             fontSize: 24,
                           ),
@@ -309,123 +309,124 @@ class HomePage extends ConsumerWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      border: Border.all(color: Colors.grey, width: 3)),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ListTile(
-                          leading: Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                border: Border.all(
-                                  width: 5,
-                                  color: Color(0xff00C2E4),
-                                )),
-                            child: const Center(
-                              child: Text(
-                                "3",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                    fontFamily: CustomTheme.fontFamily,
-                                    color: Colors.black),
-                              ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListTile(
+                        leading: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              border: Border.all(
+                                width: 5,
+                                color: Color(0xff00C2E4),
+                              )),
+                          child: const Center(
+                            child: Text(
+                              "3",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                  fontFamily: CustomTheme.fontFamily,
+                                  color: Colors.black),
                             ),
                           ),
-                          title: const Text(
-                            "Yellow Shopping",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontFamily: CustomTheme.fontFamily,
-                                color: Colors.black),
-                          ),
-                          subtitle: const Text(
-                            "Wed, 25 August",
-                            style: TextStyle(
-                                fontSize: 13,
-                                fontFamily: CustomTheme.fontFamily,
-                                color: Colors.black),
-                          ),
-                          trailing: InkWell(
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (_) {
-                                    return const SingleOrder(
-                                      id: "1",
-                                    );
-                                  },
-                                ),
-                              );
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: const Color(0xffD2E063),
-                                  borderRadius: BorderRadius.circular(6)),
-                              child: const Padding(
-                                padding: EdgeInsets.all(7.0),
-                                child: Text(
-                                  "Pay BDT 2212",
-                                  style: TextStyle(
-                                      fontSize: 10,
-                                      fontFamily: CustomTheme.fontFamily,
-                                      color: Colors.black),
-                                ),
+                        ),
+                        title: const Text(
+                          "Yellow Shopping",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: CustomTheme.fontFamily,
+                              color: Colors.black),
+                        ),
+                        subtitle: const Text(
+                          "Wed, 25 August",
+                          style: TextStyle(
+                              fontSize: 13,
+                              fontFamily: CustomTheme.fontFamily,
+                              color: Colors.black),
+                        ),
+                        trailing: InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) {
+                                  return const SingleOrder(
+                                    id: "1",
+                                    imgUrl: "",
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: const Color(0xffD2E063),
+                                borderRadius: BorderRadius.circular(6)),
+                            child: const Padding(
+                              padding: EdgeInsets.all(7.0),
+                              child: Text(
+                                "Pay BDT 2212",
+                                style: TextStyle(
+                                    fontSize: 10,
+                                    fontFamily: CustomTheme.fontFamily,
+                                    color: Colors.black),
                               ),
                             ),
                           ),
                         ),
                       ),
-                      const Divider(
-                        thickness: 2,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ListTile(
-                          leading: Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                border: Border.all(
-                                  width: 5,
-                                  color: const Color(0xff00C2E4),
-                                )),
-                            child: const Center(
-                              child: Text(
-                                "3",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                    fontFamily: CustomTheme.fontFamily,
-                                    color: Colors.black),
-                              ),
+                    ),
+                    const Divider(
+                      thickness: 2,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListTile(
+                        leading: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              border: Border.all(
+                                width: 5,
+                                color: const Color(0xff00C2E4),
+                              )),
+                          child: const Center(
+                            child: Text(
+                              "3",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                  fontFamily: CustomTheme.fontFamily,
+                                  color: Colors.black),
                             ),
                           ),
-                          title: const Text(
-                            "Yellow Shopping",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontFamily: CustomTheme.fontFamily,
-                                color: Colors.black),
-                          ),
-                          subtitle: const Text(
-                            "Wed, 25 August",
-                            style: TextStyle(
-                                fontSize: 13,
-                                fontFamily: CustomTheme.fontFamily,
-                                color: Colors.black),
-                          ),
-                          trailing: const Padding(
+                        ),
+                        title: const Text(
+                          "Yellow Shopping",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: CustomTheme.fontFamily,
+                              color: Colors.black),
+                        ),
+                        subtitle: const Text(
+                          "Wed, 25 August",
+                          style: TextStyle(
+                              fontSize: 13,
+                              fontFamily: CustomTheme.fontFamily,
+                              color: Colors.black),
+                        ),
+                        trailing: Container(
+                          decoration: BoxDecoration(
+                              color: const Color(0xffa3a3a3),
+                              borderRadius: BorderRadius.circular(6)),
+                          child: const Padding(
                             padding: EdgeInsets.all(7.0),
                             child: Text(
-                              "BDT 2212",
+                              "Pay BDT 2212",
                               style: TextStyle(
                                   fontSize: 10,
                                   fontFamily: CustomTheme.fontFamily,
@@ -434,8 +435,8 @@ class HomePage extends ConsumerWidget {
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ],

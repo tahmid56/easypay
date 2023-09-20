@@ -10,7 +10,7 @@ String orderToJson(Order data) => json.encode(data.toJson());
 
 class Order {
     List<Datum> data;
-    double? dueTotalAmount;
+    double dueTotalAmount;
 
     Order({
         required this.data,
@@ -33,6 +33,7 @@ class Datum {
     String storeName;
     String storeImgLink;
     DateTime purchasedDate;
+    String status;
     double amount;
 
     Datum({
@@ -40,6 +41,7 @@ class Datum {
         required this.storeName,
         required this.storeImgLink,
         required this.purchasedDate,
+        required this.status,
         required this.amount,
     });
 
@@ -48,6 +50,7 @@ class Datum {
         storeName: json["store_name"],
         storeImgLink: json["store_img_link"],
         purchasedDate: DateTime.parse(json["purchased_date"]),
+        status: json["status"],
         amount: json["amount"],
     );
 
@@ -56,6 +59,23 @@ class Datum {
         "store_name": storeName,
         "store_img_link": storeImgLink,
         "purchased_date": purchasedDate.toIso8601String(),
+        "status": status,
         "amount": amount,
     };
+}
+
+
+
+
+
+class EnumValues<T> {
+    Map<String, T> map;
+    late Map<T, String> reverseMap;
+
+    EnumValues(this.map);
+
+    Map<T, String> get reverse {
+        reverseMap = map.map((k, v) => MapEntry(v, k));
+        return reverseMap;
+    }
 }

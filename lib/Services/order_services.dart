@@ -19,7 +19,7 @@ class OrderServices {
           options: Options(headers: {
             "authorization": "Bearer ${token.getString("access_token")}"
           }));
-      
+
       return res;
     } catch (error) {
       showSnackBar(context, error.toString());
@@ -30,10 +30,13 @@ class OrderServices {
   Future<Response?> getOrderDetails({required int id}) async {
     final dio = Dio();
     dio.options.baseUrl = Urls.baseUrl;
+    final token = await SharedPreferences.getInstance();
+    
     try {
-      Response res = await dio.get(
-        "${Urls.orderDetailsUrl}$id",
-      );
+      Response res = await dio.get("${Urls.orderDetailsUrl}$id",
+          options: Options(headers: {
+            "authorization": "Bearer ${token.getString("access_token")}"
+          }));
       return res;
     } catch (e) {
       throw Exception(e.toString());

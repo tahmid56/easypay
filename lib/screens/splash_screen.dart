@@ -21,7 +21,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   Future navigator() async {
     final isLoggedIn = ref.read(loggedInProvider);
-    await Future.delayed(const Duration(milliseconds: 7000));
+    await Future.delayed(const Duration(milliseconds: 3000));
     if (isLoggedIn.getLoggedInStatus()) {
       return GoRouter.of(context).pushReplacementNamed(NamedRoutes.home);
     } else {

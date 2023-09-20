@@ -60,10 +60,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ref.watch(pageIndexProvider.notifier).state = index;
                 setState(() {});
               },
-              items: [
+              items: const [
                 BottomNavigationBarItem(
-                  icon:
-                      const ImageIcon(AssetImage("assets/icons/cartIcon.png")),
+                  icon: ImageIcon(AssetImage("assets/icons/cart.png")),
                   label: "Shops",
                   // activeIcon: Column(
                   //   children: [
@@ -99,8 +98,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   // ),
                 ),
                 BottomNavigationBarItem(
-                  icon:
-                      const ImageIcon(AssetImage("assets/icons/checkIcon.png")),
+                  icon: const ImageIcon(AssetImage("assets/icons/badge.png")),
                   label: "Orders",
                   // activeIcon: Column(
                   //   children: [
@@ -137,7 +135,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
                 BottomNavigationBarItem(
                   icon: const ImageIcon(
-                    AssetImage("assets/icons/badgeIcon.png"),
+                    AssetImage("assets/icons/badge2.png"),
                     size: 36,
                   ),
                   label: "Rewards",
@@ -176,7 +174,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
                 BottomNavigationBarItem(
                   icon: const ImageIcon(
-                    AssetImage("assets/icons/easypayLogo.png"),
+                    AssetImage("assets/icons/easypay.png"),
                     size: 36,
                   ),
                   label: "My Easypay",
