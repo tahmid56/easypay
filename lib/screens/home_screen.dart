@@ -98,7 +98,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   // ),
                 ),
                 BottomNavigationBarItem(
-                  icon: const ImageIcon(AssetImage("assets/icons/badge.png")),
+                  icon:  ImageIcon(AssetImage("assets/icons/badge.png")),
                   label: "Orders",
                   // activeIcon: Column(
                   //   children: [
@@ -134,7 +134,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   // ),
                 ),
                 BottomNavigationBarItem(
-                  icon: const ImageIcon(
+                  icon: ImageIcon(
                     AssetImage("assets/icons/badge2.png"),
                     size: 36,
                   ),
@@ -173,7 +173,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   // ),
                 ),
                 BottomNavigationBarItem(
-                  icon: const ImageIcon(
+                  icon: ImageIcon(
                     AssetImage("assets/icons/easypay.png"),
                     size: 36,
                   ),
