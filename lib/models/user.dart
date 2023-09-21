@@ -1,3 +1,7 @@
+// To parse this JSON data, do
+//
+//     final user = userFromJson(jsonString);
+
 import 'dart:convert';
 
 User userFromJson(String str) => User.fromJson(json.decode(str));
@@ -32,10 +36,8 @@ class Data {
     int id;
     dynamic nidFrontFile;
     dynamic nidBackFile;
-    dynamic jobOfferFile;
     dynamic bankStatementFile;
     dynamic selfieFile;
-    dynamic bankAccountFile;
     DateTime lastLogin;
     bool isSuperuser;
     bool isStaff;
@@ -43,19 +45,21 @@ class Data {
     DateTime dateJoined;
     String fullName;
     String phoneNumber;
+    dynamic dateOfBirth;
+    dynamic street;
+    dynamic city;
+    dynamic postalCode;
+    String userRoll;
     dynamic permanentAddress;
     dynamic residentialAddress;
-    String userRoll;
     dynamic userIp;
 
     Data({
         required this.id,
         required this.nidFrontFile,
         required this.nidBackFile,
-        required this.jobOfferFile,
         required this.bankStatementFile,
         required this.selfieFile,
-        required this.bankAccountFile,
         required this.lastLogin,
         required this.isSuperuser,
         required this.isStaff,
@@ -63,9 +67,13 @@ class Data {
         required this.dateJoined,
         required this.fullName,
         required this.phoneNumber,
+        required this.dateOfBirth,
+        required this.street,
+        required this.city,
+        required this.postalCode,
+        required this.userRoll,
         required this.permanentAddress,
         required this.residentialAddress,
-        required this.userRoll,
         required this.userIp,
     });
 
@@ -73,10 +81,8 @@ class Data {
         id: json["id"],
         nidFrontFile: json["nid_front_file"],
         nidBackFile: json["nid_back_file"],
-        jobOfferFile: json["job_offer_file"],
         bankStatementFile: json["bank_statement_file"],
         selfieFile: json["selfie_file"],
-        bankAccountFile: json["bank_account_file"],
         lastLogin: DateTime.parse(json["last_login"]),
         isSuperuser: json["is_superuser"],
         isStaff: json["is_staff"],
@@ -84,9 +90,13 @@ class Data {
         dateJoined: DateTime.parse(json["date_joined"]),
         fullName: json["full_name"],
         phoneNumber: json["phone_number"],
+        dateOfBirth: json["date_of_birth"],
+        street: json["street"],
+        city: json["city"],
+        postalCode: json["postal_code"],
+        userRoll: json["user_roll"],
         permanentAddress: json["permanent_address"],
         residentialAddress: json["residential_address"],
-        userRoll: json["user_roll"],
         userIp: json["user_ip"],
     );
 
@@ -94,10 +104,8 @@ class Data {
         "id": id,
         "nid_front_file": nidFrontFile,
         "nid_back_file": nidBackFile,
-        "job_offer_file": jobOfferFile,
         "bank_statement_file": bankStatementFile,
         "selfie_file": selfieFile,
-        "bank_account_file": bankAccountFile,
         "last_login": lastLogin.toIso8601String(),
         "is_superuser": isSuperuser,
         "is_staff": isStaff,
@@ -105,9 +113,13 @@ class Data {
         "date_joined": dateJoined.toIso8601String(),
         "full_name": fullName,
         "phone_number": phoneNumber,
+        "date_of_birth": dateOfBirth,
+        "street": street,
+        "city": city,
+        "postal_code": postalCode,
+        "user_roll": userRoll,
         "permanent_address": permanentAddress,
         "residential_address": residentialAddress,
-        "user_roll": userRoll,
         "user_ip": userIp,
     };
 }

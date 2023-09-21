@@ -117,7 +117,7 @@ class AuthController extends StateNotifier<bool> {
     httpErrorHandle(
         response: res,
         context: context,
-        onSuccess: () async{
+        onSuccess: () async {
           var userData = User.fromJson(res?.data);
           await prefs.setString("access_token", userData.accessToken);
           ref.watch(userRepositoryProvider.notifier).saveUser(userData);
@@ -163,6 +163,7 @@ class AuthController extends StateNotifier<bool> {
         context: context,
         onSuccess: () async {
           var userData = User.fromJson(res?.data);
+          debugPrint(userData.data.fullName);
           await prefs.setString("access_token", userData.accessToken);
           ref.watch(userRepositoryProvider.notifier).saveUser(userData);
           ref.watch(loggedInProvider).isLoggedIn(true);

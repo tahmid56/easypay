@@ -159,40 +159,4 @@ class OrdersPage extends StatelessWidget {
 }
 
 
-// ListView(
-//                     children: const [
-//                       OrderListTile(
-//                         date: "Sun, 6 August",
-//                         imgUrl: "assets/icons/ajkerdeal.png",
-//                         titleText: "Ajkerdeal",
-//                       ),
-//                       SizedBox(
-//                         height: 10,
-//                       ),
-//                       OrderListTile(
-//                         date: "Sun, 20 August",
-//                         imgUrl: "assets/icons/bagdoom.png",
-//                         titleText: "Bagdoom",
-//                       ),
-//                       SizedBox(
-//                         height: 10,
-//                       ),
-//                       OrderListTile(
-//                         date: "Sun, 10 October",
-//                         imgUrl: "assets/icons/daraz.png",
-//                         titleText: "Daraz",
-//                       ),
-//                       SizedBox(
-//                         height: 10,
-//                       ),
-//                       OrderListTile(
-//                         date: "Sun, 1 November",
-//                         imgUrl: "assets/icons/rokomari.png",
-//                         titleText: "Rokomari",
-//                       ),
-//                       SizedBox(
-//                         height: 10,
-//                       ),
-//                     ],
-//                   ),
 

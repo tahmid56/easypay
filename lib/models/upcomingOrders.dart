@@ -1,259 +1,145 @@
-// To parse this JSON data, do
-//
-//     final upcomingOrders = upcomingOrdersFromJson(jsonString);
-
 import 'dart:convert';
 
-UpcomingOrders upcomingOrdersFromJson(String str) => UpcomingOrders.fromJson(json.decode(str));
+class UpcomingOrder {
+    List<UpcomingPayment>? upcomingPayments;
+    List<DuesInDay>? duesIn15Days;
+    List<DuesInDay>? duesIn30Days;
+    List<DuesInDay>? duesIn45Days;
+    int? creditLimit;
+    double? totalDueAmount;
 
-String upcomingOrdersToJson(UpcomingOrders data) => json.encode(data.toJson());
-
-class UpcomingOrders {
-    List<AllOrdersWithDue> allOrdersWithDues;
-    List<UpcomingPayment> upcomingPayments;
-
-    UpcomingOrders({
-        required this.allOrdersWithDues,
-        required this.upcomingPayments,
+    UpcomingOrder({
+        this.upcomingPayments,
+        this.duesIn15Days,
+        this.duesIn30Days,
+        this.duesIn45Days,
+        this.creditLimit,
+        this.totalDueAmount,
     });
 
-    factory UpcomingOrders.fromJson(Map<String, dynamic> json) => UpcomingOrders(
-        allOrdersWithDues: List<AllOrdersWithDue>.from(json["all_orders_with_dues"].map((x) => AllOrdersWithDue.fromJson(x))),
-        upcomingPayments: List<UpcomingPayment>.from(json["upcoming_payments"].map((x) => UpcomingPayment.fromJson(x))),
+    factory UpcomingOrder.fromRawJson(String str) => UpcomingOrder.fromJson(json.decode(str));
+
+    String toRawJson() => json.encode(toJson());
+
+    factory UpcomingOrder.fromJson(Map<String, dynamic> json) => UpcomingOrder(
+        upcomingPayments: json["upcoming_payments"] == null ? [] : List<UpcomingPayment>.from(json["upcoming_payments"]!.map((x) => UpcomingPayment.fromJson(x))),
+        duesIn15Days: json["dues_in_15_days"] == null ? [] : List<DuesInDay>.from(json["dues_in_15_days"]!.map((x) => DuesInDay.fromJson(x))),
+        duesIn30Days: json["dues_in_30_days"] == null ? [] : List<DuesInDay>.from(json["dues_in_30_days"]!.map((x) => DuesInDay.fromJson(x))),
+        duesIn45Days: json["dues_in_45_days"] == null ? [] : List<DuesInDay>.from(json["dues_in_45_days"]!.map((x) => DuesInDay.fromJson(x))),
+        creditLimit: json["credit_limit"],
+        totalDueAmount: json["total_due_amount"]?.toDouble(),
     );
 
     Map<String, dynamic> toJson() => {
-        "all_orders_with_dues": List<dynamic>.from(allOrdersWithDues.map((x) => x.toJson())),
-        "upcoming_payments": List<dynamic>.from(upcomingPayments.map((x) => x.toJson())),
+        "upcoming_payments": upcomingPayments == null ? [] : List<dynamic>.from(upcomingPayments!.map((x) => x.toJson())),
+        "dues_in_15_days": duesIn15Days == null ? [] : List<dynamic>.from(duesIn15Days!.map((x) => x.toJson())),
+        "dues_in_30_days": duesIn30Days == null ? [] : List<dynamic>.from(duesIn30Days!.map((x) => x.toJson())),
+        "dues_in_45_days": duesIn45Days == null ? [] : List<dynamic>.from(duesIn45Days!.map((x) => x.toJson())),
+        "credit_limit": creditLimit,
+        "total_due_amount": totalDueAmount,
     };
 }
 
-class AllOrdersWithDue {
-    int orderId;
-    int totalAmount;
-    int firstDownPaymentAmount;
-    int remainingDueAmount;
-    dynamic tax;
-    String customerId;
-    Merchant merchant;
-    dynamic discounts;
-    String? customerAddress;
-    String? products;
-    bool isFullPaid;
-    String due;
-    List<Due> dues;
+class DuesInDay {
+    double? totalDueAmount;
 
-    AllOrdersWithDue({
-        required this.orderId,
-        required this.totalAmount,
-        required this.firstDownPaymentAmount,
-        required this.remainingDueAmount,
-        required this.tax,
-        required this.customerId,
-        required this.merchant,
-        required this.discounts,
-        required this.customerAddress,
-        required this.products,
-        required this.isFullPaid,
-        required this.due,
-        required this.dues,
+    DuesInDay({
+        this.totalDueAmount,
     });
 
-    factory AllOrdersWithDue.fromJson(Map<String, dynamic> json) => AllOrdersWithDue(
+    factory DuesInDay.fromRawJson(String str) => DuesInDay.fromJson(json.decode(str));
+
+    String toRawJson() => json.encode(toJson());
+
+    factory DuesInDay.fromJson(Map<String, dynamic> json) => DuesInDay(
+        totalDueAmount: json["total_due_amount"]?.toDouble(),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "total_due_amount": totalDueAmount,
+    };
+}
+
+class UpcomingPayment {
+    int? orderId;
+    double? totalAmount;
+    DateTime? purchasedDate;
+    Merchant? merchant;
+    List<UpcomingDuesInstallment>? upcomingDuesInstallment;
+
+    UpcomingPayment({
+        this.orderId,
+        this.totalAmount,
+        this.purchasedDate,
+        this.merchant,
+        this.upcomingDuesInstallment,
+    });
+
+    factory UpcomingPayment.fromRawJson(String str) => UpcomingPayment.fromJson(json.decode(str));
+
+    String toRawJson() => json.encode(toJson());
+
+    factory UpcomingPayment.fromJson(Map<String, dynamic> json) => UpcomingPayment(
         orderId: json["order_id"],
         totalAmount: json["total_amount"],
-        firstDownPaymentAmount: json["first_down_payment_amount"],
-        remainingDueAmount: json["remaining_due_amount"],
-        tax: json["tax"],
-        customerId: json["customer_id"],
-        merchant: Merchant.fromJson(json["merchant"]),
-        discounts: json["discounts"],
-        customerAddress: json["customer_address"],
-        products: json["products"],
-        isFullPaid: json["is_full_paid"],
-        due: json["due"],
-        dues: List<Due>.from(json["dues"].map((x) => Due.fromJson(x))),
+        purchasedDate: json["purchased_date"] == null ? null : DateTime.parse(json["purchased_date"]),
+        merchant: json["merchant"] == null ? null : Merchant.fromJson(json["merchant"]),
+        upcomingDuesInstallment: json["upcoming_dues_installment"] == null ? [] : List<UpcomingDuesInstallment>.from(json["upcoming_dues_installment"]!.map((x) => UpcomingDuesInstallment.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
         "order_id": orderId,
         "total_amount": totalAmount,
-        "first_down_payment_amount": firstDownPaymentAmount,
-        "remaining_due_amount": remainingDueAmount,
-        "tax": tax,
-        "customer_id": customerId,
-        "merchant": merchant.toJson(),
-        "discounts": discounts,
-        "customer_address": customerAddress,
-        "products": products,
-        "is_full_paid": isFullPaid,
-        "due": due,
-        "dues": List<dynamic>.from(dues.map((x) => x.toJson())),
+        "purchased_date": purchasedDate?.toIso8601String(),
+        "merchant": merchant?.toJson(),
+        "upcoming_dues_installment": upcomingDuesInstallment == null ? [] : List<dynamic>.from(upcomingDuesInstallment!.map((x) => x.toJson())),
     };
 }
 
-class Due {
-    int id;
-    double dueAmount;
-    dynamic dueNumber;
-    DateTime dueDate;
-    bool isPaid;
-    Installment installment;
+class Merchant {
+    String? storeName;
 
-    Due({
-        required this.id,
-        required this.dueAmount,
-        required this.dueNumber,
-        required this.dueDate,
-        required this.isPaid,
-        required this.installment,
+    Merchant({
+        this.storeName,
     });
 
-    factory Due.fromJson(Map<String, dynamic> json) => Due(
+    factory Merchant.fromRawJson(String str) => Merchant.fromJson(json.decode(str));
+
+    String toRawJson() => json.encode(toJson());
+
+    factory Merchant.fromJson(Map<String, dynamic> json) => Merchant(
+        storeName: json["store_name"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "store_name": storeName,
+    };
+}
+
+class UpcomingDuesInstallment {
+    int? id;
+    double? dueAmount;
+    DateTime? dueDate;
+
+    UpcomingDuesInstallment({
+        this.id,
+        this.dueAmount,
+        this.dueDate,
+    });
+
+    factory UpcomingDuesInstallment.fromRawJson(String str) => UpcomingDuesInstallment.fromJson(json.decode(str));
+
+    String toRawJson() => json.encode(toJson());
+
+    factory UpcomingDuesInstallment.fromJson(Map<String, dynamic> json) => UpcomingDuesInstallment(
         id: json["id"],
-        dueAmount: json["due_amount"]?.toDouble(),
-        dueNumber: json["due_number"],
-        dueDate: DateTime.parse(json["due_date"]),
-        isPaid: json["is_paid"],
-        installment: installmentValues.map[json["installment"]]!,
+        dueAmount: json["due_amount"],
+        dueDate: json["due_date"] == null ? null : DateTime.parse(json["due_date"]),
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
         "due_amount": dueAmount,
-        "due_number": dueNumber,
-        "due_date": "${dueDate.year.toString().padLeft(4, '0')}-${dueDate.month.toString().padLeft(2, '0')}-${dueDate.day.toString().padLeft(2, '0')}",
-        "is_paid": isPaid,
-        "installment": installmentValues.reverse[installment],
+        "due_date": "${dueDate!.year.toString().padLeft(4, '0')}-${dueDate!.month.toString().padLeft(2, '0')}-${dueDate!.day.toString().padLeft(2, '0')}",
     };
-}
-
-enum Installment {
-    FIRST,
-    FOURTH,
-    SECOND,
-    THIRD
-}
-
-final installmentValues = EnumValues({
-    "First": Installment.FIRST,
-    "Fourth": Installment.FOURTH,
-    "Second": Installment.SECOND,
-    "Third": Installment.THIRD
-});
-
-class Merchant {
-    User user;
-    String merchantId;
-    StoreName storeName;
-    String storeWebsite;
-    String storeId;
-    String wallet;
-    dynamic ledgerInfo;
-
-    Merchant({
-        required this.user,
-        required this.merchantId,
-        required this.storeName,
-        required this.storeWebsite,
-        required this.storeId,
-        required this.wallet,
-        required this.ledgerInfo,
-    });
-
-    factory Merchant.fromJson(Map<String, dynamic> json) => Merchant(
-        user: userValues.map[json["user"]]!,
-        merchantId: json["merchant_id"],
-        storeName: storeNameValues.map[json["store_name"]]!,
-        storeWebsite: json["store_website"],
-        storeId: json["store_id"],
-        wallet: json["wallet"],
-        ledgerInfo: json["ledger_info"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "user": userValues.reverse[user],
-        "merchant_id": merchantId,
-        "store_name": storeNameValues.reverse[storeName],
-        "store_website": storeWebsite,
-        "store_id": storeId,
-        "wallet": wallet,
-        "ledger_info": ledgerInfo,
-    };
-}
-
-enum StoreName {
-    MEDICIFY
-}
-
-final storeNameValues = EnumValues({
-    "Medicify": StoreName.MEDICIFY
-});
-
-enum User {
-    ARAFAT
-}
-
-final userValues = EnumValues({
-    "Arafat": User.ARAFAT
-});
-
-class UpcomingPayment {
-    int orderId;
-    int totalAmount;
-    int firstDownPaymentAmount;
-    int remainingDueAmount;
-    dynamic tax;
-    String customerId;
-    Merchant merchant;
-    dynamic discounts;
-    List<Due> upcomingPayments;
-
-    UpcomingPayment({
-        required this.orderId,
-        required this.totalAmount,
-        required this.firstDownPaymentAmount,
-        required this.remainingDueAmount,
-        required this.tax,
-        required this.customerId,
-        required this.merchant,
-        required this.discounts,
-        required this.upcomingPayments,
-    });
-
-    factory UpcomingPayment.fromJson(Map<String, dynamic> json) => UpcomingPayment(
-        orderId: json["order_id"],
-        totalAmount: json["total_amount"],
-        firstDownPaymentAmount: json["first_down_payment_amount"],
-        remainingDueAmount: json["remaining_due_amount"],
-        tax: json["tax"],
-        customerId: json["customer_id"],
-        merchant: Merchant.fromJson(json["merchant"]),
-        discounts: json["discounts"],
-        upcomingPayments: List<Due>.from(json["upcoming_payments"].map((x) => Due.fromJson(x))),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "order_id": orderId,
-        "total_amount": totalAmount,
-        "first_down_payment_amount": firstDownPaymentAmount,
-        "remaining_due_amount": remainingDueAmount,
-        "tax": tax,
-        "customer_id": customerId,
-        "merchant": merchant.toJson(),
-        "discounts": discounts,
-        "upcoming_payments": List<dynamic>.from(upcomingPayments.map((x) => x.toJson())),
-    };
-}
-
-class EnumValues<T> {
-    Map<String, T> map;
-    late Map<T, String> reverseMap;
-
-    EnumValues(this.map);
-
-    Map<T, String> get reverse {
-        reverseMap = map.map((k, v) => MapEntry(v, k));
-        return reverseMap;
-    }
 }

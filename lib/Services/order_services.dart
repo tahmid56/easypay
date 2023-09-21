@@ -31,7 +31,7 @@ class OrderServices {
     final dio = Dio();
     dio.options.baseUrl = Urls.baseUrl;
     final token = await SharedPreferences.getInstance();
-    
+
     try {
       Response res = await dio.get("${Urls.orderDetailsUrl}$id",
           options: Options(headers: {
@@ -41,5 +41,22 @@ class OrderServices {
     } catch (e) {
       throw Exception(e.toString());
     }
+  }
+
+  Future<Response?> getUpcomingPayments({required BuildContext context}) async {
+    final dio = Dio();
+    dio.options.baseUrl = Urls.baseUrl;
+    final token = await SharedPreferences.getInstance();
+    try {
+      Response res = await dio.get(Urls.upcomingPaymentUrl,
+          options: Options(headers: {
+            "authorization": "Bearer ${token.getString("access_token")}"
+          }));
+      
+      return res;
+    } catch (error) {
+      showSnackBar(context, error.toString());
+    }
+    return null;
   }
 }

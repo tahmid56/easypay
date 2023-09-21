@@ -8,5 +8,6 @@ class Urls {
   static const thirdRegistrationUrl = '$baseUrl/user-info/';
   static const fourthRegistrationUrl = '$baseUrl/pin/';
   static const ordersUrl = '$baseUrl/orders-list/123/';
+  static const upcomingPaymentUrl = '$baseUrl/home/100/';
   static const orderDetailsUrl = '$baseUrl/dues/123/';
 }
