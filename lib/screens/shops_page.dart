@@ -1,4 +1,8 @@
+import 'package:easypay/providers/shop_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../constants/url.dart';
 
 class ShopsPage extends StatefulWidget {
   const ShopsPage({super.key});
@@ -35,233 +39,287 @@ class _ShopsPageState extends State<ShopsPage> {
           ),
         ),
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.14,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: const Color(0xffB3EDF7),
-                  ),
-                  child: Column(
+          child: Consumer(builder: (context, ref, child) {
+            final shops = ref.watch(shopProvider(context));
+
+            return shops.when(
+                data: (data) {
+                  debugPrint(data?.featuredImage[0].image);
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Divider(),
-                          Padding(
-                            padding: EdgeInsets.only(top: 10),
-                            child: Image(
-                              image: AssetImage("assets/images/logo4.png"),
-                              height: 25,
-                              color: Colors.black,
-                            ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.14,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: const Color(0xffB3EDF7),
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 10),
-                            child: Icon(
-                              Icons.favorite,
-                              color: Colors.red,
-                            ),
+                          child: Column(
+                            children: [
+                              const Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Divider(),
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 10),
+                                    child: Image(
+                                      image:
+                                          AssetImage("assets/images/logo4.png"),
+                                      height: 25,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 10),
+                                    child: Icon(
+                                      Icons.favorite,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8.0, vertical: 4),
+                                child: TextField(
+                                  textAlign: TextAlign.center,
+                                  decoration: InputDecoration(
+                                    prefixIcon: const Icon(
+                                      Icons.search,
+                                      size: 36,
+                                      color: Colors.black,
+                                    ),
+                                    hintText: "Search brands, stores, products",
+                                    hintStyle:
+                                        const TextStyle(color: Colors.black45),
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                      borderSide:
+                                          const BorderSide(color: Colors.white),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide:
+                                          const BorderSide(color: Colors.white),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
-                        ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 40,
+                        child: ListView(
+                          itemExtent: 100,
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 8),
+                              height: 30,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Color(0xff00C2E4)),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: Text(
+                                    "All",
+                                    style: TextStyle(
+                                        fontFamily: "Italian Plate 2"),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 8),
+                              height: 30,
+                              decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: const Color(0xff00C2E4)),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: Text(
+                                    "Newest",
+                                    style: TextStyle(
+                                        fontFamily: "Italian Plate 2"),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 8),
+                              height: 30,
+                              decoration: BoxDecoration(
+                                color: const Color(0xff00C2E4),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  "Popular",
+                                  style: TextStyle(
+                                      fontFamily: "Italian Plate 2",
+                                      color: Colors.black),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 8),
+                              height: 30,
+                              decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: const Color(0xff00C2E4)),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  "Trending",
+                                  style:
+                                      TextStyle(fontFamily: "Italian Plate 2"),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 4),
-                        child: TextField(
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                            prefixIcon: const Icon(
-                              Icons.search,
-                              size: 36,
-                              color: Colors.black,
-                            ),
-                            hintText: "Search brands, stores, products",
-                            hintStyle: const TextStyle(color: Colors.black45),
-                            filled: true,
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+                        padding: const EdgeInsets.all(4.0),
+                        child: ClipRRect(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
+                          child: Image.network(
+                            'https://backend.easypayltd.com/media/banner/art.png',
+                            errorBuilder: (context, error, stackTrace) {
+                              return const Text('Error loading image');
+                            },
                           ),
                         ),
-                      )
+                      ),
+                      const Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Featured Stores",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 24),
+                            ),
+                            Icon(Icons.play_circle),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 200,
+                        width: double.infinity,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: data?.stores.length ?? 0,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                      "${Urls.baseUrl}${data?.stores[index].storeImage ?? "/media/store_images/ss.PNG"}",
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.amber,
+                                ),
+                                margin: const EdgeInsets.all(5),
+                                width: 200,
+                                height: 200,
+                                alignment: Alignment.center,
+                              );
+                            }),
+                      ),
                     ],
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              SizedBox(
-                width: double.infinity,
-                height: 40,
-                child: ListView(
-                  itemExtent: 100,
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 8),
-                      height: 30,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Color(0xff00C2E4)),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Text(
-                            "All",
-                            style: TextStyle(fontFamily: "Italian Plate 2"),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 8),
-                      height: 30,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: const Color(0xff00C2E4)),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Text(
-                            "Newest",
-                            style: TextStyle(fontFamily: "Italian Plate 2"),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 8),
-                      height: 30,
-                      decoration: BoxDecoration(
-                        color: const Color(0xff00C2E4),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          "Popular",
-                          style: TextStyle(
-                              fontFamily: "Italian Plate 2",
-                              color: Colors.black),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 8),
-                      height: 30,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: const Color(0xff00C2E4)),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          "Trending",
-                          style: TextStyle(fontFamily: "Italian Plate 2"),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Padding(
-                padding: EdgeInsets.all(4.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  child: Image(
-                    image: AssetImage("assets/images/banner.png"),
-                  ),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Featured Stores",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                    ),
-                    Icon(Icons.play_circle),
-                  ],
-                ),
-              ),
-              SizedBox(
-                width: double.infinity,
-                height: 200,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        image: const DecorationImage(
-                          image: NetworkImage(
-                            'https://easypayltd.com/slider2.jpg',
-                          ),
-                          fit: BoxFit.cover,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.amber,
-                      ),
-                      margin: const EdgeInsets.all(5),
-                      width: 200,
-                      height: 200,
-                      alignment: Alignment.center,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        image: const DecorationImage(
-                          image: NetworkImage(
-                            'https://easypayltd.com/slider7.jpg',
-                          ),
-                          fit: BoxFit.cover,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      margin: const EdgeInsets.all(5),
-                      width: 200,
-                      height: 200,
-                      alignment: Alignment.center,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        image: const DecorationImage(
-                          image: NetworkImage(
-                            'https://easypayltd.com/slider3.jpg',
-                          ),
-                          fit: BoxFit.cover,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.amber,
-                      ),
-                      margin: const EdgeInsets.all(5),
-                      width: 200,
-                      height: 200,
-                      alignment: Alignment.center,
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+                  );
+                },
+                error: (error, stackTrace) =>
+                    Center(child: Text('Error: $error')),
+                loading: () =>
+                    const Center(child: CircularProgressIndicator()));
+          }),
         ),
       ),
     );
   }
 }
+
+
+// SizedBox(
+//                         width: double.infinity,
+//                         height: 200,
+//                         child: ListView.builder(
+//                           scrollDirection: Axis.horizontal,
+//                           children: [
+//                             Container(
+//                               decoration: BoxDecoration(
+//                                 image: const DecorationImage(
+//                                   image: NetworkImage(
+//                                     'https://easypayltd.com/slider2.jpg',
+//                                   ),
+//                                   fit: BoxFit.cover,
+//                                 ),
+//                                 borderRadius: BorderRadius.circular(10),
+//                                 color: Colors.amber,
+//                               ),
+//                               margin: const EdgeInsets.all(5),
+//                               width: 200,
+//                               height: 200,
+//                               alignment: Alignment.center,
+//                             ),
+//                             Container(
+//                               decoration: BoxDecoration(
+//                                 image: const DecorationImage(
+//                                   image: NetworkImage(
+//                                     'https://easypayltd.com/slider7.jpg',
+//                                   ),
+//                                   fit: BoxFit.cover,
+//                                 ),
+//                                 borderRadius: BorderRadius.circular(10),
+//                               ),
+//                               margin: const EdgeInsets.all(5),
+//                               width: 200,
+//                               height: 200,
+//                               alignment: Alignment.center,
+//                             ),
+//                             Container(
+//                               decoration: BoxDecoration(
+//                                 image: const DecorationImage(
+//                                   image: NetworkImage(
+//                                     'https://easypayltd.com/slider3.jpg',
+//                                   ),
+//                                   fit: BoxFit.cover,
+//                                 ),
+//                                 borderRadius: BorderRadius.circular(10),
+//                                 color: Colors.amber,
+//                               ),
+//                               margin: const EdgeInsets.all(5),
+//                               width: 200,
+//                               height: 200,
+//                               alignment: Alignment.center,
+//                             ),
+//                           ],
+//                         ),
+//                       ),

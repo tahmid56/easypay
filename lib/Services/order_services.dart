@@ -52,11 +52,22 @@ class OrderServices {
           options: Options(headers: {
             "authorization": "Bearer ${token.getString("access_token")}"
           }));
-      
+
       return res;
     } catch (error) {
       showSnackBar(context, error.toString());
     }
     return null;
+  }
+
+  Future<Response?> getShops({required BuildContext context}) async {
+    final dio = Dio();
+    dio.options.baseUrl = Urls.baseUrl;
+    try {
+      Response res = await dio.get(Urls.shopUrl);
+      return res;
+    } catch (error) {
+      showSnackBar(context, error.toString());
+    }
   }
 }

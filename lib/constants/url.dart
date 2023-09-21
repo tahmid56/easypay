@@ -10,4 +10,5 @@ class Urls {
   static const ordersUrl = '$baseUrl/orders-list/123/';
   static const upcomingPaymentUrl = '$baseUrl/home/100/';
   static const orderDetailsUrl = '$baseUrl/dues/123/';
+  static const shopUrl = '$baseUrl/shop-list/';
 }
