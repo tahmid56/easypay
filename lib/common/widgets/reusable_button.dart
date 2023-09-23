@@ -11,7 +11,7 @@ class ReusableButton extends StatelessWidget {
       required this.buttonText,
       required this.onPressed,
       required this.customWidth,
-      this.colorCode = 0xffD2E063});
+      this.colorCode = 0xff00c2e4});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,8 @@ class ReusableButton extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.05,
         width: customWidth,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10), color: Color(colorCode)),
+            
+            borderRadius: BorderRadius.circular(10), color: Color(colorCode),),
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),

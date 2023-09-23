@@ -8,6 +8,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 import '../common/widgets/reusable_button.dart';
 import '../common/widgets/text_reusable_button.dart';
@@ -23,29 +24,39 @@ class ThirdRegistrationScreen extends ConsumerStatefulWidget {
 
 class _ThirdRegistrationScreenState
     extends ConsumerState<ThirdRegistrationScreen> {
-  FilePickerResult? nidFrontFilePath;
-  FilePickerResult? nidBackFilePath;
-  FilePickerResult? offerLetterFilePath;
-  FilePickerResult? bankStatementFilePath;
-  final TextEditingController permanentAddressController =
-      TextEditingController();
-  final TextEditingController residentialAddressController =
-      TextEditingController();
+  // FilePickerResult? nidFrontFilePath;
+  // FilePickerResult? nidBackFilePath;
+  // FilePickerResult? offerLetterFilePath;
+  // FilePickerResult? bankStatementFilePath;
+  final TextEditingController cardController = TextEditingController();
+  final TextEditingController cvvController = TextEditingController();
+  DateTime? _expireDate;
+  final TextEditingController streetController = TextEditingController();
+  final TextEditingController cityController = TextEditingController();
+  final TextEditingController postalCodeController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  Future<void> _pickNIDFront() async {
-    nidFrontFilePath = await pickFile(fileTypes: ["png"]);
-  }
+  // Future<void> _pickNIDFront() async {
+  //   nidFrontFilePath = await pickFile(fileTypes: ["png"]);
+  // }
 
-  Future<void> _pickNIDBack() async {
-    nidBackFilePath = await pickFile(fileTypes: ["png"]);
-  }
+  // Future<void> _pickNIDBack() async {
+  //   nidBackFilePath = await pickFile(fileTypes: ["png"]);
+  // }
 
-  Future<void> _pickJobOfferLetter() async {
-    offerLetterFilePath = await pickFile(fileTypes: ["png"]);
-  }
+  // Future<void> _pickJobOfferLetter() async {
+  //   offerLetterFilePath = await pickFile(fileTypes: ["png"]);
+  // }
 
-  Future<void> _pickBankStatement() async {
-    bankStatementFilePath = await pickFile(fileTypes: ["png"]);
+  // Future<void> _pickBankStatement() async {
+  //   bankStatementFilePath = await pickFile(fileTypes: ["png"]);
+  // }
+  void _showDatePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1950),
+      lastDate: DateTime.now(),
+    );
   }
 
   void onNextClick(
@@ -58,43 +69,43 @@ class _ThirdRegistrationScreenState
       FilePickerResult? offerLetterPath,
       FilePickerResult? bankStatementPath) {
     // if (_formKey.currentState!.validate()) {
-    if (nidFrontFilePath == null) {
-      showSnackBar(
-          context, "NID Front image is empty! Please Select the proper file!");
-      return;
-    }
-    if (nidBackFilePath == null) {
-      showSnackBar(
-          context, "NID back image is empty! Please Select the proper file!");
-      return;
-    }
-    if (offerLetterFilePath == null) {
-      showSnackBar(context,
-          "Offer Letter image is empty! Please Select the proper file!");
-      return;
-    }
-    if (bankStatementFilePath == null) {
-      showSnackBar(context,
-          "Bank Statement image is empty! Please Select the proper file!");
-      return;
-    }
+    // if (nidFrontFilePath == null) {
+    //   showSnackBar(
+    //       context, "NID Front image is empty! Please Select the proper file!");
+    //   return;
+    // }
+    // if (nidBackFilePath == null) {
+    //   showSnackBar(
+    //       context, "NID back image is empty! Please Select the proper file!");
+    //   return;
+    // }
+    // if (offerLetterFilePath == null) {
+    //   showSnackBar(context,
+    //       "Offer Letter image is empty! Please Select the proper file!");
+    //   return;
+    // }
+    // if (bankStatementFilePath == null) {
+    //   showSnackBar(context,
+    //       "Bank Statement image is empty! Please Select the proper file!");
+    //   return;
+    // }
     // GoRouter.of(context)
     //     .pushNamed(NamedRoutes.registration4);
     // }
-    if (_formKey.currentState!.validate()) {
-      ref.read(authControllerProvider.notifier).thirdStepRegistration(
-          context: context,
-          nidFrontFile: nidFrontFilePath!.files.first.path!,
-          nidFrontName: nidFrontFilePath?.files.first.name,
-          nidBackFile: nidBackFilePath!.files.first.path!,
-          nidBackName: nidBackFilePath?.files.first.name,
-          permanentAddress: permanentAddress,
-          residentialAddress: residentAddress,
-          jobOfferFile: offerLetterFilePath!.files.first.path!,
-          jobOfferName: offerLetterFilePath?.files.first.name,
-          bankStatement: bankStatementFilePath!.files.first.path!,
-          bankStateName: bankStatementFilePath?.files.first.name);
-    }
+    // if (_formKey.currentState!.validate()) {
+    //   ref.read(authControllerProvider.notifier).thirdStepRegistration(
+    //       context: context,
+    //       nidFrontFile: nidFrontFilePath!.files.first.path!,
+    //       nidFrontName: nidFrontFilePath?.files.first.name,
+    //       nidBackFile: nidBackFilePath!.files.first.path!,
+    //       nidBackName: nidBackFilePath?.files.first.name,
+    //       permanentAddress: permanentAddress,
+    //       residentialAddress: residentAddress,
+    //       jobOfferFile: offerLetterFilePath!.files.first.path!,
+    //       jobOfferName: offerLetterFilePath?.files.first.name,
+    //       bankStatement: bankStatementFilePath!.files.first.path!,
+    //       bankStateName: bankStatementFilePath?.files.first.name);
+    // }
   }
 
   @override
@@ -112,111 +123,247 @@ class _ThirdRegistrationScreenState
                   width: MediaQuery.of(context).size.width,
                   child: Form(
                     key: _formKey,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Image.asset("assets/images/logo4.png"),
-                        ),
-                        const Spacer(),
-                        CustomUploadButton(
-                          buttonText: nidFrontFilePath?.files.first.name ??
-                              "Upload NID Front",
-                          onPressed: () {
-                            _pickNIDFront().then((_) => setState(() {}));
-                          },
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        CustomUploadButton(
-                          buttonText: nidBackFilePath?.files.first.name ??
-                              "Upload NID Back",
-                          onPressed: () {
-                            _pickNIDBack().then((_) => setState(() {}));
-                          },
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: CustomTextField(
-                            textEditingController: permanentAddressController,
-                            hintText: "Permanent Address",
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 15, left: 10),
+                      child: Column(
+                        children: [
+                          const Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Add",
+                              style: TextStyle(
+                                fontSize: 38,
+                                fontFamily: CustomTheme.fontFamily,
+                                color: CustomTheme.secondaryColor,
+                              ),
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: CustomTextField(
-                            textEditingController: residentialAddressController,
-                            hintText: "Residential Address",
+                          const Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Payment",
+                              style: TextStyle(
+                                fontSize: 38,
+                                fontFamily: CustomTheme.fontFamily,
+                                color: CustomTheme.secondaryColor,
+                              ),
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        CustomUploadButton(
-                          buttonText: offerLetterFilePath?.files.first.name ??
-                              "Upload Job Offer Letter",
-                          onPressed: () {
-                            _pickJobOfferLetter().then((_) => setState(() {}));
-                          },
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        CustomUploadButton(
-                          buttonText: bankStatementFilePath?.files.first.name ??
-                              "Upload Bank Statement of Last 3 months",
-                          onPressed: () {
-                            _pickBankStatement().then((_) => setState(() {}));
-                          },
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            ReusableButton(
-                                buttonText: "Next",
-                                customWidth:
-                                    MediaQuery.of(context).size.width * 0.2,
-                                onPressed: () {
-                                  onNextClick(
-                                      ref,
-                                      context,
-                                      nidFrontFilePath,
-                                      nidBackFilePath,
-                                      permanentAddressController.text,
-                                      residentialAddressController.text,
-                                      offerLetterFilePath,
-                                      bankStatementFilePath);
-                                }),
-                            ReusableButton(
-                                buttonText: "Go Back",
-                                customWidth:
-                                    MediaQuery.of(context).size.width * 0.2,
-                                colorCode: 0xff00c2e5,
-                                onPressed: () {
-                                  GoRouter.of(context).pushReplacementNamed(NamedRoutes.registration2);
-                                }),
-                          ],
-                        ),
-                        const Spacer(),
-                        const Text("Not registered as a User?",
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold)),
-                        TextReusableButton(
-                            buttonText: "Login",
-                            onPressed: () {
-                              GoRouter.of(context).pushNamed(NamedRoutes.login);
-                            }),
-                      ],
+                          const Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Method",
+                              style: TextStyle(
+                                fontSize: 38,
+                                fontFamily: CustomTheme.fontFamily,
+                                color: CustomTheme.secondaryColor,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          const Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Please enter your 16 digit card number",
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: CustomTheme.fontFamily,
+                                color: CustomTheme.secondaryColor,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          const Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Card Number",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontFamily: CustomTheme.fontFamily,
+                                color: CustomTheme.secondaryColor,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          CustomTextField(
+                              textEditingController: cardController,
+                              hintText: ""),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          SizedBox(
+                            height: 100,
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 3),
+                                      child: Text(
+                                        "Expiry Date",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontFamily: CustomTheme.fontFamily,
+                                          color: CustomTheme.secondaryColor,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Container(
+                                      height: 55,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 15),
+                                            child: Text(
+                                              DateFormat('dd-MM-yyyy').format(
+                                                _expireDate ?? DateTime.now(),
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 15),
+                                            child: InkWell(
+                                              onTap: () {
+                                                showDatePicker(
+                                                  context: context,
+                                                  initialDate: DateTime.now(),
+                                                  firstDate: DateTime(1950),
+                                                  lastDate: DateTime.now(),
+                                                ).then((value) {
+                                                  setState(() {
+                                                    _expireDate =
+                                                        value ?? DateTime.now();
+                                                  });
+                                                });
+                                              },
+                                              child: const Icon(
+                                                Icons.calendar_today_outlined,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 10, vertical: 5),
+                                      child: Text(
+                                        "CVV",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontFamily: CustomTheme.fontFamily,
+                                          color: CustomTheme.secondaryColor,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.4,
+                                      child: CustomTextField(
+                                          textEditingController: cvvController,
+                                          hintText: ""),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 5),
+                              child: Text(
+                                "Address",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontFamily: CustomTheme.fontFamily,
+                                  color: CustomTheme.secondaryColor,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            child: CustomTextField(
+                                textEditingController: streetController,
+                                hintText: "Street"),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.38,
+                                child: CustomTextField(
+                                  textEditingController: cityController,
+                                  hintText: "City",
+                                ),
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.38,
+                                child: CustomTextField(
+                                  textEditingController: postalCodeController,
+                                  hintText: "Postal Code",
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          ReusableButton(
+                              buttonText: "Done",
+                              customWidth:
+                                  MediaQuery.of(context).size.width * 0.2,
+                              onPressed: () {
+                                // onNextClick(
+                                //     ref,
+                                //     context,
+                                //     nidFrontFilePath,
+                                //     nidBackFilePath,
+                                //     permanentAddressController.text,
+                                //     residentialAddressController.text,
+                                //     offerLetterFilePath,
+                                //     bankStatementFilePath);
+                              }),
+                          const Spacer(),
+                          const Text("Not registered as a User?",
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold)),
+                          TextReusableButton(
+                              buttonText: "Login",
+                              onPressed: () {
+                                GoRouter.of(context)
+                                    .pushNamed(NamedRoutes.login);
+                              }),
+                        ],
+                      ),
                     ),
                   ),
                 ),
