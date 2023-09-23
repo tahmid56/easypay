@@ -37,10 +37,10 @@ class OrderListTile extends StatelessWidget {
         child: Container(
           height: 60,
           width: MediaQuery.of(context).size.width * 0.9,
-          decoration:
-              BoxDecoration(border: Border(bottom: BorderSide(width: 0.1))),
+          decoration: const BoxDecoration(
+              border: Border(bottom: BorderSide(width: 0.1))),
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 5),
+            padding: const EdgeInsets.only(bottom: 5, left: 10),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -60,27 +60,30 @@ class OrderListTile extends StatelessWidget {
                               NetworkImage("${Urls.baseUrl}$imgUrl"),
                         ),
                       ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      titleText,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: CustomTheme.fontFamily,
-                        color: Colors.black,
-                      ),
-                    ),
-                    Text(
-                      DateFormat('MMM, dd, yyyy').format(date),
-                      style: const TextStyle(
-                          fontSize: 12,
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        titleText,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                           fontFamily: CustomTheme.fontFamily,
-                          color: Colors.black),
-                    ),
-                  ],
+                          color: Colors.black,
+                        ),
+                      ),
+                      Text(
+                        DateFormat('MMM, dd, yyyy').format(date),
+                        style: const TextStyle(
+                            fontSize: 12,
+                            fontFamily: CustomTheme.fontFamily,
+                            color: Colors.black),
+                      ),
+                    ],
+                  ),
                 ),
                 const Spacer(),
                 Padding(
@@ -107,6 +110,9 @@ class OrderListTile extends StatelessWidget {
                             ],
                           ),
                         ),
+                      ),
+                      const SizedBox(
+                        height: 5,
                       ),
                       Text(
                         status == "Pending" ? "Ongoing" : "Completed",

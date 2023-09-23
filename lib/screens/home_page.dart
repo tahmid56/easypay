@@ -341,27 +341,23 @@ class HomePage extends StatelessWidget {
                                 return Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: ListTile(
-                                    leading: Container(
-                                      height: 40,
-                                      width: 40,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                          border: Border.all(
-                                            width: 5,
-                                            color: const Color(0xff00C2E4),
-                                          )),
-                                      child: const Center(
-                                        child: Text(
+                                    leading: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        SizedBox(
+                                          height: 50,
+                                          child: Image.asset(
+                                              "assets/icons/payment_1.png"),
+                                        ),
+                                        const Text(
                                           "3",
                                           style: TextStyle(
-                                              fontWeight: FontWeight.bold,
                                               fontSize: 15,
                                               fontFamily:
                                                   CustomTheme.fontFamily,
                                               color: Colors.black),
                                         ),
-                                      ),
+                                      ],
                                     ),
                                     title: Text(
                                       data?.upcomingPayments?[index].merchant
@@ -378,7 +374,7 @@ class HomePage extends StatelessWidget {
                                           .upcomingDuesInstallment?[0]
                                           .dueDate as DateTime),
                                       style: const TextStyle(
-                                          fontSize: 13,
+                                          fontSize: 10,
                                           fontFamily: CustomTheme.fontFamily,
                                           color: Colors.black),
                                     ),
@@ -404,15 +400,10 @@ class HomePage extends StatelessWidget {
                                             borderRadius:
                                                 BorderRadius.circular(6)),
                                         child: Padding(
-                                          padding:const EdgeInsets.all(7.0),
+                                          padding: const EdgeInsets.all(7.0),
                                           child: Text(
-                                            data
-                                                    ?.upcomingPayments?[index]
-                                                    .upcomingDuesInstallment?[0]
-                                                    .dueAmount
-                                                    .toString() ??
-                                                "0",
-                                            style:const TextStyle(
+                                            "BDT ${data?.upcomingPayments?[index].upcomingDuesInstallment?[0].dueAmount.toString()}",
+                                            style: const TextStyle(
                                                 fontSize: 10,
                                                 fontFamily:
                                                     CustomTheme.fontFamily,
