@@ -5,7 +5,7 @@ class Urls {
   static const verifyLoginOtp = '$baseUrl/otp-verify/';
   static const firstRegistrationUrl = '$baseUrl/signup/';
   static const secondRegistrationUrl = '$baseUrl/opt-send/';
-  static const thirdRegistrationUrl = '$baseUrl/user-info/';
+  static const thirdRegistrationUrl = '$baseUrl/card-details-and-address/';
   static const fourthRegistrationUrl = '$baseUrl/pin/';
   static const ordersUrl = '$baseUrl/orders-list/123/';
   static const upcomingPaymentUrl = '$baseUrl/home/100/';

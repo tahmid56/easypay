@@ -5,6 +5,7 @@ import 'package:easypay/providers/auth_provider.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 final authServicesProvider = Provider((ref) => AuthServices());
 
@@ -14,6 +15,8 @@ class AuthServices {
     required BuildContext context,
     required fullName,
     required mobileNumber,
+    required password,
+    required DateTime dateTime,
   }) async {
     final dio = Dio();
     dio.options.baseUrl = Urls.baseUrl;
@@ -23,7 +26,12 @@ class AuthServices {
         options: Options(
           headers: {"Content-Type": "application/json"},
         ),
-        data: {"full_name": fullName, "phone_number": mobileNumber},
+        data: {
+          "full_name": fullName,
+          "phone_number": mobileNumber,
+          "password": password,
+          "date_of_birth": DateFormat("yyyy-mm-dd").format(dateTime),
+        },
       );
 
       cookie = res.headers['Set-Cookie'];

@@ -6,6 +6,7 @@ import 'package:easypay/route/named_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 import '../common/widgets/custom_text_field.dart';
 
@@ -33,7 +34,6 @@ class _FirstRegistrationScreenState
       firstDate: DateTime(1950),
       lastDate: DateTime.now(),
     );
-    
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -43,11 +43,15 @@ class _FirstRegistrationScreenState
     BuildContext context,
     String fullName,
     String mobileNumber,
+    String password,
+    DateTime dateTime,
   ) {
     ref.read(authControllerProvider.notifier).firstStepRegistration(
           context: context,
           fullName: fullName,
           mobileNumber: mobileNumber,
+          password: password,
+          dateTime: dateTime,
         );
   }
 
@@ -219,15 +223,24 @@ class _FirstRegistrationScreenState
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(left: 15),
-                                  child: Text(
-                                      _dateTime.day == DateTime.now().day
-                                          ? "Enter"
-                                          : _dateTime.day.toString()),
+                                  child: Text(DateFormat('dd-MM-yyyy')
+                                      .format(_dateTime)),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(right: 10),
                                   child: InkWell(
-                                      onTap: _showDatePicker,
+                                      onTap: () {
+                                        showDatePicker(
+                                          context: context,
+                                          initialDate: DateTime.now(),
+                                          firstDate: DateTime(1950),
+                                          lastDate: DateTime.now(),
+                                        ).then((value) {
+                                          setState(() {
+                                            _dateTime = value ?? DateTime.now();
+                                          });
+                                        });
+                                      },
                                       child: const Icon(
                                           Icons.calendar_today_outlined)),
                                 )
@@ -246,11 +259,12 @@ class _FirstRegistrationScreenState
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 firstRegistrationClick(
-                                  ref,
-                                  context,
-                                  fullNameController.text,
-                                  mobileController.text,
-                                );
+                                    ref,
+                                    context,
+                                    fullNameController.text,
+                                    mobileController.text,
+                                    passwordController.text,
+                                    _dateTime);
                               }
                             }),
                         const Spacer(),

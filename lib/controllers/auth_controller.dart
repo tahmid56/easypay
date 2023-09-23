@@ -26,10 +26,17 @@ class AuthController extends StateNotifier<bool> {
   void firstStepRegistration(
       {required BuildContext context,
       required String fullName,
-      required String mobileNumber}) async {
+      required String mobileNumber,
+      required String password,
+      required DateTime dateTime}) async {
     state = true;
     final Response? res = await _authServices.firstRegistration(
-        context: context, fullName: fullName, mobileNumber: mobileNumber);
+      context: context,
+      fullName: fullName,
+      mobileNumber: mobileNumber,
+      password: password,
+      dateTime: dateTime,
+    );
     state = false;
     // ignore: use_build_context_synchronously
     httpErrorHandle(
