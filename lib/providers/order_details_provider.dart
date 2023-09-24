@@ -10,7 +10,7 @@ final orderDetailsProvider = FutureProvider.family(
       final res = await ref
           .watch(ordersServicesProvider)
           .getOrderDetails(id: int.parse(arg));
-      debugPrint(res?.data.toString());
+      debugPrint(res?.statusCode.toString());
       if (res?.statusCode == 200) {
         var orderDetails = OrderDetails.fromJson(res?.data);
         // debugPrint(orderDetails.toString());

@@ -64,40 +64,61 @@ class AuthServices {
 
   Future<Response?> thirdRegistration({
     required BuildContext context,
-    required String nidFrontFile,
-    required String? nidFrontName,
-    required String nidBackFile,
-    required String? nidBackName,
-    required String permanentAddress,
-    required String residentialAddress,
-    required String jobOfferFile,
-    required String? jobOfferName,
-    required String bankStatement,
-    required String? bankStateName,
+    required String cardNumber,
+    required DateTime expireDate,
+    required String cvv,
+    required String street,
+    required String city,
+    required String postalCode,
+    required String cardType,
   }) async {
     final dio = Dio();
     dio.options.baseUrl = Urls.baseUrl;
     dio.options.headers['Cookie'] = cookie;
     try {
-      FormData formData = FormData.fromMap({
-        "nid_front":
-            await MultipartFile.fromFile(nidFrontFile, filename: nidFrontName),
-        "nid_back":
-            await MultipartFile.fromFile(nidBackFile, filename: nidBackName),
-        "residential_address": residentialAddress,
-        "permanent_address": permanentAddress,
-        "job_offer_latter":
-            await MultipartFile.fromFile(jobOfferFile, filename: jobOfferName),
-        "bank_statement": await MultipartFile.fromFile(bankStatement,
-            filename: bankStateName),
-        "user": FirstStepProvider().getFirstRegistrationData()
-      });
-      formData.fields.map((e) => debugPrint(e.value));
-      Response res = await dio.post(Urls.thirdRegistrationUrl, data: formData);
-      debugPrint(res.data.toString());
+      // FormData formData = FormData.fromMap({
+      //   "nid_front":
+      //       await MultipartFile.fromFile(nidFrontFile, filename: nidFrontName),
+      //   "nid_back":
+      //       await MultipartFile.fromFile(nidBackFile, filename: nidBackName),
+      //   "residential_address": residentialAddress,
+      //   "permanent_address": permanentAddress,
+      //   "job_offer_latter":
+      //       await MultipartFile.fromFile(jobOfferFile, filename: jobOfferName),
+      //   "bank_statement": await MultipartFile.fromFile(bankStatement,
+      //       filename: bankStateName),
+      //   "user": FirstStepProvider().getFirstRegistrationData()
+      // });
+      debugPrint({
+        "card_number": cardNumber.toString(),
+        "expiry_month": expireDate.month.toString(),
+        "expiry_year": DateFormat('yy').format(expireDate).toString(),
+        "cvc": cvv.toString(),
+        "street": street.toString(),
+        "city": city.toString(),
+        "postal_code": postalCode.toString(),
+        "card_type": cardType == "MASTERCARD" ? "1" : "2",
+      }.toString());
+      Response res = await dio.post(Urls.thirdRegistrationUrl,
+          options: Options(
+            headers: {
+              "Content-Type": "multipart/formdata",
+            },
+          ),
+          data: {
+            "card_number": cardNumber.toString(),
+            "expiry_month": expireDate.month.toString(),
+            "expiry_year": DateFormat('yy').format(expireDate).toString(),
+            "cvc": cvv.toString(),
+            "street": street.toString(),
+            "city": city.toString(),
+            "postal_code": postalCode.toString(),
+            "card_type": cardType == "MASTERCARD" ? "1" : "2",
+          });
+
+      debugPrint(cardType);
       return res;
     } catch (e) {
-      debugPrint(e.toString());
       showSnackBar(context, e.toString());
     }
     return null;

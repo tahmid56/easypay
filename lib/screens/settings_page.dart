@@ -58,7 +58,7 @@ class SettingsPage extends StatelessWidget {
                             height: 5,
                           ),
                           Text(
-                            "User",
+                            "Arafat",
                             style: TextStyle(
                               fontSize: 34,
                               fontFamily: CustomTheme.fontFamily,
@@ -94,7 +94,7 @@ class SettingsPage extends StatelessWidget {
                   height: 8,
                 ),
                 const Text(
-                  "BDT 6000",
+                  "BDT 3500.01",
                   style: TextStyle(
                       fontFamily: CustomTheme.fontFamily,
                       fontSize: 48,
@@ -104,7 +104,7 @@ class SettingsPage extends StatelessWidget {
                   height: 5,
                 ),
                 const Text(
-                  "Pre approved to spend limit: BDT 25000",
+                  "Pre approved to spend limit: BDT 0",
                   style: TextStyle(
                     fontFamily: CustomTheme.fontFamily,
                     fontSize: 16,
@@ -155,7 +155,7 @@ class SettingsPage extends StatelessWidget {
                         ),
                       ),
                       const Text(
-                        "17th Aug 2023",
+                        "4th Oct 2023",
                         style: TextStyle(fontFamily: CustomTheme.fontFamily),
                       ),
                       Column(
@@ -164,7 +164,7 @@ class SettingsPage extends StatelessWidget {
                             height: 32,
                           ),
                           const Text(
-                            "BDT.3500",
+                            "BDT.1000",
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -309,7 +309,7 @@ class SettingsPage extends StatelessWidget {
                             Icons.phone,
                             color: Colors.red,
                           ),
-                          Text("01600000000")
+                          Text("0123456789")
                         ],
                       ),
                       Row(

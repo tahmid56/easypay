@@ -30,7 +30,8 @@ class _ThirdRegistrationScreenState
   // FilePickerResult? bankStatementFilePath;
   final TextEditingController cardController = TextEditingController();
   final TextEditingController cvvController = TextEditingController();
-  DateTime? _expireDate;
+  DateTime _expireDate = DateTime.now();
+  String cardType = "MASTERCARD";
   final TextEditingController streetController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
   final TextEditingController postalCodeController = TextEditingController();
@@ -50,24 +51,18 @@ class _ThirdRegistrationScreenState
   // Future<void> _pickBankStatement() async {
   //   bankStatementFilePath = await pickFile(fileTypes: ["png"]);
   // }
-  void _showDatePicker() {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1950),
-      lastDate: DateTime.now(),
-    );
-  }
 
   void onNextClick(
-      WidgetRef ref,
-      BuildContext context,
-      FilePickerResult? nidFrontPath,
-      FilePickerResult? nidBackPath,
-      String permanentAddress,
-      String residentAddress,
-      FilePickerResult? offerLetterPath,
-      FilePickerResult? bankStatementPath) {
+    WidgetRef ref,
+    BuildContext context,
+    String cardNumber,
+    String cvv,
+    String street,
+    DateTime expireDate,
+    String city,
+    String postalCode,
+    String cardType,
+  ) {
     // if (_formKey.currentState!.validate()) {
     // if (nidFrontFilePath == null) {
     //   showSnackBar(
@@ -92,20 +87,29 @@ class _ThirdRegistrationScreenState
     // GoRouter.of(context)
     //     .pushNamed(NamedRoutes.registration4);
     // }
-    // if (_formKey.currentState!.validate()) {
-    //   ref.read(authControllerProvider.notifier).thirdStepRegistration(
-    //       context: context,
-    //       nidFrontFile: nidFrontFilePath!.files.first.path!,
-    //       nidFrontName: nidFrontFilePath?.files.first.name,
-    //       nidBackFile: nidBackFilePath!.files.first.path!,
-    //       nidBackName: nidBackFilePath?.files.first.name,
-    //       permanentAddress: permanentAddress,
-    //       residentialAddress: residentAddress,
-    //       jobOfferFile: offerLetterFilePath!.files.first.path!,
-    //       jobOfferName: offerLetterFilePath?.files.first.name,
-    //       bankStatement: bankStatementFilePath!.files.first.path!,
-    //       bankStateName: bankStatementFilePath?.files.first.name);
-    // }
+    if (_formKey.currentState!.validate()) {
+      //   ref.read(authControllerProvider.notifier).thirdStepRegistration(
+      //       context: context,
+      //       nidFrontFile: nidFrontFilePath!.files.first.path!,
+      //       nidFrontName: nidFrontFilePath?.files.first.name,
+      //       nidBackFile: nidBackFilePath!.files.first.path!,
+      //       nidBackName: nidBackFilePath?.files.first.name,
+      //       permanentAddress: permanentAddress,
+      //       residentialAddress: residentAddress,
+      //       jobOfferFile: offerLetterFilePath!.files.first.path!,
+      //       jobOfferName: offerLetterFilePath?.files.first.name,
+      //       bankStatement: bankStatementFilePath!.files.first.path!,
+      //       bankStateName: bankStatementFilePath?.files.first.name);
+      ref.read(authControllerProvider.notifier).thirdStepRegistration(
+          context: context,
+          cardNumber: cardNumber,
+          expireDate: expireDate,
+          cvv: cvv,
+          street: street,
+          city: city,
+          postalCode: postalCode,
+          cardType: cardType);
+    }
   }
 
   @override
@@ -191,14 +195,56 @@ class _ThirdRegistrationScreenState
                           const SizedBox(
                             height: 5,
                           ),
-                          CustomTextField(
-                              textEditingController: cardController,
-                              hintText: ""),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.45,
+                                child: CustomTextField(
+                                  textEditingController: cardController,
+                                  hintText: "",
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                width: MediaQuery.of(context).size.width * 0.35,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButton(
+                                        hint: Text(cardType),
+                                        isExpanded: true,
+                                        style: const TextStyle(
+                                            color: Colors.black),
+                                        items: ["MASTERCARD", "VISA"]
+                                            .map((String value) {
+                                          return DropdownMenuItem(
+                                            value: value.toString(),
+                                            child: Text(
+                                              value,
+                                              style: const TextStyle(
+                                                  color: Colors.black),
+                                            ),
+                                          );
+                                        }).toList(),
+                                        onChanged: (value) {
+                                          cardType = value.toString();
+                                          setState(() {});
+                                        }),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                           const SizedBox(
                             height: 5,
                           ),
                           SizedBox(
-                            height: 100,
+                            height: 110,
                             width: MediaQuery.of(context).size.width,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -234,7 +280,7 @@ class _ThirdRegistrationScreenState
                                                 const EdgeInsets.only(left: 15),
                                             child: Text(
                                               DateFormat('dd-MM-yyyy').format(
-                                                _expireDate ?? DateTime.now(),
+                                                _expireDate,
                                               ),
                                             ),
                                           ),
@@ -247,7 +293,7 @@ class _ThirdRegistrationScreenState
                                                   context: context,
                                                   initialDate: DateTime.now(),
                                                   firstDate: DateTime(1950),
-                                                  lastDate: DateTime.now(),
+                                                  lastDate: DateTime(2100),
                                                 ).then((value) {
                                                   setState(() {
                                                     _expireDate =
@@ -288,7 +334,7 @@ class _ThirdRegistrationScreenState
                                           0.4,
                                       child: CustomTextField(
                                           textEditingController: cvvController,
-                                          hintText: ""),
+                                          hintText: "cvv"),
                                     ),
                                   ],
                                 ),
@@ -342,15 +388,16 @@ class _ThirdRegistrationScreenState
                               customWidth:
                                   MediaQuery.of(context).size.width * 0.2,
                               onPressed: () {
-                                // onNextClick(
-                                //     ref,
-                                //     context,
-                                //     nidFrontFilePath,
-                                //     nidBackFilePath,
-                                //     permanentAddressController.text,
-                                //     residentialAddressController.text,
-                                //     offerLetterFilePath,
-                                //     bankStatementFilePath);
+                                onNextClick(
+                                    ref,
+                                    context,
+                                    cardController.text,
+                                    cvvController.text,
+                                    streetController.text,
+                                    _expireDate,
+                                    cityController.text,
+                                    postalCodeController.text,
+                                    cardType);
                               }),
                           const Spacer(),
                           const Text("Not registered as a User?",

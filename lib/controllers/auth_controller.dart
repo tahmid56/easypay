@@ -65,31 +65,26 @@ class AuthController extends StateNotifier<bool> {
         });
   }
 
-  void thirdStepRegistration(
-      {required BuildContext context,
-      required String nidFrontFile,
-      required String? nidFrontName,
-      required String nidBackFile,
-      required String? nidBackName,
-      required String permanentAddress,
-      required String residentialAddress,
-      required String jobOfferFile,
-      required String? jobOfferName,
-      required String bankStatement,
-      required String? bankStateName}) async {
+  void thirdStepRegistration({
+    required BuildContext context,
+    required String cardNumber,
+    required DateTime expireDate,
+    required String cvv,
+    required String street,
+    required String city,
+    required String postalCode,
+    required String cardType,
+  }) async {
     state = true;
     final Response? res = await _authServices.thirdRegistration(
         context: context,
-        nidFrontFile: nidFrontFile,
-        nidFrontName: nidFrontName,
-        nidBackFile: nidBackFile,
-        nidBackName: nidBackName,
-        permanentAddress: permanentAddress,
-        residentialAddress: residentialAddress,
-        jobOfferFile: jobOfferFile,
-        jobOfferName: jobOfferName,
-        bankStatement: bankStatement,
-        bankStateName: bankStateName);
+        cardNumber: cardNumber,
+        expireDate: expireDate,
+        cardType: cardType,
+        cvv: cvv,
+        street: street,
+        city: city,
+        postalCode: postalCode);
     state = false;
     // ignore: use_build_context_synchronously
     httpErrorHandle(

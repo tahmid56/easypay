@@ -9,80 +9,44 @@ OrderDetails orderDetailsFromJson(String str) => OrderDetails.fromJson(json.deco
 String orderDetailsToJson(OrderDetails data) => json.encode(data.toJson());
 
 class OrderDetails {
-    Order order;
-    List<Due> dues;
+    Order? order;
+    List<dynamic>? dues;
 
     OrderDetails({
-        required this.order,
-        required this.dues,
+        this.order,
+        this.dues,
     });
 
     factory OrderDetails.fromJson(Map<String, dynamic> json) => OrderDetails(
-        order: Order.fromJson(json["order"]),
-        dues: List<Due>.from(json["dues"].map((x) => Due.fromJson(x))),
+        order: json["order"] == null ? null : Order.fromJson(json["order"]),
+        dues: json["dues"] == null ? [] : List<dynamic>.from(json["dues"]!.map((x) => x)),
     );
 
     Map<String, dynamic> toJson() => {
-        "order": order.toJson(),
-        "dues": List<dynamic>.from(dues.map((x) => x.toJson())),
-    };
-}
-
-class Due {
-    int id;
-    double dueAmount;
-    DateTime dueDate;
-    bool isPaid;
-    String installment;
-    bool isFullPaid;
-
-    Due({
-        required this.id,
-        required this.dueAmount,
-        required this.dueDate,
-        required this.isPaid,
-        required this.installment,
-        required this.isFullPaid,
-    });
-
-    factory Due.fromJson(Map<String, dynamic> json) => Due(
-        id: json["id"],
-        dueAmount: json["due_amount"]?.toDouble(),
-        dueDate: DateTime.parse(json["due_date"]),
-        isPaid: json["is_paid"],
-        installment: json["installment"],
-        isFullPaid: json["is_full_paid"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "due_amount": dueAmount,
-        "due_date": "${dueDate.year.toString().padLeft(4, '0')}-${dueDate.month.toString().padLeft(2, '0')}-${dueDate.day.toString().padLeft(2, '0')}",
-        "is_paid": isPaid,
-        "installment": installment,
-        "is_full_paid": isFullPaid,
+        "order": order?.toJson(),
+        "dues": dues == null ? [] : List<dynamic>.from(dues!.map((x) => x)),
     };
 }
 
 class Order {
-    int orderId;
-    dynamic totalAmount;
-    dynamic firstDownPaymentAmount;
-    dynamic remainingDueAmount;
+    int? orderId;
+    double? totalAmount;
+    double? firstDownPaymentAmount;
+    double? remainingDueAmount;
     dynamic tax;
-    String customerId;
-    Merchant merchant;
+    String? customerId;
+    Merchant? merchant;
     dynamic discounts;
 
     Order({
-        required this.orderId,
-        required this.totalAmount,
-        required this.firstDownPaymentAmount,
-        required this.remainingDueAmount,
-        required this.tax,
-        required this.customerId,
-        required this.merchant,
-        required this.discounts,
+        this.orderId,
+        this.totalAmount,
+        this.firstDownPaymentAmount,
+        this.remainingDueAmount,
+        this.tax,
+        this.customerId,
+        this.merchant,
+        this.discounts,
     });
 
     factory Order.fromJson(Map<String, dynamic> json) => Order(
@@ -92,7 +56,7 @@ class Order {
         remainingDueAmount: json["remaining_due_amount"],
         tax: json["tax"],
         customerId: json["customer_id"],
-        merchant: Merchant.fromJson(json["merchant"]),
+        merchant: json["merchant"] == null ? null : Merchant.fromJson(json["merchant"]),
         discounts: json["discounts"],
     );
 
@@ -103,24 +67,24 @@ class Order {
         "remaining_due_amount": remainingDueAmount,
         "tax": tax,
         "customer_id": customerId,
-        "merchant": merchant.toJson(),
+        "merchant": merchant?.toJson(),
         "discounts": discounts,
     };
 }
 
 class Merchant {
-    dynamic user;
-    String merchantId;
-    String storeName;
-    String storeWebsite;
-    String storeId;
+    String? user;
+    String? merchantId;
+    String? storeName;
+    dynamic storeWebsite;
+    String? storeId;
 
     Merchant({
-        required this.user,
-        required this.merchantId,
-        required this.storeName,
-        required this.storeWebsite,
-        required this.storeId,
+        this.user,
+        this.merchantId,
+        this.storeName,
+        this.storeWebsite,
+        this.storeId,
     });
 
     factory Merchant.fromJson(Map<String, dynamic> json) => Merchant(

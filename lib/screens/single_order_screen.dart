@@ -22,8 +22,6 @@ class SingleOrder extends StatelessWidget {
             final orderDetail = ref.watch(orderDetailsProvider(id));
             return orderDetail.when(
                 data: (data) {
-                  final firstDue =
-                      data!.dues.firstWhere((due) => due.isPaid == false);
                   return RefreshIndicator(
                     onRefresh: () async {
                       ref.refresh(orderDetailsProvider(id));
@@ -93,14 +91,15 @@ class SingleOrder extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            data.order.merchant.storeName,
+                                            data?.order?.merchant?.storeName ??
+                                                "",
                                             style: const TextStyle(
                                                 fontSize: 24,
                                                 fontFamily:
                                                     CustomTheme.fontFamily),
                                           ),
                                           Text(
-                                            "BDT ${data.order.totalAmount}",
+                                            "BDT ${data?.order?.totalAmount}",
                                             style: const TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.w800,
@@ -108,8 +107,13 @@ class SingleOrder extends StatelessWidget {
                                                     CustomTheme.fontFamily),
                                           ),
                                           Text(
-                                            DateFormat('dd, MMM, yyyy')
-                                                .format(firstDue.dueDate),
+                                            DateFormat('dd, MMM, yyyy').format(
+                                                data?.dues?.isNotEmpty == true
+                                                    ? data?.dues
+                                                        ?.firstWhere((due) =>
+                                                            due.isPaid == false)
+                                                        ?.dueDate
+                                                    : DateTime.now()),
                                             style: const TextStyle(
                                                 fontSize: 12,
                                                 fontFamily:
@@ -124,7 +128,7 @@ class SingleOrder extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "BDT ${data.order.remainingDueAmount}",
+                                        "BDT ${data?.order?.remainingDueAmount}",
                                         style: const TextStyle(
                                             fontSize: 60,
                                             fontWeight: FontWeight.w600,
@@ -252,7 +256,7 @@ class SingleOrder extends StatelessWidget {
                             ),
                             child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: data.dues.length,
+                                itemCount: data?.dues?.length,
                                 itemBuilder: (context, index) {
                                   return Padding(
                                     padding: const EdgeInsets.symmetric(
@@ -282,7 +286,7 @@ class SingleOrder extends StatelessWidget {
                                           height: 5,
                                         ),
                                         Text(
-                                          data.dues[index].isPaid
+                                          data?.dues?[index].isPaid
                                               ? "Paid"
                                               : "Not Yet Done",
                                           style: const TextStyle(
@@ -294,7 +298,7 @@ class SingleOrder extends StatelessWidget {
                                           height: 5,
                                         ),
                                         Text(
-                                          "BDT ${data.dues[index].dueAmount}",
+                                          "BDT ${data?.dues?[index].dueAmount}",
                                           style: const TextStyle(
                                               fontSize: 12,
                                               fontFamily:
@@ -303,15 +307,19 @@ class SingleOrder extends StatelessWidget {
                                         const SizedBox(
                                           height: 5,
                                         ),
-                                        data.dues[index].isPaid
+                                        data?.dues?[index].isPaid
                                             ? Text(
                                                 DateFormat('dd, MMM, yyyy')
                                                     .format(data
-                                                        .dues[index].dueDate),
+                                                        ?.dues?[index].dueDate),
                                                 style: const TextStyle(
                                                     fontSize: 10),
                                               )
-                                            : firstDue.id == data.dues[index].id
+                                            : data?.dues
+                                                        ?.firstWhere((due) =>
+                                                            due.isPaid == false)
+                                                        .id ==
+                                                    data?.dues?[index].id
                                                 ? Container(
                                                     height: 20,
                                                     width: 50,
