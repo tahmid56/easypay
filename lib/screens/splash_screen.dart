@@ -49,35 +49,11 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              "assets/icons/easypayLogo.png",
-              height: 200,
-              width: 300,
-            ),
-            const Text(
-              "easypay",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 48,
-                  color: Color(0xff00c2e4),
-                  fontFamily: CustomTheme.fontFamily),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            const Text(
-              "Buy now, Pay later",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 12,
-                  color: Color(0xff00c2e4),
-                  fontFamily: CustomTheme.fontFamily),
-            ),
-          ],
-        )),
+          child: Image.asset(
+            "assets/icons/splashIcon.png",
+            
+          ),
+        ),
       ),
     );
   }
